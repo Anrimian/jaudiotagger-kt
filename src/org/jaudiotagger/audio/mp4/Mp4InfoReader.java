@@ -290,6 +290,14 @@ public class Mp4InfoReader
                                 info.setBitsPerSample(alac.getSampleSize());
                             }
                         }
+                        //Catch all when there is no audio header
+                        else
+                        {
+                            info.setEncodingType("");
+                            info.setChannelNumber(0);
+                            info.setBitRate(0);
+                            info.setBitsPerSample(0);
+                        }
                     }
                 }
             }

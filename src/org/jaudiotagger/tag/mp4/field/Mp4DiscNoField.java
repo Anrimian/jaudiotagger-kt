@@ -119,17 +119,26 @@ public class Mp4DiscNoField extends Mp4TagTextNumberField
         Mp4DataBox databox = new Mp4DataBox(header, data);
         dataSize = header.getDataLength();
         numbers = databox.getNumbers();
-
+        System.out.println("Datasize:"+dataSize);
+        System.out.println("DataContent:"+databox.getContent());
         //Disc number always hold four values, we can discard the first one and last one, the second one is the disc no
         //and the third is the total no of discs so only use if not zero
         StringBuffer sb = new StringBuffer();
-        if ((numbers.size() > DISC_NO_INDEX) && (numbers.get(DISC_NO_INDEX) > 0))
+        if(numbers!=null)
         {
-            sb.append(numbers.get(DISC_NO_INDEX));
+            if ((numbers.size() > DISC_NO_INDEX) && (numbers.get(DISC_NO_INDEX) > 0))
+            {
+                sb.append(numbers.get(DISC_NO_INDEX));
+            }
+
+            if ((numbers.size() > DISC_TOTAL_INDEX) && (numbers.get(DISC_TOTAL_INDEX) > 0))
+            {
+                sb.append("/").append(numbers.get(DISC_TOTAL_INDEX));
+            }
         }
-        if ((numbers.size() > DISC_TOTAL_INDEX) && (numbers.get(DISC_TOTAL_INDEX) > 0))
+        else if(databox.getContent()!=null)
         {
-            sb.append("/").append(numbers.get(DISC_TOTAL_INDEX));
+            sb.append(databox.getContent());
         }
         content = sb.toString();
     }

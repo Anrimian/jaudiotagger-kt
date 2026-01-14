@@ -29,6 +29,8 @@ import org.jaudiotagger.audio.exceptions.*;
 import org.jaudiotagger.audio.flac.FlacFileReader;
 import org.jaudiotagger.audio.flac.FlacFileWriter;
 import org.jaudiotagger.audio.generic.*;
+import org.jaudiotagger.audio.monkey.MonkeyFileReader;
+import org.jaudiotagger.audio.monkey.MonkeyFileWriter;
 import org.jaudiotagger.audio.mp3.MP3FileReader;
 import org.jaudiotagger.audio.mp3.MP3FileWriter;
 import org.jaudiotagger.audio.mp4.Mp4FileReader;
@@ -38,6 +40,8 @@ import org.jaudiotagger.audio.ogg.OggFileWriter;
 import org.jaudiotagger.audio.real.RealFileReader;
 import org.jaudiotagger.audio.wav.WavFileReader;
 import org.jaudiotagger.audio.wav.WavFileWriter;
+import org.jaudiotagger.audio.wavpack.WavPackFileReader;
+import org.jaudiotagger.audio.wavpack.WavPackFileWriter;
 import org.jaudiotagger.logging.ErrorMessage;
 import org.jaudiotagger.tag.TagException;
 
@@ -302,6 +306,8 @@ public class AudioFileIO
         readers.put(SupportedFileFormat.AIFF.getFilesuffix(), new AiffFileReader());
         readers.put(SupportedFileFormat.DSF.getFilesuffix(), new DsfFileReader());
         readers.put(SupportedFileFormat.DFF.getFilesuffix(), new DffFileReader());
+        readers.put(SupportedFileFormat.WV.getFilesuffix(), new WavPackFileReader());
+        readers.put(SupportedFileFormat.APE.getFilesuffix(), new MonkeyFileReader());
         final RealFileReader realReader = new RealFileReader();
         readers.put(SupportedFileFormat.RA.getFilesuffix(), realReader);
         readers.put(SupportedFileFormat.RM.getFilesuffix(), realReader);
@@ -321,6 +327,8 @@ public class AudioFileIO
         writers.put(SupportedFileFormat.AIFC.getFilesuffix(), new AiffFileWriter());
         writers.put(SupportedFileFormat.AIFF.getFilesuffix(), new AiffFileWriter());
         writers.put(SupportedFileFormat.DSF.getFilesuffix(), new DsfFileWriter());
+        writers.put(SupportedFileFormat.WV.getFilesuffix(), new WavPackFileWriter());
+        writers.put(SupportedFileFormat.APE.getFilesuffix(), new MonkeyFileWriter());
 
         for (AudioFileWriter curr : writers.values())
         {

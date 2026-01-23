@@ -21,18 +21,23 @@ import org.jaudiotagger.tag.TagOptionSingleton;
 
 import java.io.*;
 import java.util.EnumMap;
+import java.util.Random;
 import java.util.regex.Pattern;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 /**
  *
  */
-public abstract class AbstractTestCase extends TestCase {
+public abstract class AbstractTestCase extends TestCase
+{
 
     @Override
     public void setUp()
     {
-        TagOptionSingleton.getInstance().setToDefault();    
+        TagOptionSingleton.getInstance().setToDefault();
     }
+
     /**
      * Stores a {@link Pattern} for each {@link ErrorMessage}.<br>
      * Place holders like &quot;{&lt;number&gt;}&quot; will be replaced with
@@ -40,74 +45,80 @@ public abstract class AbstractTestCase extends TestCase {
      */
     private final static EnumMap<ErrorMessage, Pattern> ERROR_PATTERNS;
 
-    static {
+    static
+    {
         ERROR_PATTERNS = new EnumMap<ErrorMessage, Pattern>(ErrorMessage.class);
-        for (ErrorMessage curr : ErrorMessage.values()) {
+        for (ErrorMessage curr : ErrorMessage.values())
+        {
             final String regex = curr.getMsg().replaceAll("\\{\\d+\\}", ".*");
             ERROR_PATTERNS.put(curr, Pattern.compile(regex,
                     Pattern.CASE_INSENSITIVE | Pattern.DOTALL));
         }
     }
 
-    private static boolean append(File fromFile1, File fromFile2, File toFile) {
-        try {
-            FileInputStream in = new FileInputStream(fromFile1);
-            FileInputStream in2 = new FileInputStream(fromFile2);
-            FileOutputStream out = new FileOutputStream(toFile);
-            BufferedInputStream inBuffer = new BufferedInputStream(in);
-            BufferedInputStream inBuffer2 = new BufferedInputStream(in2);
-            BufferedOutputStream outBuffer = new BufferedOutputStream(out);
+    private static boolean append(File fromFile1, File fromFile2, File toFile)
+    {
+        try
+        (
+                BufferedInputStream in1  = new BufferedInputStream(new FileInputStream(fromFile1));
+                BufferedInputStream in2  = new BufferedInputStream(new FileInputStream(fromFile2));
+                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(toFile))
+        )
+        {
+            byte[] buffer = new byte[8192];
+            int read;
 
-            int theByte;
-
-            while ((theByte = inBuffer.read()) > -1) {
-                outBuffer.write(theByte);
+            while ((read = in1.read(buffer)) != -1)
+            {
+                out.write(buffer, 0, read);
             }
 
-            while ((theByte = inBuffer2.read()) > -1) {
-                outBuffer.write(theByte);
+            while ((read = in2.read(buffer)) != -1)
+            {
+                out.write(buffer, 0, read);
             }
 
-            outBuffer.close();
-            inBuffer.close();
-            inBuffer2.close();
-            out.close();
-            in.close();
-            in2.close();
+            out.flush();
 
-            // cleanupif files are not the same length
-            if ((fromFile1.length() + fromFile2.length()) != toFile.length()) {
-                toFile.delete();
-
-                return false;
-            }
-
-            return true;
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
             return false;
         }
+
+        // All streams are definitely closed here
+        if ((fromFile1.length() + fromFile2.length()) != toFile.length())
+        {
+            if (!toFile.delete())
+            {
+                // optional: log failure
+            }
+            return false;
+        }
+        return true;
     }
+
 
     /**
      * Copy a File
-     * 
-     * @param fromFile
-     *            The existing File
-     * @param toFile
-     *            The new File
+     *
+     * @param fromFile The existing File
+     * @param toFile   The new File
      * @return <code>true</code> if and only if the renaming succeeded;
-     *         <code>false</code> otherwise
+     * <code>false</code> otherwise
      */
-    public static boolean copy(File fromFile, File toFile) {
-        try {
+    public static boolean copy(File fromFile, File toFile)
+    {
+        try
+        {
             FileInputStream in = new FileInputStream(fromFile);
             FileOutputStream out = new FileOutputStream(toFile);
             byte[] buf = new byte[8192];
 
             int len;
 
-            while ((len = in.read(buf)) > -1) {
+            while ((len = in.read(buf)) > -1)
+            {
                 out.write(buf, 0, len);
             }
 
@@ -115,14 +126,16 @@ public abstract class AbstractTestCase extends TestCase {
             out.close();
 
             // cleanupif files are not the same length
-            if (fromFile.length() != toFile.length()) {
+            if (fromFile.length() != toFile.length())
+            {
                 toFile.delete();
 
                 return false;
             }
 
             return true;
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
             return false;
         }
@@ -131,33 +144,54 @@ public abstract class AbstractTestCase extends TestCase {
 
     /**
      * Copy audiofile to processing dir ready for use in test
-     * 
+     *
      * @param fileName
      * @return
      */
-    public static File copyAudioToTmp(String fileName) {
-        File inputFile = new File("testdata", fileName);
-        File outputFile = new File("testdatatmp", fileName);
-        if (!outputFile.getParentFile().exists()) {
-            outputFile.getParentFile().mkdirs();
+    public static File copyAudioToTmp(String fileName)
+    {
+        try
+        {
+            String filenamebase = fileName.substring(0, fileName.indexOf("."));
+            String filenamesuffix = fileName.substring(fileName.indexOf("."));
+
+            File inputFile = new File("testdata", fileName);
+
+            File outputFile = File.createTempFile(
+                    filenamebase + "-",
+                    filenamesuffix,
+                    new File("testdatatmp")
+            );
+
+            if (!outputFile.getParentFile().exists())
+            {
+                outputFile.getParentFile().mkdirs();
+            }
+            boolean result = copy(inputFile, outputFile);
+            assertTrue(result);
+            return outputFile;
         }
-        boolean result = copy(inputFile, outputFile);
-        assertTrue(result);
-        return outputFile;
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
      * Copy audiofile to processing dir ready for use in test, use this if using
      * same file in multiple tests because with junit multithreading can have
      * problems otherwise
-     * 
+     *
      * @param fileName
      * @return
      */
-    public static File copyAudioToTmp(String fileName, File newFileName) {
+    public static File copyAudioToTmp(String fileName, File newFileName)
+    {
         File inputFile = new File("testdata", fileName);
         File outputFile = new File("testdatatmp", newFileName.getName());
-        if (!outputFile.getParentFile().exists()) {
+        if (!outputFile.getParentFile().exists())
+        {
             outputFile.getParentFile().mkdirs();
         }
         boolean result = copy(inputFile, outputFile);
@@ -167,35 +201,51 @@ public abstract class AbstractTestCase extends TestCase {
 
     /**
      * Prepends file with tag file in order to create an mp3 with a valid id3
-     * 
+     *
      * @param tagfile
      * @param fileName
      * @return
      */
-    public static File copyAudioToTmp(String tagfile, String fileName) {
-        File inputTagFile = new File("testtagdata", tagfile);
-        File inputFile = new File("testdata", fileName);
-        File outputFile = new File("testdatatmp", fileName);
-        if (!outputFile.getParentFile().exists()) {
-            outputFile.getParentFile().mkdirs();
+    public static File copyAudioToTmp(String tagfile, String fileName)
+    {
+        try
+        {
+            String filenamebase = fileName.substring(0, fileName.indexOf("."));
+            String filenamesuffix = fileName.substring(fileName.indexOf("."));
+            File inputTagFile = new File("testtagdata", tagfile);
+            File inputFile = new File("testdata", fileName);
+
+            File outputFile = File.createTempFile(
+                    filenamebase + "-",
+                    filenamesuffix,
+                    new File("testdatatmp")
+            );
+            if (!outputFile.getParentFile().exists())
+            {
+                outputFile.getParentFile().mkdirs();
+            }
+            boolean result = append(inputTagFile, inputFile, outputFile);
+            assertTrue(result);
+            return outputFile;
         }
-        boolean result = append(inputTagFile, inputFile, outputFile);
-        assertTrue(result);
-        return outputFile;
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
      * This method asserts that the given <code>actual</code> message is
      * constructed with the <code>expected</code> message string.<br>
      * <br>
-     * 
-     * @param expected
-     *            the expected message source.
-     * @param actual
-     *            the message to compare against.
+     *
+     * @param expected the expected message source.
+     * @param actual   the message to compare against.
      */
     public void assertErrorMessage(final ErrorMessage expected,
-            final String actual) {
+                                   final String actual)
+    {
         assertTrue("Message not correctly constructed.", ERROR_PATTERNS.get(
                 expected).matcher(actual).matches());
     }

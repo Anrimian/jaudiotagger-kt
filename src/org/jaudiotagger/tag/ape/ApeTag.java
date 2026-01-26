@@ -93,10 +93,6 @@ public class ApeTag extends AbstractTag
         FIELD_MAP.put(FieldKey.PRODUCER, ApeFieldKey.PRODUCER);
         FIELD_MAP.put(FieldKey.PRODUCER_SORT, ApeFieldKey.PRODUCER_SORT);
         FIELD_MAP.put(FieldKey.RATING, ApeFieldKey.RATING);
-        FIELD_MAP.put(FieldKey.REPLAYGAIN_TRACK_GAIN, ApeFieldKey.REPLAYGAIN_TRACK_GAIN);
-        FIELD_MAP.put(FieldKey.REPLAYGAIN_TRACK_PEAK, ApeFieldKey.REPLAYGAIN_TRACK_PEAK);
-        FIELD_MAP.put(FieldKey.REPLAYGAIN_ALBUM_GAIN, ApeFieldKey.REPLAYGAIN_ALBUM_GAIN);
-        FIELD_MAP.put(FieldKey.REPLAYGAIN_ALBUM_PEAK, ApeFieldKey.REPLAYGAIN_ALBUM_PEAK);
     }
 
     public ApeTag()
@@ -317,8 +313,9 @@ public class ApeTag extends AbstractTag
         List<TagField> fields = super.getFields(id);
         for (TagField field : fields)
         {
-            if (field instanceof ApeTagCoverField coverField)
+            if (field instanceof ApeTagCoverField)
             {
+                ApeTagCoverField coverField = (ApeTagCoverField) field;
                 target.add(coverField.toArtwork());
             }
         }

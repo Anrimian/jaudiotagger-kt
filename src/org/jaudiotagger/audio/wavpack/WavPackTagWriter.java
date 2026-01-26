@@ -26,10 +26,11 @@ final class WavPackTagWriter
 {
     void write(Tag tag, Path path) throws CannotWriteException
     {
-        if (!(tag instanceof ApeTag apeTag))
+        if (!(tag instanceof ApeTag))
         {
             throw new CannotWriteException("WavPack files require an APEv2 tag instance");
         }
+        ApeTag apeTag = (ApeTag) tag;
         if (apeTag.isEmpty())
         {
             delete(tag, path);
@@ -133,12 +134,14 @@ final class WavPackTagWriter
 
     private ApeTagField toApeField(TagField field)
     {
-        if (field instanceof ApeTagField apeField)
+        if (field instanceof ApeTagField)
         {
+            ApeTagField apeField = (ApeTagField) field;
             return apeField;
         }
-        if (field instanceof TagTextField textField)
+        if (field instanceof TagTextField)
         {
+            TagTextField textField = (TagTextField) field;
             return new ApeTagTextField(field.getId(), textField.getContent(), false);
         }
         return null;

@@ -26,10 +26,12 @@ final class MonkeyTagWriter
 {
     void write(Tag tag, Path path) throws CannotWriteException
     {
-        if (!(tag instanceof ApeTag apeTag))
+        if (!(tag instanceof ApeTag ))
         {
             throw new CannotWriteException("Monkey's Audio files require an APEv2 tag instance");
         }
+
+        ApeTag apeTag = (ApeTag) tag;
         if (apeTag.isEmpty())
         {
             delete(tag, path);
@@ -130,13 +132,13 @@ final class MonkeyTagWriter
 
     private ApeTagField toApeField(TagField field)
     {
-        if (field instanceof ApeTagField apeField)
+        if (field instanceof ApeTagField)
         {
-            return apeField;
+            return (ApeTagField) field;
         }
-        if (field instanceof TagTextField textField)
+        if (field instanceof TagTextField)
         {
-            return new ApeTagTextField(field.getId(), textField.getContent(), false);
+            return new ApeTagTextField(field.getId(), ((TagTextField)field).getContent(), false);
         }
         return null;
     }

@@ -66,8 +66,9 @@ public class ApeTagTextField extends ApeTagField implements TagTextField
     @Override
     protected void copyValueFrom(ApeTagField field)
     {
-        if (field instanceof ApeTagTextField textField)
+        if (field instanceof ApeTagTextField)
         {
+            ApeTagTextField textField = (ApeTagTextField)field;
             this.value = textField.value;
             this.encoding = textField.encoding;
         }

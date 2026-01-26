@@ -413,8 +413,9 @@ public class AudioFile
         /* TODO Currently only works for Dsf We need additional check here for Wav and Aif because they wrap the ID3 tag so never return
          * null for getTag() and the wrapper stores the location of the existing tag, would that be broken if tag set to something else
          */
-        if(tag instanceof AbstractID3v2Tag d3v2Tag)
+        if(tag instanceof AbstractID3v2Tag)
         {
+            AbstractID3v2Tag d3v2Tag =(AbstractID3v2Tag)tag;
             Tag convertedTag = convertID3Tag(d3v2Tag, TagOptionSingleton.getInstance().getID3V2Version());
             if(convertedTag!=null)
             {
@@ -468,8 +469,9 @@ public class AudioFile
      */
     public AbstractID3v2Tag convertID3Tag(AbstractID3v2Tag tag, ID3V2Version id3V2Version)
     {
-        if(tag instanceof ID3v24Tag d3v24Tag)
+        if(tag instanceof ID3v24Tag )
         {
+            ID3v24Tag d3v24Tag = (ID3v24Tag)tag;
             switch(id3V2Version)
             {
                 case ID3_V22:
@@ -480,8 +482,9 @@ public class AudioFile
                     return null;
             }
         }
-        else if(tag instanceof ID3v23Tag d3v23Tag)
+        else if(tag instanceof ID3v23Tag)
         {
+            ID3v23Tag d3v23Tag = (ID3v23Tag)tag;
             switch(id3V2Version)
             {
                 case ID3_V22:
@@ -492,8 +495,9 @@ public class AudioFile
                     return new ID3v24Tag(d3v23Tag);
             }
         }
-        else if(tag instanceof ID3v22Tag d3v22Tag)
+        else if(tag instanceof ID3v22Tag)
         {
+            ID3v22Tag d3v22Tag = (ID3v22Tag) tag;
             switch(id3V2Version)
             {
                 case ID3_V22:

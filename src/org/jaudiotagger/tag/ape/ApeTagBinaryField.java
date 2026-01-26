@@ -41,8 +41,9 @@ public class ApeTagBinaryField extends ApeTagField
     @Override
     protected void copyValueFrom(ApeTagField field)
     {
-        if (field instanceof ApeTagBinaryField binaryField)
+        if (field instanceof ApeTagBinaryField)
         {
+            ApeTagBinaryField binaryField = (ApeTagBinaryField)field;
             this.data = Arrays.copyOf(binaryField.data, binaryField.data.length);
         }
     }

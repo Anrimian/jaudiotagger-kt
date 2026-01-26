@@ -72,8 +72,9 @@ public abstract class ApeTagField implements TagField
     @Override
     public void copyContent(TagField field)
     {
-        if (field instanceof ApeTagField apeField)
+        if (field instanceof ApeTagField )
         {
+            ApeTagField apeField = (ApeTagField)field;
             this.flags = apeField.flags;
             copyValueFrom(apeField);
         }

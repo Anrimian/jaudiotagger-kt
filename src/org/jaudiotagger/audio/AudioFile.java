@@ -10,6 +10,7 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagOptionSingleton;
 import org.jaudiotagger.tag.aiff.AiffTag;
 import org.jaudiotagger.tag.asf.AsfTag;
+import org.jaudiotagger.tag.ape.ApeTag;
 import org.jaudiotagger.tag.flac.FlacTag;
 import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
 import org.jaudiotagger.tag.id3.ID3v22Tag;
@@ -355,6 +356,14 @@ public class AudioFile
         {
             return Dsf.createDefaultTag();
         }
+        else if(SupportedFileFormat.WV.getFilesuffix().equals(extension))
+        {
+            return ApeTag.createDefaultTag();
+        }
+        else if(SupportedFileFormat.APE.getFilesuffix().equals(extension))
+        {
+            return ApeTag.createDefaultTag();
+        }
         else
         {
             throw new RuntimeException("Unable to create default tag for this file format");
@@ -404,9 +413,9 @@ public class AudioFile
         /* TODO Currently only works for Dsf We need additional check here for Wav and Aif because they wrap the ID3 tag so never return
          * null for getTag() and the wrapper stores the location of the existing tag, would that be broken if tag set to something else
          */
-        if(tag instanceof AbstractID3v2Tag)
+        if(tag instanceof AbstractID3v2Tag d3v2Tag)
         {
-            Tag convertedTag = convertID3Tag((AbstractID3v2Tag)tag, TagOptionSingleton.getInstance().getID3V2Version());
+            Tag convertedTag = convertID3Tag(d3v2Tag, TagOptionSingleton.getInstance().getID3V2Version());
             if(convertedTag!=null)
             {
                 return convertedTag;
@@ -459,40 +468,40 @@ public class AudioFile
      */
     public AbstractID3v2Tag convertID3Tag(AbstractID3v2Tag tag, ID3V2Version id3V2Version)
     {
-        if(tag instanceof ID3v24Tag)
+        if(tag instanceof ID3v24Tag d3v24Tag)
         {
             switch(id3V2Version)
             {
                 case ID3_V22:
-                    return new ID3v22Tag((ID3v24Tag)tag);
+                    return new ID3v22Tag(d3v24Tag);
                 case ID3_V23:
-                    return new ID3v23Tag((ID3v24Tag)tag);
+                    return new ID3v23Tag(d3v24Tag);
                 case ID3_V24:
                     return null;
             }
         }
-        else if(tag instanceof ID3v23Tag)
+        else if(tag instanceof ID3v23Tag d3v23Tag)
         {
             switch(id3V2Version)
             {
                 case ID3_V22:
-                    return new ID3v22Tag((ID3v23Tag)tag);
+                    return new ID3v22Tag(d3v23Tag);
                 case ID3_V23:
                     return null;
                 case ID3_V24:
-                    return new ID3v24Tag((ID3v23Tag)tag);
+                    return new ID3v24Tag(d3v23Tag);
             }
         }
-        else if(tag instanceof ID3v22Tag)
+        else if(tag instanceof ID3v22Tag d3v22Tag)
         {
             switch(id3V2Version)
             {
                 case ID3_V22:
                     return null;
                 case ID3_V23:
-                    return new ID3v23Tag((ID3v22Tag)tag);
+                    return new ID3v23Tag(d3v22Tag);
                 case ID3_V24:
-                    return new ID3v24Tag((ID3v22Tag)tag);
+                    return new ID3v24Tag(d3v22Tag);
             }
         }
         return null;

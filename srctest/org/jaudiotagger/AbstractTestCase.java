@@ -21,10 +21,7 @@ import org.jaudiotagger.tag.TagOptionSingleton;
 
 import java.io.*;
 import java.util.EnumMap;
-import java.util.Random;
 import java.util.regex.Pattern;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 /**
  *

@@ -21,7 +21,7 @@ public class ApeReadTagTest extends AbstractTestCase
         Exception exceptionCaught = null;
         try
         {
-            File testFile = AbstractTestCase.copyAudioToTmp("test2.ape");
+            File testFile = AbstractTestCase.copyAudioToTmp("test0002.ape");
             AudioFile f = AudioFileIO.read(testFile);
         }
         catch (Exception e)

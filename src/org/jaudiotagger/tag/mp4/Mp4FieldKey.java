@@ -44,6 +44,7 @@ public enum Mp4FieldKey
     ALBUM_ARTISTS("com.apple.iTunes","ALBUM_ARTISTS",  TEXT, Tagger.JAIKOZ),
     ALBUM_ARTISTS_SORT("com.apple.iTunes","ALBUM_ARTISTS_SORT",  TEXT, Tagger.JAIKOZ),
     ALBUM_COMPOSER("com.apple.iTunes", "ALBUM_COMPOSER", TEXT),
+    ALBUM_COMPOSER_SORT("com.apple.iTunes", "ALBUM_COMPOSER_SORT", TEXT),
     ARTIST_SORT("soar",Mp4TagFieldSubType.TEXT, TEXT),
     ARTWORK("covr",Mp4TagFieldSubType.ARTWORK, COVERART_JPEG),
     ASIN("com.apple.iTunes", "ASIN", TEXT, Tagger.PICARD),

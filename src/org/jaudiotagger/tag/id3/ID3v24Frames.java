@@ -390,6 +390,7 @@ public class ID3v24Frames extends ID3Frames
         tagFieldToId3.put(FieldKey.ALBUM_ARTISTS, ID3v24FieldKey.ALBUM_ARTISTS);
         tagFieldToId3.put(FieldKey.ALBUM_ARTISTS_SORT, ID3v24FieldKey.ALBUM_ARTISTS_SORT);
         tagFieldToId3.put(FieldKey.ALBUM_COMPOSER, ID3v24FieldKey.ALBUM_COMPOSER);
+        tagFieldToId3.put(FieldKey.ALBUM_COMPOSER_SORT, ID3v24FieldKey.ALBUM_COMPOSER_SORT);
         tagFieldToId3.put(FieldKey.ALBUM_SORT, ID3v24FieldKey.ALBUM_SORT);
         tagFieldToId3.put(FieldKey.ALBUM_YEAR, ID3v24FieldKey.ALBUM_YEAR);
         tagFieldToId3.put(FieldKey.AMAZON_ID, ID3v24FieldKey.AMAZON_ID);

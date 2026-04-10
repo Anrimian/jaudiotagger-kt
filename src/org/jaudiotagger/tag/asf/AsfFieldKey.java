@@ -66,6 +66,7 @@ public enum AsfFieldKey
     ALBUM_ARTISTS("ALBUM_ARTISTS", true),
     ALBUM_ARTISTS_SORT("ALBUM_ARTISTS_SORT", true),
     ALBUM_COMPOSER("ALBUM_COMPOSER", true),
+    ALBUM_COMPOSER_SORT("ALBUM_COMPOSER_SORT", true),
     ALBUM_SORT("WM/AlbumSortOrder", false),
     ALBUM_YEAR("ALBUM_YEAR", false),
     AMAZON_ID("ASIN", false),

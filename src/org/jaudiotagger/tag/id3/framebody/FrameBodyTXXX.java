@@ -63,6 +63,7 @@ public class FrameBodyTXXX extends AbstractFrameBodyTextInfo implements ID3v24Fr
     public static final String ALBUM_ARTISTS                = "ALBUM_ARTISTS";
     public static final String ALBUM_ARTISTS_SORT           = "ALBUM_ARTISTS_SORT";
     public static final String ALBUM_COMPOSER               = "ALBUM_COMPOSER";
+    public static final String ALBUM_COMPOSER_SORT          = "ALBUM_COMPOSER_SORT";
     public static final String ALBUM_YEAR                   = "ALBUM_YEAR";
     public static final String AUDIO_ENGINEER               = "AUDIO_ENGINEER";
     public static final String AUDIO_ENGINEER_SORT          = "AUDIO_ENGINEER_SORT";

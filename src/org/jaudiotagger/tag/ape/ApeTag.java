@@ -29,6 +29,7 @@ public class ApeTag extends AbstractTag
         FIELD_MAP.put(FieldKey.ALBUM_ARTIST_SORT, ApeFieldKey.ALBUM_ARTIST_SORT);
         FIELD_MAP.put(FieldKey.ALBUM_ARTISTS_SORT, ApeFieldKey.ALBUM_ARTIST_SORT);
         FIELD_MAP.put(FieldKey.ALBUM_SORT, ApeFieldKey.ALBUM_SORT);
+        FIELD_MAP.put(FieldKey.ALBUM_COMPOSER, ApeFieldKey.ALBUM_COMPOSER);
         FIELD_MAP.put(FieldKey.ARTIST, ApeFieldKey.ARTIST);
         FIELD_MAP.put(FieldKey.ARTISTS, ApeFieldKey.ARTISTS);
         FIELD_MAP.put(FieldKey.ARTISTS_SORT, ApeFieldKey.ARTISTS_SORT);

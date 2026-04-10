@@ -13,6 +13,7 @@ public enum ApeFieldKey
     ALBUM_ARTIST("Album Artist", true),
     ALBUM_ARTIST_SORT("Album Artist Sort", false),
     ALBUM_SORT("Album Sort", false),
+    ALBUM_COMPOSER("Album Composer", false),
     ARTIST("Artist", true),
     ARTISTS("Artists", false),
     ARTISTS_SORT("Artists Sort", false),

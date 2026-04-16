@@ -10,6 +10,7 @@ Summarise Changes
 #663:Handle m4a without an audio info (esds or alac) atom
 #665:For Mp4 support disk atom that uses type of text (0x01) rather than type implict (0x00) (expects a number value )
 #667:Add ALBUM_COMPOSER field
+#668:MusicBrainz Album Type should be maapped to RELEASETYPE for VorbisComment Tags
 
 3.0.1
 #039:Fixes required due to PR69 changes to AbstractID3v2Tag.getFrame() so that it now always returns list

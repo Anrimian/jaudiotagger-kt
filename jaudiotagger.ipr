@@ -490,6 +490,7 @@
     <file url="file://$PROJECT_DIR$/src" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
       <option name="myName" value="Project Default" />
@@ -501,6 +502,45 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
+    </option>
+  </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
+    <option name="myOrdered" value="false" />
+    <option name="myNullables">
+      <value>
+        <list size="11">
+          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+          <item index="5" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
+          <item index="6" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+          <item index="7" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
+          <item index="8" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="9" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="10" class="java.lang.String" itemvalue="org.springframework.lang.Nullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="11">
+          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="2" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+          <item index="5" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+          <item index="6" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+          <item index="7" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
+          <item index="8" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="9" class="java.lang.String" itemvalue="lombok.NonNull" />
+          <item index="10" class="java.lang.String" itemvalue="org.springframework.lang.NonNull" />
+        </list>
+      </value>
     </option>
   </component>
   <component name="Palette2">
@@ -739,14 +779,14 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="Maven Central repository" />
-      <option name="url" value="https://repo1.maven.org/maven2" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="jvnet-nexus-snapshots" />
       <option name="name" value="Java.net Nexus Snapshots Repository" />
       <option name="url" value="https://maven.java.net/content/repositories/snapshots" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="jboss.community" />
@@ -758,7 +798,8 @@
     <mapping directory="" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="Maven: junit:junit:3.8.1">
+    <library name="Maven: junit:junit:3.8.1" type="java-imported" external-system-id="Maven">
+      <properties groupId="junit" artifactId="junit" version="3.8.1" baseVersion="3.8.1" />
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1.jar!/" />
       </CLASSES>

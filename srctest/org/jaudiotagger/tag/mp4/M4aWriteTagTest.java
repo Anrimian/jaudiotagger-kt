@@ -2102,10 +2102,7 @@ public class M4aWriteTagTest extends TestCase
 
     /**
      * Call {@link Mp4Tag#setField(FieldKey, String...)} twice, first with genre that can
-     * only be represented by custom and then with standard genre, this should cause the
-     * custom genre to be deleted.
-     *
-     * See <a href="https://bitbucket.org/ijabz/jaudiotagger/issue/48/mp4s-can-end-up-with-two-types-of-genre">Issue 48</a>.
+     * only be represented by custom and then with standard genre
      */
     public void testWriteGenres3()
     {
@@ -2126,7 +2123,7 @@ public class M4aWriteTagTest extends TestCase
             tag = (Mp4Tag) f.getTag();
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+            assertEquals("Tangoey", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
         }
         catch (Exception e)
         {
@@ -2138,10 +2135,7 @@ public class M4aWriteTagTest extends TestCase
 
     /**
      * Call {@link Mp4Tag#setField(FieldKey, String...)} twice, first with standard genre then
-     * with genre that can only be represented by custom, this should cause the standard genre
-     * to be deleted.
-     *
-     * See <a href="https://bitbucket.org/ijabz/jaudiotagger/issue/48/mp4s-can-end-up-with-two-types-of-genre">Issue 48</a>.
+     * with genre that can only be represented by custom
      */
     public void testWriteGenres4()
     {
@@ -2161,8 +2155,8 @@ public class M4aWriteTagTest extends TestCase
             f.commit();
             f = AudioFileIO.read(testFile);
             tag = (Mp4Tag) f.getTag();
-            assertEquals("Tangoey", tag.getFirst(FieldKey.GENRE));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE));
+            assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
+            assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
             assertEquals("Tangoey", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
         }
         catch (Exception e)

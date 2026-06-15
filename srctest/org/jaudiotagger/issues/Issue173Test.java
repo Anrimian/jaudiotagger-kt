@@ -47,7 +47,7 @@ public class Issue173Test extends AbstractTestCase
             //mapped correctly otherwise would not be value for Mp4Fieldkey
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+            assertEquals("Genre", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
             mp4File.commit();
 
             //Rereads as value
@@ -55,7 +55,7 @@ public class Issue173Test extends AbstractTestCase
             tag = (Mp4Tag) mp4File.getTag();
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+            assertEquals("Genre", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
 
             //Set Genre using integer
             tag.setField(FieldKey.GENRE, "1");
@@ -74,22 +74,22 @@ public class Issue173Test extends AbstractTestCase
             //because using generic interface the genre field is removed automtically
             tag.setField(FieldKey.GENRE, "FlapFlap");
             //mapped correctly otherwise would not be value for Mp4Fieldkey
-            assertEquals("FlapFlap", tag.getFirst(FieldKey.GENRE));
+            assertEquals("Classic Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("FlapFlap", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE));
+            assertEquals("Classic Rock", tag.getFirst(Mp4FieldKey.GENRE));
             mp4File.commit();
-            assertEquals("FlapFlap", tag.getFirst(FieldKey.GENRE));
+            assertEquals("Classic Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("FlapFlap", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE));
+            assertEquals("Classic Rock", tag.getFirst(Mp4FieldKey.GENRE));
 
             tag.setField(FieldKey.GENRE, "Rock");
             //mapped correctly otherwise would not be value for Mp4Fieldkey
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+            assertEquals("FlapFlap", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
             mp4File.commit();
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+            assertEquals("FlapFlap", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
 
             //Always use custom
@@ -98,11 +98,11 @@ public class Issue173Test extends AbstractTestCase
             //mapped correctly otherwise would not be value for Mp4Fieldkey
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE));
+            assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
             mp4File.commit();
             assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
             assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
-            assertEquals("", tag.getFirst(Mp4FieldKey.GENRE));
+            assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
         }
         catch (Exception ex)
         {

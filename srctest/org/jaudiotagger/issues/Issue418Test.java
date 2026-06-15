@@ -75,5 +75,19 @@ public class Issue418Test extends AbstractTestCase
         assertEquals("Pop", ((TagTextField)tag.getFields(FieldKey.GENRE).get(1)).getContent());
         assertEquals("Genre", ((TagTextField)tag.getFields(FieldKey.GENRE).get(2)).getContent());
         assertEquals(3, tag.getFields(FieldKey.GENRE).size());
+
+        tag.setField(FieldKey.GENRE,"Jazz");
+        assertEquals("Jazz", tag.getFirst(FieldKey.GENRE));
+        assertEquals("Jazz", ((TagTextField)tag.getFields(FieldKey.GENRE).get(0)).getContent());
+        assertEquals("Pop", ((TagTextField)tag.getFields(FieldKey.GENRE).get(1)).getContent());
+        assertEquals("Genre", ((TagTextField)tag.getFields(FieldKey.GENRE).get(2)).getContent());
+        assertEquals(3, tag.getFields(FieldKey.GENRE).size());
+
+        tag.setField(FieldKey.GENRE,"NewCustomGenre");
+        assertEquals("Jazz", tag.getFirst(FieldKey.GENRE));
+        assertEquals("Jazz", ((TagTextField)tag.getFields(FieldKey.GENRE).get(0)).getContent());
+        assertEquals("Pop", ((TagTextField)tag.getFields(FieldKey.GENRE).get(1)).getContent());
+        assertEquals("NewCustomGenre", ((TagTextField)tag.getFields(FieldKey.GENRE).get(2)).getContent());
+        assertEquals(3, tag.getFields(FieldKey.GENRE).size());
     }
 }

@@ -756,8 +756,7 @@ public class Mp4Tag extends AbstractTag
     }
 
     /**
-     * Overidden to ensure cannot have both a genre field and a custom genre field
-     *
+      *
      * @param genericKey
      * @param value
      * @throws KeyNotFoundException
@@ -767,18 +766,6 @@ public class Mp4Tag extends AbstractTag
     public void setField(FieldKey genericKey, String... value) throws KeyNotFoundException, FieldDataInvalidException
     {
         TagField tagfield = createField(genericKey,value);
-
-        if(genericKey==FieldKey.GENRE)
-        {
-            if(tagfield.getId().equals(GENRE.getFieldName()))
-            {
-                this.deleteField(Mp4FieldKey.GENRE_CUSTOM);
-            }
-            else if(tagfield.getId().equals(GENRE_CUSTOM.getFieldName()))
-            {
-                this.deleteField(Mp4FieldKey.GENRE);
-            }
-        }
         setField(tagfield);
     }
 

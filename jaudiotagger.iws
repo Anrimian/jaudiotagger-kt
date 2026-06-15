@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Added sonatype plugin as described at">
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard">
+      <change beforePath="$PROJECT_DIR$/jaudiotagger.iml" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/jaudiotagger/audio/wav/WavTagWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/jaudiotagger/audio/wav/WavTagWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/jaudiotagger/tag/mp4/Mp4Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/jaudiotagger/tag/mp4/Mp4Tag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue173Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue173Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue418Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue418Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srctest/org/jaudiotagger/tag/mp4/M4aWriteTagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/tag/mp4/M4aWriteTagTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testV1.mp3" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +90,9 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="10324" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -111,6 +119,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="1Z4Eo72oRE6B5htVKSjAAE38qKH" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
@@ -122,10 +137,113 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "last_opened_file_path": "C:/Code/jthink/opensrc/jaudiotagger/jaudiotagger.ipr"
+    "Application.ID3v24TagTest.executor": "Run",
+    "JUnit.AiffAudioFileTest.executor": "Run",
+    "JUnit.AiffAudioTagTest.executor": "Run",
+    "JUnit.AiffFileHeaderTest.executor": "Run",
+    "JUnit.AiffInfoReaderTest.executor": "Run",
+    "JUnit.AlbumComposerTest.executor": "Run",
+    "JUnit.AlbumComposerTest.testAif.executor": "Run",
+    "JUnit.AlbumComposerTest.testFlac.executor": "Run",
+    "JUnit.AlbumComposerTest.testFlacFile.executor": "Run",
+    "JUnit.AlbumComposerTest.testMp4File.executor": "Run",
+    "JUnit.AlbumComposerTest.testVorbisCommentFile.executor": "Run",
+    "JUnit.AlbumComposerTest.testWav.executor": "Run",
+    "JUnit.ApeReadTagTest.executor": "Run",
+    "JUnit.ApeReadTagTest.testReadFile.executor": "Run",
+    "JUnit.AsfCodeCheckTest.executor": "Run",
+    "JUnit.AsfHeaderUtils.executor": "Run",
+    "JUnit.AsfKeyMappingTest.executor": "Run",
+    "JUnit.AsfTagCoverFieldTest.executor": "Run",
+    "JUnit.AsfTagTest.executor": "Run",
+    "JUnit.AudioFileWriteAsTest.executor": "Run",
+    "JUnit.AudioFileWriterTest.executor": "Run",
+    "JUnit.ChunkContainerTest.executor": "Run",
+    "JUnit.ChunkTest.executor": "Run",
+    "JUnit.CompressedTest.executor": "Run",
+    "JUnit.ConcurrentWritesTest (1).executor": "Run",
+    "JUnit.ConcurrentWritesTest (2).executor": "Run",
+    "JUnit.ConcurrentWritesTest (3).executor": "Run",
+    "JUnit.ConcurrentWritesTest (4).executor": "Run",
+    "JUnit.ConcurrentWritesTest.executor": "Run",
+    "JUnit.ContainerTypeTest.executor": "Run",
+    "JUnit.ContentBrandingData.executor": "Run",
+    "JUnit.FileClosingTest.testClosingFileAfterFailedReadOnly.executor": "Run",
+    "JUnit.FrameCOMMTest.executor": "Run",
+    "JUnit.FrameCOMMTest.testReadFileContainingInvalidSizeCOMMFrame.executor": "Run",
+    "JUnit.FrameTIT1Test.testAppleGrouping.executor": "Run",
+    "JUnit.FrameTXXXTest.executor": "Run",
+    "JUnit.ID3v24TagTest.testWriteAppleMusicGrouping.executor": "Run",
+    "JUnit.ID3v24TagTest.testWriteMultipleGenresToID3v24TagUsingV24CreateField.executor": "Run",
+    "JUnit.Issue123Test.executor": "Run",
+    "JUnit.Issue173Test.testMp4GenresUsingGenericInterface.executor": "Run",
+    "JUnit.Issue173Test.testMp4GenresUsingMp4Interface.executor": "Run",
+    "JUnit.Issue418Test.testGetCustomGenreField.executor": "Run",
+    "JUnit.Issue655Test.executor": "Run",
+    "JUnit.Issue655Test.testWriteFile.executor": "Run",
+    "JUnit.Issue657Test.executor": "Run",
+    "JUnit.Issue657Test.testFixBadEncoding.executor": "Run",
+    "JUnit.Issue657Test.testFixBadWavId3v23Encoding.executor": "Run",
+    "JUnit.Issue657Test.testFixBadWavListInfoEncoding.executor": "Run",
+    "JUnit.Issue657Test.testFixBadWavRiffEncoding.executor": "Run",
+    "JUnit.Issue657Test.testReadFile.executor": "Run",
+    "JUnit.Issue657Test.testReadFile2.executor": "Run",
+    "JUnit.Issue657Test.testWriteFile.executor": "Run",
+    "JUnit.Issue659Test.executor": "Run",
+    "JUnit.Issue659Test.testFixBadWavId3v23Encoding.executor": "Run",
+    "JUnit.Issue663Test.testIso8.executor": "Run",
+    "JUnit.Issue665Test.testReadFileDiskAtomStoringTextInsteadOfNumber.executor": "Run",
+    "JUnit.Issue667Test.testApe.executor": "Run",
+    "JUnit.Issue667Test.testApeFile.executor": "Run",
+    "JUnit.Issue700Test.testIso8.executor": "Run",
+    "JUnit.M4aWriteTagTest.executor": "Run",
+    "JUnit.M4aWriteTagTest.testReadWriteMultipleGenres.executor": "Run",
+    "JUnit.M4aWriteTagTest.testReadWriteMultipleGenres2.executor": "Run",
+    "JUnit.M4aWriteTagTest.testWriteGenres3.executor": "Run",
+    "JUnit.M4aWriteTagTest.testWriteGenres4.executor": "Run",
+    "JUnit.MonkeyReadTest.executor": "Run",
+    "JUnit.MonkeyReadTest.testReadFile.executor": "Run",
+    "JUnit.Mp4HeaderTest.testReadFile3.executor": "Run",
+    "JUnit.ReadFileTest.executor": "Run",
+    "JUnit.ReadFileTest.testReadFile.executor": "Run",
+    "JUnit.VorbisWriteTagTest.executor": "Run",
+    "JUnit.VorbisWriteTagTest.testDeleteTag.executor": "Run",
+    "JUnit.VorbisWriteTagTest.testDeleteTag2.executor": "Run",
+    "JUnit.WavSimpleTest.executor": "Run",
+    "JUnit.WavpackReadTest.executor": "Run",
+    "JUnit.WavpackReadTest.testReadFile.executor": "Run",
+    "JUnit.WmaSimpleTest.executor": "Run",
+    "JUnit.WriteFileTest.executor": "Run",
+    "JUnit.WriteFileTest.testWriteFile.executor": "Run",
+    "JUnit.jaudiotagger in jaudiotagger.executor": "Run",
+    "JUnit.srctest in jaudiotagger.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/code/jthink/jthinksearch",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Code\jthink\opensrc\jaudiotagger\testdata" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.jaudiotagger.tag.wav" />
       <recent name="org.jaudiotagger.audio.asf" />
@@ -133,17 +251,14 @@
       <recent name="org.jaudiotagger.tag.aiff" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.jaudiotagger.audio.wavpack" />
+      <recent name="org.jaudiotagger.audio.monkey" />
+      <recent name="org.jaudiotagger.tag.ape" />
       <recent name="org.jaudiotagger.issues" />
       <recent name="org.jaudiotagger.tag.id3" />
-      <recent name="org.jaudiotagger.tag.id3.framebody" />
-      <recent name="org.jaudiotagger.tag.wav" />
-      <recent name="org.jaudiotagger.audio.wav" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Code\jthink\opensrc\jaudiotagger\testdata" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.WavMetadataTest">
+  <component name="RunManager" selected="JUnit.Issue173Test.testMp4GenresUsingGenericInterface">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -196,6 +311,15 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
       <setting name="environment" value="" />
@@ -269,6 +393,46 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Issue173Test.testMp4GenresUsingGenericInterface" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaudiotagger" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue173Test" />
+      <option name="METHOD_NAME" value="testMp4GenresUsingGenericInterface" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Issue173Test.testMp4GenresUsingMp4Interface" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaudiotagger" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue173Test" />
+      <option name="METHOD_NAME" value="testMp4GenresUsingMp4Interface" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Issue180Test.testWriteIDv22AifForITunes12_6" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
@@ -285,7 +449,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Issue335Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Issue418Test.testGetCustomGenreField" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <extension name="coverage">
         <pattern>
@@ -294,46 +458,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue335Test" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Issue390Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaudiotagger" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue390Test" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Issue390Test.testIssue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaudiotagger" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue390Test" />
-      <option name="METHOD_NAME" value="testIssue" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue418Test" />
+      <option name="METHOD_NAME" value="testGetCustomGenreField" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -343,17 +469,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Issue450Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="M4aWriteTagTest.testWriteGenres3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
+          <option name="PATTERN" value="org.jaudiotagger.tag.mp4.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue450Test" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="org.jaudiotagger.tag.mp4" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.tag.mp4.M4aWriteTagTest" />
+      <option name="METHOD_NAME" value="testWriteGenres3" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -362,17 +489,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WavMetadataTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="M4aWriteTagTest.testWriteGenres4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.jaudiotagger.tag.wav.*" />
+          <option name="PATTERN" value="org.jaudiotagger.tag.mp4.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.jaudiotagger.tag.wav" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.tag.wav.WavMetadataTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="org.jaudiotagger.tag.mp4" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.tag.mp4.M4aWriteTagTest" />
+      <option name="METHOD_NAME" value="testWriteGenres4" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -403,33 +531,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file enabled="true" id="idea.log" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.Issue164Test.testReadWriteMp4With64BitMDatLength" />
       <item itemvalue="JUnit.Issue180Test.testWriteIDv22AifForITunes12_6" />
       <item itemvalue="JUnit.AiffAudioTagTest.testReadAiff3" />
       <item itemvalue="JUnit.AiffAudioTagTest" />
-      <item itemvalue="JUnit.WavMetadataTest" />
-      <item itemvalue="JUnit.Issue335Test" />
-      <item itemvalue="JUnit.Issue450Test" />
-      <item itemvalue="JUnit.Issue390Test" />
-      <item itemvalue="JUnit.Issue390Test.testIssue" />
+      <item itemvalue="JUnit.Issue173Test.testMp4GenresUsingGenericInterface" />
+      <item itemvalue="JUnit.Issue173Test.testMp4GenresUsingMp4Interface" />
+      <item itemvalue="JUnit.Issue418Test.testGetCustomGenreField" />
+      <item itemvalue="JUnit.M4aWriteTagTest.testWriteGenres3" />
+      <item itemvalue="JUnit.M4aWriteTagTest.testWriteGenres4" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.WavMetadataTest" />
-        <item itemvalue="JUnit.Issue390Test" />
-        <item itemvalue="JUnit.Issue390Test.testIssue" />
-        <item itemvalue="JUnit.Issue450Test" />
-        <item itemvalue="JUnit.Issue335Test" />
+        <item itemvalue="JUnit.Issue173Test.testMp4GenresUsingGenericInterface" />
+        <item itemvalue="JUnit.Issue173Test.testMp4GenresUsingMp4Interface" />
+        <item itemvalue="JUnit.M4aWriteTagTest.testWriteGenres4" />
+        <item itemvalue="JUnit.M4aWriteTagTest.testWriteGenres3" />
+        <item itemvalue="JUnit.Issue418Test.testGetCustomGenreField" />
       </list>
     </recent_temporary>
   </component>
@@ -449,6 +568,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1410537432863</updated>
+      <workItem from="1775817836387" duration="12300000" />
+      <workItem from="1777187320497" duration="595000" />
+      <workItem from="1777985371388" duration="1320000" />
     </task>
     <task id="LOCAL-00214" summary="Reverted back">
       <created>1588093729091</created>
@@ -793,7 +915,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <option name="localTasksCounter" value="282" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -816,13 +938,34 @@
       <is-autoscroll-to-source value="false" />
     </todo-panel>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="631868a6-8230-4dd6-ae47-a6206f2a9029" value="TOOL_WINDOW" />
+        <entry key="ab0491c1-72fd-405b-b548-47142972d036" value="TOOL_WINDOW" />
+        <entry key="cdacbf6f-8ec3-4fab-8be0-98aa2045af2d" value="TOOL_WINDOW" />
+        <entry key="db6e39b1-f996-4b2c-b676-dda60cb70bd9" value="TOOL_WINDOW" />
+        <entry key="f28d6c11-6805-4508-84e9-383517877382" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="1">
           <value>
             <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -841,6 +984,137 @@
                   </entry>
                 </map>
               </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="631868a6-8230-4dd6-ae47-a6206f2a9029">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="ab0491c1-72fd-405b-b548-47142972d036">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="cdacbf6f-8ec3-4fab-8be0-98aa2045af2d">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="db6e39b1-f996-4b2c-b676-dda60cb70bd9">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="f28d6c11-6805-4508-84e9-383517877382">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
           </value>
         </entry>
@@ -856,24 +1130,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="oops" />
-    <MESSAGE value="#332:Add support for Roon LIVE field" />
-    <MESSAGE value="Added Taggers using fields" />
-    <MESSAGE value="#333:For ID3 rename PRODUCER, ARRANGER, ENGINEER, DJMIXER and MIXER to PRODUCER_INVOLVEDPEOPLE etc that will continue to write to TIPL/IPLS" />
-    <MESSAGE value="#334:Remove INVOLVEDPEOPLE mappings such as PRODUCER_INVOLVED PEOPLE and simplify logic" />
-    <MESSAGE value="More tests for TMCL/IPLS/TIPL" />
-    <MESSAGE value="#335:When converting ID3v23 IPLS frame should convert to TIPL and/or TMCL frame but only if have data" />
-    <MESSAGE value="Fixed issue with vorbiscomment assuming vendorstring and underecounting number of comments" />
-    <MESSAGE value="#336:Add support for Roon ROONALBUMTAG and ROONTRACKTAG fields." />
-    <MESSAGE value="Lowering debug level" />
-    <MESSAGE value="." />
-    <MESSAGE value="#337:Open MP4 channels in a try-with-resources block" />
-    <MESSAGE value="SONGKONG-2214:jaudiotagger:Wav java.nio.BufferUnderflowException" />
-    <MESSAGE value="SONGKONG-2216:Flac read java.nio.BufferUnderflowException, when file has PictureBlock of size zero" />
-    <MESSAGE value="#340:Flac reader should check StreamInfo block is too small to read header details" />
-    <MESSAGE value="#343:Dont split ID3v23 IPLS frame into ID3v23 TIPL or TMCL based on content just convert to TIPL" />
-    <MESSAGE value="Fix tests required as a result of pr69, framemap refactoring." />
-    <MESSAGE value="SongKong 3.0.0 Release" />
     <MESSAGE value="Need to use the new s01 sonatype server" />
     <MESSAGE value="JAIKOZ-1291:Add JAIKOZ_ID field" />
     <MESSAGE value="Fixes for sonatype" />
@@ -881,7 +1137,25 @@
     <MESSAGE value="Tidied up README" />
     <MESSAGE value="Remove invalid link to Cobertura reports" />
     <MESSAGE value="#355:When write to Wav LIST fields need to write as IS0-8859-1 not UTF-8" />
-    <option name="LAST_COMMIT_MESSAGE" value="#355:When write to Wav LIST fields need to write as IS0-8859-1 not UTF-8" />
+    <MESSAGE value="#655:Issue writing to Wav file because INFO chunk has invalid field and this prevents reading of subsequent data chunk" />
+    <MESSAGE value="#656:Add support for CREDITS,URL_BANDCAMP_ARTIST_SITE and URL_BANDCAMP_RELEASE_SITE" />
+    <MESSAGE value="#658:For Wav Files allow to read Riff Files using a different encoding to the official ISO-8859-1 encoding" />
+    <MESSAGE value="#659:For files that have ID3 tag allow for frames with text encoding set to zero (ISO-8859-1) allow to read as different encoding instead" />
+    <MESSAGE value="Only use override charset for fields listed in TagOptionSingleton.getInstance().getOverrideCharset()" />
+    <MESSAGE value="Modify ID3 tags so now take note of the overrideCharset field list, and only does override if field is in list.&#10;Also, overrideCharset has no effect on some text fields. If the text field is a description field to further subdivide a frame into versions for different data (most notably FrameBodyTXXX and FrameBodyCOMM description fields) we use the standard encoding when reading the metadata because software would usually only write   wrong charset into the value field not the description field." />
+    <MESSAGE value="#622:Add ENGINEER subtypes AUDIO_ENGINEER, BALANCE_ENGINEER, AUDIO_ENGINEER, SOUND_ENGINEER and also MASTERING plus sort fields" />
+    <MESSAGE value="Fix Mastering incorrectly mapped to unsymc lyrics" />
+    <MESSAGE value="#663:Handle m4a without an audio info (esds or alac) atom" />
+    <MESSAGE value="#665:For Mp4 support disk atom that uses type of text (0x01) rather than type implict (0x00) (expects a number value )" />
+    <MESSAGE value="Fixed some tests sometimes failing because we have multiple tests creating file with same name in testdatatmp causing race conditions, now ensure that files have unique name." />
+    <MESSAGE value="Removed use of pattern matching instanceof code because we require code to be compatible with java 1.8&#10;Remoe replaygain fields added to FieldKey because dont have support for them in all tag formats so was breaking tests" />
+    <MESSAGE value="Wavpack and Ape test Files and tests that currently fail on reading files" />
+    <MESSAGE value="#667:Add support for ALBUM_COMPOSER" />
+    <MESSAGE value="Fixed ape/wavpack test file names" />
+    <MESSAGE value="#667:Also added ALBUM_COMPOSER_SORT" />
+    <MESSAGE value="For VorbisComment MusicBRainz Album Type shpuld be mapped to RELEASETYPE" />
+    <MESSAGE value="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard" />
+    <option name="LAST_COMMIT_MESSAGE" value="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -916,9 +1190,14 @@
           <line>1289</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue657Test.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/org/jaudiotagger/tag/mp4/Mp4FieldKey.java</url>
-          <line>306</line>
+          <line>321</line>
           <properties field="TITLE_MOVEMENT" class="org.jaudiotagger.tag.mp4.Mp4FieldKey" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>

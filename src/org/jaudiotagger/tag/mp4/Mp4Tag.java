@@ -327,19 +327,19 @@ public class Mp4Tag extends AbstractTag
 
         if (genericKey==FieldKey.KEY)
         {
+            List<TagField> mergedList = new ArrayList<TagField>(list);
             if (list.size() == 0)
             {
-                list = getFields(KEY_OLD.getFieldName());
+                mergedList.addAll(getFields(KEY_OLD.getFieldName()));
             }
             return list;
         }
         else if(genericKey==FieldKey.GENRE)
         {
-            if (list.size() == 0)
-            {
-                list = getFields(GENRE_CUSTOM.getFieldName());
-            }
-            return list;
+            List<TagField> mergedList = new ArrayList<TagField>(list);
+            List<TagField> customFields = getFields(GENRE_CUSTOM.getFieldName());
+            mergedList.addAll(customFields);
+            return mergedList;
         }
         else if(genericKey==FieldKey.TRACK)
         {

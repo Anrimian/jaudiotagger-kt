@@ -2503,5 +2503,68 @@ public class M4aWriteTagTest extends TestCase
         }
         assertNull(exceptionCaught);
     }
+
+    public void testReadWriteMultipleGenres()
+    {
+        Exception exceptionCaught = null;
+        try
+        {
+            File testFile = AbstractTestCase.copyAudioToTmp("test5.m4a", new File("testReadMultipleMixedGenres.m4a"));
+            AudioFile f = AudioFileIO.read(testFile);
+            Mp4Tag tag = (Mp4Tag) f.getTag();
+
+            assertEquals(TEST_FILE5_SIZE, testFile.length());
+
+            //Change value using string
+            TagOptionSingleton.getInstance().setWriteMp4GenresAsText(false);
+            tag.setField(tag.createField(FieldKey.GENRE, "Rock"));
+            tag.addField(tag.createField(FieldKey.GENRE, "Poppy")); //key for classic rock
+            f.commit();
+            f = AudioFileIO.read(testFile);
+            tag = (Mp4Tag) f.getTag();
+            assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
+            assertEquals(2, tag.getFields(FieldKey.GENRE).size());
+            assertEquals("Rock", ((TagTextField)tag.getFields(FieldKey.GENRE).get(0)).getContent());
+            assertEquals("Poppy", ((TagTextField)tag.getFields(FieldKey.GENRE).get(1)).getContent());
+            assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE));
+            assertEquals("Poppy", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            exceptionCaught = e;
+        }
+        assertNull(exceptionCaught);
+    }
+
+    public void testReadWriteMultipleGenres2()
+    {
+        Exception exceptionCaught = null;
+        try
+        {
+            File testFile = AbstractTestCase.copyAudioToTmp("test5.m4a", new File("testReadMultipleMixedGenres2.m4a"));
+            AudioFile f = AudioFileIO.read(testFile);
+            Mp4Tag tag = (Mp4Tag) f.getTag();
+
+            assertEquals(TEST_FILE5_SIZE, testFile.length());
+
+            //Change value using string
+            TagOptionSingleton.getInstance().setWriteMp4GenresAsText(true);
+            tag.setField(tag.createField(FieldKey.GENRE, "Rock"));
+            tag.addField(tag.createField(FieldKey.GENRE, "Poppy")); //key for classic rock
+            f.commit();
+            f = AudioFileIO.read(testFile);
+            tag = (Mp4Tag) f.getTag();
+            assertEquals("Rock", tag.getFirst(FieldKey.GENRE));
+            assertEquals(2, tag.getFields(FieldKey.GENRE).size());
+            assertEquals("Rock", ((TagTextField)tag.getFields(FieldKey.GENRE).get(0)).getContent());
+            assertEquals("Poppy", ((TagTextField)tag.getFields(FieldKey.GENRE).get(1)).getContent());
+            assertEquals("Rock", tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            exceptionCaught = e;
+        }
+        assertNull(exceptionCaught);
+    }
 }
 

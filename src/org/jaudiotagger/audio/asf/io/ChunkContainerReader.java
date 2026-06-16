@@ -25,7 +25,7 @@ abstract class ChunkContainerReader<ChunkType extends ChunkContainer> implements
     /**
      * Logger
      */
-    protected static final Logger LOGGER = Logger.getLogger("org.jaudiotabgger.audio"); //$NON-NLS-1$
+    protected static final Logger LOGGER = Logger.getLogger("org.jaudiotagger.audio"); //$NON-NLS-1$
 
     /**
      * Within this range, a {@link ChunkReader} should be aware if it fails.

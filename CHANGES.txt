@@ -12,6 +12,7 @@ Summarise Changes
 #667:Add ALBUM_COMPOSER field
 #668:MusicBrainz Album Type should be mapped to RELEASETYPE for VorbisComment Tags
 #263:Unable to read multiple genres in an m4a file
+#666:Typo in class name reference in logger: jaudiotabgger
 
 3.0.1
 #039:Fixes required due to PR69 changes to AbstractID3v2Tag.getFrame() so that it now always returns list

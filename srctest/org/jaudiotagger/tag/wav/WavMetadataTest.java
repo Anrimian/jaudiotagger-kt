@@ -13,7 +13,10 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagOptionSingleton;
 import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
+import org.jaudiotagger.tag.id3.ID3v22Tag;
 import org.jaudiotagger.tag.id3.ID3v23Tag;
+import org.jaudiotagger.tag.id3.ID3v24Tag;
+import org.jaudiotagger.tag.reference.ID3V2Version;
 
 import java.io.File;
 
@@ -1798,5 +1801,57 @@ public class WavMetadataTest extends AbstractTestCase
         }
         assertNull(exceptionCaught);
     }
+
+    public void testConvertId3Metadata()
+    {
+        TagOptionSingleton.getInstance().setWavOptions(WavOptions.READ_ID3_ONLY);
+        TagOptionSingleton.getInstance().setWavSaveOptions(WavSaveOptions.SAVE_ACTIVE);
+        TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.ID3_THEN_INFO);
+        TagOptionSingleton.getInstance().setID3V2Version(ID3V2Version.ID3_V24);
+
+        Exception exceptionCaught = null;
+        try
+        {
+            File testFile = AbstractTestCase.copyAudioToTmp("test146.wav", new File("test123ConvertId3.wav"));
+            AudioFile f = AudioFileIO.read(testFile);
+            System.out.println(f.getAudioHeader());
+
+            assertTrue(f.getTag() instanceof WavTag);
+            WavTag tag = (WavTag) f.getTag();
+            System.out.println("IsTag:"+tag.isID3Tag());
+            assertTrue(((WavTag)f.getTag()).getID3Tag() instanceof ID3v23Tag);
+
+            assertEquals("Bo Junior", tag.getFirst(FieldKey.ARTIST));
+
+            WavTag wavtag           = (WavTag)f.getTag();
+            AbstractID3v2Tag id3tag = WavTag.convertWavTag(wavtag.getID3Tag(), TagOptionSingleton.getInstance().getID3V2Version());
+            if(id3tag!=null)
+            {
+                wavtag.setID3Tag(id3tag);
+            }
+            assertTrue(((WavTag)f.getTag()).getID3Tag() instanceof ID3v24Tag);
+
+            //Modify Value
+            tag.setField(FieldKey.ARTIST, "fred");
+            f.commit();
+
+            //Read modified metadata now in file
+            f = AudioFileIO.read(testFile);
+            assertTrue(f.getTag() instanceof WavTag);
+            tag = (WavTag) f.getTag();
+            assertTrue(((WavTag)f.getTag()).getID3Tag() instanceof ID3v24Tag);
+
+            assertEquals("fred", tag.getFirst(FieldKey.ARTIST));
+            assertTrue(tag.isID3Tag());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            exceptionCaught = e;
+        }
+        assertNull(exceptionCaught);
+    }
+
+
 }
 

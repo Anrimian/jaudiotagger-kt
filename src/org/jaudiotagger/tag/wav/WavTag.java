@@ -694,4 +694,48 @@ public class WavTag implements Tag, Id3SupportingTag
     {
         isNonStandardPadding = nonStandardPadding;
     }
+
+    public static  AbstractID3v2Tag convertWavTag(AbstractID3v2Tag tag, ID3V2Version id3V2Version)
+    {
+        if(tag instanceof ID3v24Tag)
+        {
+            ID3v24Tag d3v24Tag = (ID3v24Tag)tag;
+            switch(id3V2Version)
+            {
+                case ID3_V22:
+                    return new ID3v22Tag(d3v24Tag);
+                case ID3_V23:
+                    return new ID3v23Tag(d3v24Tag);
+                case ID3_V24:
+                    return null;
+            }
+        }
+        else if(tag instanceof ID3v23Tag)
+        {
+            ID3v23Tag d3v23Tag = (ID3v23Tag)tag;
+            switch(id3V2Version)
+            {
+                case ID3_V22:
+                    return new ID3v22Tag(d3v23Tag);
+                case ID3_V23:
+                    return null;
+                case ID3_V24:
+                    return new ID3v24Tag(d3v23Tag);
+            }
+        }
+        else if(tag instanceof ID3v22Tag)
+        {
+            ID3v22Tag d3v22Tag = (ID3v22Tag) tag;
+            switch(id3V2Version)
+            {
+                case ID3_V22:
+                    return null;
+                case ID3_V23:
+                    return new ID3v23Tag(d3v22Tag);
+                case ID3_V24:
+                    return new ID3v24Tag(d3v22Tag);
+            }
+        }
+        return null;
+    }
 }

@@ -87,6 +87,17 @@ public class AiffTag implements Tag, Id3SupportingTag
     }
 
     /**
+     * Does an ID3 tag exist, note it is created by default if one does not exist in file it was read from
+     *
+     * @return
+     */
+    public boolean isID3Tag()
+    {
+        return id3Tag != null;
+    }
+
+    
+    /**
      * Sets the ID3 tag
      */
     public void setID3Tag(AbstractID3v2Tag t)
@@ -481,5 +492,49 @@ public class AiffTag implements Tag, Id3SupportingTag
     public void setFileSize(long fileSize)
     {
         this.fileSize = fileSize;
+    }
+
+    public static  AbstractID3v2Tag convertAiffTag(AbstractID3v2Tag tag, ID3V2Version id3V2Version)
+    {
+        if(tag instanceof ID3v24Tag)
+        {
+            ID3v24Tag d3v24Tag = (ID3v24Tag)tag;
+            switch(id3V2Version)
+            {
+                case ID3_V22:
+                    return new ID3v22Tag(d3v24Tag);
+                case ID3_V23:
+                    return new ID3v23Tag(d3v24Tag);
+                case ID3_V24:
+                    return null;
+            }
+        }
+        else if(tag instanceof ID3v23Tag)
+        {
+            ID3v23Tag d3v23Tag = (ID3v23Tag)tag;
+            switch(id3V2Version)
+            {
+                case ID3_V22:
+                    return new ID3v22Tag(d3v23Tag);
+                case ID3_V23:
+                    return null;
+                case ID3_V24:
+                    return new ID3v24Tag(d3v23Tag);
+            }
+        }
+        else if(tag instanceof ID3v22Tag)
+        {
+            ID3v22Tag d3v22Tag = (ID3v22Tag) tag;
+            switch(id3V2Version)
+            {
+                case ID3_V22:
+                    return null;
+                case ID3_V23:
+                    return new ID3v23Tag(d3v22Tag);
+                case ID3_V24:
+                    return new ID3v24Tag(d3v22Tag);
+            }
+        }
+        return null;
     }
 }

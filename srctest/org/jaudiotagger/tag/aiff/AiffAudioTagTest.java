@@ -13,12 +13,16 @@ import org.jaudiotagger.audio.iff.ChunkHeader;
 import org.jaudiotagger.audio.iff.IffHeaderChunk;
 import org.jaudiotagger.audio.wav.WavOptions;
 import org.jaudiotagger.audio.wav.WavSaveOptions;
+import org.jaudiotagger.audio.wav.WavSaveOrder;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagOptionSingleton;
+import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
 import org.jaudiotagger.tag.id3.ID3v22Tag;
 import org.jaudiotagger.tag.id3.ID3v23Tag;
+import org.jaudiotagger.tag.id3.ID3v24Tag;
 import org.jaudiotagger.tag.reference.ID3V2Version;
+import org.jaudiotagger.tag.wav.WavTag;
 
 import java.io.File;
 import java.io.IOException;
@@ -912,4 +916,58 @@ public class AiffAudioTagTest extends TestCase {
         assertNull(exceptionCaught);
     }
 
+    public void testConvertId3Metadata()
+    {
+        TagOptionSingleton.getInstance().setWavOptions(WavOptions.READ_ID3_ONLY);
+        TagOptionSingleton.getInstance().setWavSaveOptions(WavSaveOptions.SAVE_ACTIVE);
+        TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.ID3_THEN_INFO);
+        TagOptionSingleton.getInstance().setID3V2Version(ID3V2Version.ID3_V23);
+
+        Exception exceptionCaught = null;
+        try
+        {
+            File testFile = AbstractTestCase.copyAudioToTmp("test136.aif", new File("testConvertId3.aif"));
+            AudioFile f = AudioFileIO.read(testFile);
+            System.out.println(f.getAudioHeader());
+
+            assertTrue(f.getTag() instanceof AiffTag);
+            AiffTag tag = (AiffTag) f.getTag();
+            assertFalse(tag.isExistingId3Tag());
+            f.getTagOrCreateAndSetDefault().setField(FieldKey.ALBUM, "album");
+            f.commit();
+
+            f = AudioFileIO.read(testFile);
+            AiffTag aiftag           = (AiffTag)f.getTag();
+            assertTrue(((AiffTag)f.getTag()).getID3Tag() instanceof ID3v23Tag);
+
+            TagOptionSingleton.getInstance().setID3V2Version(ID3V2Version.ID3_V24);
+
+            AbstractID3v2Tag id3tag = AiffTag.convertAiffTag(aiftag.getID3Tag(), TagOptionSingleton.getInstance().getID3V2Version());
+            if(id3tag!=null)
+            {
+                aiftag.setID3Tag(id3tag);
+            }
+
+            assertTrue(((AiffTag)f.getTag()).getID3Tag() instanceof ID3v24Tag);
+
+            //Modify Value
+            id3tag.setField(FieldKey.ALBUM, "newalbum");
+            f.commit();
+
+            //Read modified metadata now in file
+            f = AudioFileIO.read(testFile);
+            assertTrue(f.getTag() instanceof AiffTag);
+            tag = (AiffTag) f.getTag();
+            assertTrue(((AiffTag)f.getTag()).getID3Tag() instanceof ID3v24Tag);
+
+            assertEquals("newalbum", tag.getFirst(FieldKey.ALBUM));
+            assertTrue(tag.isExistingId3Tag());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            exceptionCaught = e;
+        }
+        assertNull(exceptionCaught);
+    }
 }

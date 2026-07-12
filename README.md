@@ -1,6 +1,6 @@
 # jaudiotagger-kt
 
-[![JitPack](https://jitpack.io/v/Anrimian/jaudiotagger.svg)](https://jitpack.io/#Anrimian/jaudiotagger)
+[![JitPack](https://jitpack.io/v/Anrimian/jaudiotagger-kt.svg)](https://jitpack.io/#Anrimian/jaudiotagger-kt)
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL_v2.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 ![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20JVM%20%7C%20iOS%20%7C%20macOS-orange)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.3-purple)
@@ -64,13 +64,19 @@ dependencyResolutionManagement {
 Then add the dependency:
 
 ```kotlin
-// Android / KMP common
-implementation("com.github.Anrimian.jaudiotagger:jaudiotagger-kt:<version>")
+// Android (resolves the AAR through the multiplatform metadata) or JVM
+implementation("com.github.Anrimian.jaudiotagger-kt:jaudiotagger-kt:3.0.2-kt")
 
-// or explicitly the Android artifact
-implementation("com.github.Anrimian.jaudiotagger:jaudiotagger-kt-android:<version>")
+// or pin the platform artifact explicitly
+implementation("com.github.Anrimian.jaudiotagger-kt:jaudiotagger-kt-android:3.0.2-kt")
+implementation("com.github.Anrimian.jaudiotagger-kt:jaudiotagger-kt-jvm:3.0.2-kt")
 ```
 
+> Note the three-part group `com.github.Anrimian.jaudiotagger-kt`. Do **not**
+> use the short `com.github.Anrimian:jaudiotagger-kt` coordinate — that is a
+> JitPack aggregate that pulls every module (including the JVM jar next to the
+> Android AAR) onto one classpath.
+>
 > JitPack builds the Android, JVM and multiplatform-metadata artifacts
 > (its Linux builders cannot compile the Apple targets — build from source
 > on a Mac for iOS/macOS).

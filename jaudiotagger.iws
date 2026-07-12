@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README-java.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.ipr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="+ rewrite to kt">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +115,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="WARN_ABOUT_CRLF" value="false" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Anrimian"
+  }
+}]]></component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -127,6 +131,12 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Anrimian/jaudiotagger-kt.git",
+    "accountId": "70523536-ac39-46c3-97cb-f10998d900c2"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -930,7 +940,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="282" />
+    <option name="localTasksCounter" value="283" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1145,7 +1155,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Need to use the new s01 sonatype server" />
     <MESSAGE value="JAIKOZ-1291:Add JAIKOZ_ID field" />
     <MESSAGE value="Fixes for sonatype" />
     <MESSAGE value="Remove reference to bintray" />
@@ -1170,7 +1179,8 @@
     <MESSAGE value="#667:Also added ALBUM_COMPOSER_SORT" />
     <MESSAGE value="For VorbisComment MusicBRainz Album Type shpuld be mapped to RELEASETYPE" />
     <MESSAGE value="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard" />
-    <option name="LAST_COMMIT_MESSAGE" value="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard" />
+    <MESSAGE value="+ rewrite to kt" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ rewrite to kt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -131,3 +131,15 @@ test116.m4a
 test118.m4a
 
 
+
+# Kotlin rewrite module
+jaudiotagger-kt/.gradle/
+jaudiotagger-kt/build/
+jaudiotagger-kt/.kotlin/
+jaudiotagger-kt/local.properties
+
+# Gradle (root)
+.gradle/
+build/
+local.properties
+.kotlin/

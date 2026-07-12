@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="ALL" />
+    <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="#263:Unable to read multiple genres in an m4a file when one genre is custom and one is standard">
-      <change beforePath="$PROJECT_DIR$/jaudiotagger.iml" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README-java.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/jaudiotagger/tag/mp4/Mp4Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/jaudiotagger/tag/mp4/Mp4Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue173Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue173Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue418Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue418Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srctest/org/jaudiotagger/tag/mp4/M4aWriteTagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/tag/mp4/M4aWriteTagTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testV1.mp3" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="Commander">
     <leftPanel />
@@ -92,6 +91,18 @@
   </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="10324" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -219,8 +230,12 @@
     "JUnit.srctest in jaudiotagger.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":jaudiotagger-kt:macosArm64Test" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.jaudiotagger" external.system.module.type="sourceSet" external.system.module.version="0.1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="Native (macos_arm64) " allPlatforms="Native []/Native [macos_arm64]" useProjectSettings="false" isTestModule="true" externalProjectId=":jaudiotagger-kt" isHmppProject="true">
+        <dependsOnModuleNames>
+          <dependsOn>:jaudiotagger-kt:macosTest</dependsOn>
+          <dependsOn>:jaudiotagger-kt:appleTest</dependsOn>
+          <dependsOn>:jaudiotagger-kt:nativeTest</dependsOn>
+          <dependsOn>:jaudiotagger-kt:commonTest</dependsOn>
+        </dependsOnModuleNames>
+        <additionalVisibleModuleNames>
+          <friend>:jaudiotagger-kt:macosArm64Main</friend>
+          <friend>:jaudiotagger-kt:macosMain</friend>
+          <friend>:jaudiotagger-kt:appleMain</friend>
+          <friend>:jaudiotagger-kt:nativeMain</friend>
+          <friend>:jaudiotagger-kt:commonMain</friend>
+        </additionalVisibleModuleNames>
+        <sourceSets>
+          <sourceSet>jaudiotagger.jaudiotagger-kt.macosTest</sourceSet>
+          <sourceSet>jaudiotagger.jaudiotagger-kt.appleTest</sourceSet>
+          <sourceSet>jaudiotagger.jaudiotagger-kt.nativeTest</sourceSet>
+          <sourceSet>jaudiotagger.jaudiotagger-kt.commonTest</sourceSet>
+        </sourceSets>
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <externalSystemTestTasks>
+          <externalSystemTestTask>macosArm64Test|:jaudiotagger-kt|macosArm64|native</externalSystemTestTask>
+        </externalSystemTestTasks>
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xexport-kdoc -nopack -nostdlib" />
+        </compilerSettings>
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="debug" arg="true" />
+            <flagArg name="enableAssertions" arg="true" />
+            <flagArg name="noendorsedlibs" arg="true" />
+            <flagArg name="multiPlatform" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="moduleName" arg="org.jaudiotagger:jaudiotagger-kt_test" />
+            <stringArg name="outputName" arg="$MODULE_DIR$/build/classes/kotlin/macosArm64/test/klib/jaudiotagger-kt_test" />
+            <stringArg name="produce" arg="library" />
+            <stringArg name="shortModuleName" arg="jaudiotagger-kt_test" />
+            <stringArg name="target" arg="macos_arm64" />
+            <stringArg name="apiVersion" arg="2.3" />
+            <stringArg name="languageVersion" arg="2.3" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="fragmentRefines">
+              <args>
+                <arg>macosArm64Test:macosTest</arg>
+                <arg>macosTest:appleTest</arg>
+                <arg>appleTest:nativeTest</arg>
+                <arg>nativeTest:commonTest</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="fragments">
+              <args>
+                <arg>macosArm64Test</arg>
+                <arg>macosTest</arg>
+                <arg>appleTest</arg>
+                <arg>nativeTest</arg>
+                <arg>commonTest</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginClasspaths" />
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <output-test url="file://$MODULE_DIR$/build/classes/kotlin/macosArm64/test/klib" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/src/macosArm64Test" />
+    <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.macosTest" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.appleTest" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.nativeTest" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.commonTest" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.macosArm64Main" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.macosMain" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.appleMain" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.nativeMain" scope="TEST" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.commonMain" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: stdlib" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreFoundation | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Network | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: QuartzCore | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MLCompute | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SafetyKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Security | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CloudKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PreferencePanes | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: VideoSubscriberAccount | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Accessibility | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GameKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AVFoundation | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CFNetwork | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: WebKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Metal | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreMotion | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: iconv | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: LocalAuthenticationEmbeddedUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MediaToolbox | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ThreadNetwork | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: KernelManagement | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: IOBluetooth | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SensitiveContentAnalysis | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: posix | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreHaptics | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: vmnet | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: UniformTypeIdentifiers | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: OpenDirectory | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AppTrackingTransparency | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: FinderSync | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: EventKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SecurityFoundation | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PHASE | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreWLAN | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreAudio | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: DiskArbitration | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AudioUnit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ExecutionPolicy | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: StoreKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ContactsUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MultipeerConnectivity | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SafariServices | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MetricKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AddressBook | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Hypervisor | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: _CoreData_CloudKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SpriteKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreAudioKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreText | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ForceFeedback | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: LocalAuthentication | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AutomaticAssessmentConfiguration | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreGraphics | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MailKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreData | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ServiceManagement | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SystemExtensions | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SceneKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ShazamKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ReplayKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: DataDetection | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SoundAnalysis | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Cinematic | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: QuickLookThumbnailing | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreMedia | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ScriptingBridge | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: BackgroundAssets | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GameController | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreSpotlight | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: zlib | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CFCGTypes | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MediaExtension | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PDFKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: FileProviderUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MetalPerformanceShaders | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Matter | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Contacts | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SecurityInterface | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GameplayKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CommonCrypto | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PassKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: OpenGL3 | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AudioToolbox | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GLKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MediaAccessibility | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Vision | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MetalPerformanceShadersGraph | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreServices | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Speech | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: IOKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: BackgroundTasks | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreAudioTypes | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CallKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreML | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: libkern | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AdSupport | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: FSKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AVKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GLUT | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ModelIO | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Social | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: NaturalLanguage | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CryptoTokenKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MapKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GameSave | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Intents | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: IOSurface | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: NetworkExtension | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AuthenticationServices | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: UserNotificationsUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: UserNotifications | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: OSLog | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ClassKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ScreenSaver | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Accounts | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: BusinessChat | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: VideoToolbox | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PushKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ExceptionHandling | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: JavaRuntimeSupport | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Accelerate | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: OpenGLCommon | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ImageCaptureCore | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: DeviceCheck | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: builtin | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: iTunesLibrary | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreMIDI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AVFAudio | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreVideo | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: _LocationEssentials | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ApplicationServices | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: IntentsUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Cocoa | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: DeviceDiscoveryExtension | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AppKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: darwin | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: osx | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PencilKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreLocation | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SecurityUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: objc | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreTelephony | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ScreenCaptureKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: NotificationCenter | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: FileProvider | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ImageIO | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: GSS | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: LinkPresentation | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ExternalAccessory | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: AdServices | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Quartz | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SensorKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Foundation | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: IdentityLookup | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: SystemConfiguration | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Photos | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Virtualization | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Collaboration | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: IOUSBHost | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MediaLibrary | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreImage | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: QuickLookUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: NearbyInteraction | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreFoundationBase | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: JavaScriptCore | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ParavirtualizedGraphics | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: CoreBluetooth | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Symbols | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: PhotosUI | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: QuickLook | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: Kernel | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: cups | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: OpenGL | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MediaPlayer | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: MetalKit | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Kotlin/Native: ScreenTime | macos_arm64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-core-macosarm64:0.9.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-bytestring-macosarm64:0.9.1" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="jaudiotagger.jaudiotagger-kt.macosArm64Main" />
+</module>

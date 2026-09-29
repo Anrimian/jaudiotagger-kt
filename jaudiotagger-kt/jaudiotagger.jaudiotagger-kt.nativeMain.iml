@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":jaudiotagger-kt:nativeMain" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="org.jaudiotagger" external.system.module.type="sourceSet" external.system.module.version="0.1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="Common (experimental) " allPlatforms="Native []/Native [ios_arm64]/Native [ios_simulator_arm64]/Native [macos_arm64]" useProjectSettings="false" isTestModule="false" externalProjectId=":jaudiotagger-kt" isHmppProject="true">
+        <dependsOnModuleNames>:jaudiotagger-kt:commonMain</dependsOnModuleNames>
+        <newMppModelJpsModuleKind>SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <compilerSettings />
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="multiPlatform" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="apiVersion" arg="2.3" />
+            <stringArg name="languageVersion" arg="2.3" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/2.3.21/7f816ad9c22a970642b5d06cf79fe6e52a16fc69/kotlin-scripting-jvm-2.3.21.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/2.3.21/c159f56b1e5104c4d07a6e7119b628bc6129b630/kotlin-scripting-common-2.3.21.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.3.21/a2ee2c4e220fee522f0451b723bab2a43f3481a7/kotlin-stdlib-2.3.21.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/2.3.21/8dafd7f0eb5efef35a446683a2774fef61c68aeb/kotlin-script-runtime-2.3.21.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/src/nativeMain">
+      <sourceFolder url="file://$MODULE_DIR$/src/nativeMain/kotlin" type="kotlin-source" />
+    </content>
+    <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.commonMain" />
+    <orderEntry type="library" name="Kotlin/Native: stdlib" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreFoundation | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Network | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: QuartzCore | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MLCompute | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SafetyKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Security | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CloudKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: VideoSubscriberAccount | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Accessibility | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: GameKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AVFoundation | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CFNetwork | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: WebKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Metal | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreMotion | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: iconv | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: LocalAuthenticationEmbeddedUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MediaToolbox | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ThreadNetwork | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SensitiveContentAnalysis | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: posix | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreHaptics | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: UniformTypeIdentifiers | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AppTrackingTransparency | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: EventKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: PHASE | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreAudio | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: StoreKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ContactsUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MultipeerConnectivity | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SafariServices | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MetricKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AddressBook | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: _CoreData_CloudKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SpriteKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreAudioKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreText | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: LocalAuthentication | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AutomaticAssessmentConfiguration | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreGraphics | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreData | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SceneKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ShazamKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ReplayKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: DataDetection | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SoundAnalysis | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Cinematic | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: QuickLookThumbnailing | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreMedia | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: BackgroundAssets | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: GameController | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreSpotlight | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: zlib | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CFCGTypes | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: PDFKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: FileProviderUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MetalPerformanceShaders | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Matter | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Contacts | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: GameplayKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CommonCrypto | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: PassKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AudioToolbox | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: GLKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MediaAccessibility | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Vision | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MetalPerformanceShadersGraph | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreServices | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Speech | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: BackgroundTasks | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreAudioTypes | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CallKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreML | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AdSupport | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AVKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ModelIO | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Social | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: NaturalLanguage | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CryptoTokenKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MapKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: GameSave | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Intents | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: IOSurface | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: NetworkExtension | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AuthenticationServices | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: UserNotificationsUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: UserNotifications | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ClassKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Accounts | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: BusinessChat | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: VideoToolbox | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: PushKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Accelerate | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ImageCaptureCore | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: DeviceCheck | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: builtin | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreMIDI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AVFAudio | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreVideo | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: _LocationEssentials | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: IntentsUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: DeviceDiscoveryExtension | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: darwin | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: PencilKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreLocation | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SecurityUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: objc | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreTelephony | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: NotificationCenter | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: FileProvider | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ImageIO | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: GSS | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: LinkPresentation | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ExternalAccessory | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: AdServices | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SensorKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Foundation | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: IdentityLookup | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: SystemConfiguration | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Photos | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreImage | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: NearbyInteraction | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreFoundationBase | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: JavaScriptCore | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: CoreBluetooth | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: Symbols | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: PhotosUI | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: QuickLook | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MediaPlayer | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: MetalKit | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ScreenTime | [(ios_arm64, ios_simulator_arm64, macos_arm64)]" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-core:appleMain:0.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-core:nativeNonAndroidMain:0.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-core:nativeMain:0.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-core:commonMain:0.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-bytestring:appleMain:0.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-bytestring:nativeMain:0.9.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-bytestring:commonMain:0.9.1" level="project" />
+  </component>
+</module>

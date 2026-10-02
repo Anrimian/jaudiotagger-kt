@@ -3,6 +3,7 @@ package org.jaudiotagger.kt.tag.mp4
 import org.jaudiotagger.kt.tag.Artwork
 import org.jaudiotagger.kt.tag.FieldKey
 import org.jaudiotagger.kt.tag.Tag
+import org.jaudiotagger.kt.tag.id3.GenreTypes
 
 /**
  * A single ilst metadata item.
@@ -28,6 +29,11 @@ sealed class Mp4Item(val atomId: String) {
         override fun toString(): String = "covr(<${data.size} bytes>)"
     }
 
+    /** gnre atom: uint16 genre id (ID3v1 index + 1). */
+    class Genre(val genreId: Int) : Mp4Item("gnre") {
+        override fun toString(): String = "gnre=$genreId"
+    }
+
     /** Anything the library does not interpret; raw item content is preserved. */
     class Binary(atomId: String, val rawData: ByteArray) : Mp4Item(atomId) {
         override fun toString(): String = "$atomId(<${rawData.size} bytes>)"
@@ -40,6 +46,10 @@ sealed class Mp4Item(val atomId: String) {
 class Mp4Tag : Tag {
 
     val items = mutableListOf<Mp4Item>()
+
+    private companion object {
+        const val GENRE_CUSTOM_ATOM = "\u00A9gen"
+    }
 
     private fun key(fieldKey: FieldKey): Mp4FrameKey =
         mp4FrameKeys[fieldKey]
@@ -57,6 +67,8 @@ class Mp4Tag : Tag {
 
     override fun all(key: FieldKey): List<String> {
         when (key) {
+            FieldKey.GENRE -> return genreValues()
+
             FieldKey.TRACK -> return numberPair("trkn")?.number?.takeIf { it > 0 }
                 ?.let { listOf(it.toString()) } ?: emptyList()
 
@@ -85,6 +97,8 @@ class Mp4Tag : Tag {
 
     override fun set(key: FieldKey, value: String) {
         when (key) {
+            FieldKey.GENRE -> return setGenre(value)
+
             FieldKey.TRACK -> return setNumberPair("trkn", number = value.toIntOrNull() ?: 0)
             FieldKey.TRACK_TOTAL -> return setNumberPair("trkn", total = value.toIntOrNull() ?: 0)
             FieldKey.DISC_NO -> return setNumberPair("disk", number = value.toIntOrNull() ?: 0)
@@ -101,6 +115,11 @@ class Mp4Tag : Tag {
             FieldKey.TRACK, FieldKey.TRACK_TOTAL, FieldKey.DISC_NO, FieldKey.DISC_TOTAL ->
                 return set(key, value)
 
+            FieldKey.GENRE -> {
+                items += Mp4Item.Text(GENRE_CUSTOM_ATOM, value)
+                return
+            }
+
             else -> {}
         }
         addItemFor(key(key), value)
@@ -116,20 +135,49 @@ class Mp4Tag : Tag {
 
     override fun remove(key: FieldKey) {
         when (key) {
-            FieldKey.TRACK, FieldKey.TRACK_TOTAL -> {
-                items.removeAll { it.atomId == "trkn" }
+            FieldKey.GENRE -> {
+                items.removeAll { it is Mp4Item.Genre || (it is Mp4Item.Text && it.atomId == GENRE_CUSTOM_ATOM) }
                 return
             }
 
-            FieldKey.DISC_NO, FieldKey.DISC_TOTAL -> {
-                items.removeAll { it.atomId == "disk" }
-                return
-            }
+            FieldKey.TRACK -> return deleteNumberPair("trkn", deleteNumber = true)
+            FieldKey.TRACK_TOTAL -> return deleteNumberPair("trkn", deleteNumber = false)
+            FieldKey.DISC_NO -> return deleteNumberPair("disk", deleteNumber = true)
+            FieldKey.DISC_TOTAL -> return deleteNumberPair("disk", deleteNumber = false)
 
             else -> {}
         }
         val k = key(key)
         items.removeAll { matches(it, k) }
+    }
+
+    private fun genreValues(): List<String> {
+        val values = mutableListOf<String>()
+        for (item in items) {
+            when (item) {
+                is Mp4Item.Genre -> GenreTypes.nameOf(item.genreId - 1)?.let { values += it }
+                is Mp4Item.Text -> if (item.atomId == GENRE_CUSTOM_ATOM) values += item.value
+                else -> {}
+            }
+        }
+        return values
+    }
+
+    private fun setGenre(value: String) {
+        items.removeAll { it is Mp4Item.Genre || (it is Mp4Item.Text && it.atomId == GENRE_CUSTOM_ATOM) }
+        value.toShortOrNull()?.let { genreVal ->
+            if (genreVal <= GenreTypes.MAX_STANDARD_GENRE_ID) {
+                items += Mp4Item.Genre(genreVal + 1)
+                return
+            }
+        }
+        GenreTypes.idOf(value)?.let { id ->
+            if (id <= GenreTypes.MAX_STANDARD_GENRE_ID) {
+                items += Mp4Item.Genre(id + 1)
+                return
+            }
+        }
+        items += Mp4Item.Text(GENRE_CUSTOM_ATOM, value)
     }
 
     private fun numberPair(atomId: String): Mp4Item.NumberPair? =
@@ -142,6 +190,23 @@ class Mp4Tag : Tag {
             total?.let { existing.total = it }
         } else {
             items += Mp4Item.NumberPair(atomId, number ?: 0, total ?: 0)
+        }
+    }
+
+    private fun deleteNumberPair(atomId: String, deleteNumber: Boolean) {
+        val existing = numberPair(atomId) ?: return
+        if (deleteNumber) {
+            if (existing.total <= 0) {
+                items.removeAll { it === existing }
+            } else {
+                existing.number = 0
+            }
+        } else {
+            if (existing.number <= 0) {
+                items.removeAll { it === existing }
+            } else {
+                existing.total = 0
+            }
         }
     }
 

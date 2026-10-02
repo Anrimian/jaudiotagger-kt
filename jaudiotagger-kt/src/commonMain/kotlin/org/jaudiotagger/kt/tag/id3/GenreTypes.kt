@@ -5,6 +5,9 @@ package org.jaudiotagger.kt.tag.id3
  * 148-191 later Winamp additions).
  */
 object GenreTypes {
+    /** Largest genre id in the ID3v1 standard list (iTunes-compatible MP4 gnre range). */
+    const val MAX_STANDARD_GENRE_ID = 125
+
     val names: List<String> = listOf(
         "Blues",
         "Classic Rock",
@@ -205,5 +208,14 @@ object GenreTypes {
     fun idOf(name: String): Int? {
         val index = names.indexOfFirst { it.equals(name, ignoreCase = true) }
         return if (index >= 0) index else null
+    }
+
+    /** True when [value] is a standard ID3v1 genre id or name (for MP4 gnre atoms). */
+    fun isValidMp4Genre(value: String): Boolean {
+        value.toShortOrNull()?.let { genreVal ->
+            if ((genreVal - 1) <= MAX_STANDARD_GENRE_ID) return true
+        }
+        val id3GenreId = idOf(value)
+        return id3GenreId != null && id3GenreId <= MAX_STANDARD_GENRE_ID
     }
 }

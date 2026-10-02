@@ -93,17 +93,24 @@ class VorbisCommentTag(
 
     override fun first(key: FieldKey): String? {
         if (key == FieldKey.ENCODER) return vendor.ifEmpty { null }
+        if (key == FieldKey.ALBUM_ARTIST) return albumArtistValues().firstOrNull()
         return firstRaw(vorbisKey(key).fieldName)
     }
 
     override fun all(key: FieldKey): List<String> {
         if (key == FieldKey.ENCODER) return if (vendor.isEmpty()) emptyList() else listOf(vendor)
+        if (key == FieldKey.ALBUM_ARTIST) return albumArtistValues()
         return allRaw(vorbisKey(key).fieldName)
     }
 
     override fun set(key: FieldKey, value: String) {
         if (key == FieldKey.ENCODER) {
             vendor = value
+            return
+        }
+        if (key == FieldKey.ALBUM_ARTIST) {
+            setRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName, value)
+            removeRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
             return
         }
         setRaw(vorbisKey(key).fieldName, value)
@@ -114,6 +121,10 @@ class VorbisCommentTag(
             vendor = value
             return
         }
+        if (key == FieldKey.ALBUM_ARTIST) {
+            addRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName, value)
+            return
+        }
         addRaw(vorbisKey(key).fieldName, value)
     }
 
@@ -122,7 +133,19 @@ class VorbisCommentTag(
             vendor = DEFAULT_VENDOR
             return
         }
+        if (key == FieldKey.ALBUM_ARTIST) {
+            removeRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName)
+            removeRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
+            return
+        }
         removeRaw(vorbisKey(key).fieldName)
+    }
+
+    /** Java default: read ALBUMARTIST, then JRiver's `ALBUM ARTIST`. */
+    private fun albumArtistValues(): List<String> {
+        val standard = allRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName)
+        if (standard.isNotEmpty()) return standard
+        return allRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
     }
 
     override val fieldCount: Int get() = fields.size

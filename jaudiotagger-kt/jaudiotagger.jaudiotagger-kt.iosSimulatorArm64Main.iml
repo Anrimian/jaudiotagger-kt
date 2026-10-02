@@ -23,7 +23,6 @@
           <flagArguments>
             <flagArg name="debug" arg="true" />
             <flagArg name="enableAssertions" arg="true" />
-            <flagArg name="noendorsedlibs" arg="true" />
             <flagArg name="multiPlatform" arg="true" />
           </flagArguments>
           <stringArguments>
@@ -32,8 +31,8 @@
             <stringArg name="produce" arg="library" />
             <stringArg name="shortModuleName" arg="jaudiotagger-kt" />
             <stringArg name="target" arg="ios_simulator_arm64" />
-            <stringArg name="apiVersion" arg="2.3" />
-            <stringArg name="languageVersion" arg="2.3" />
+            <stringArg name="apiVersion" arg="2.4" />
+            <stringArg name="languageVersion" arg="2.4" />
           </stringArguments>
           <arrayArguments>
             <arrayArg name="fragmentRefines">
@@ -107,6 +106,7 @@
     <orderEntry type="library" name="Kotlin/Native: ContactsUI | ios_simulator_arm64" level="project" />
     <orderEntry type="library" name="Kotlin/Native: BrowserKit | ios_simulator_arm64" level="project" />
     <orderEntry type="library" name="Kotlin/Native: MultipeerConnectivity | ios_simulator_arm64" level="project" />
+    <orderEntry type="library" name="Kotlin/Native: ServicesAccountLinking | ios_simulator_arm64" level="project" />
     <orderEntry type="library" name="Kotlin/Native: SafariServices | ios_simulator_arm64" level="project" />
     <orderEntry type="library" name="Kotlin/Native: MetricKit | ios_simulator_arm64" level="project" />
     <orderEntry type="library" name="Kotlin/Native: AddressBook | ios_simulator_arm64" level="project" />

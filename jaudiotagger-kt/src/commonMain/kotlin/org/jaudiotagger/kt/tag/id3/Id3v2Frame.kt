@@ -6,6 +6,11 @@ package org.jaudiotagger.kt.tag.id3
  */
 sealed class Id3v2Frame(val id: String) {
 
+    /** TRCK/TPOS (TRK/TPA in v2.2): track or disc number plus optional total. */
+    class NumberTotal(id: String, val part: PartOfSetValue) : Id3v2Frame(id) {
+        override fun toString(): String = "$id=$part"
+    }
+
     /** T*** text frame; may carry several NUL-separated values. */
     class Text(id: String, val values: MutableList<String>) : Id3v2Frame(id) {
         val value: String get() = values.firstOrNull() ?: ""

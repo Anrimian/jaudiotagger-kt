@@ -157,6 +157,13 @@ internal object Id3v2TagWriter {
     private fun encodeFrameBody(version: Id3v2Version, frame: Id3v2Frame): ByteArray {
         val out = Buffer()
         when (frame) {
+            is Id3v2Frame.NumberTotal -> {
+                val text = frame.part.toRawText()
+                val encoding = chooseEncoding(version, text)
+                out.writeByte(encoding.id.toByte())
+                out.write(encoding.encode(text))
+            }
+
             is Id3v2Frame.Text -> {
                 val encoding = chooseEncoding(version, *frame.values.toTypedArray())
                 out.writeByte(encoding.id.toByte())

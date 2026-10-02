@@ -1,5 +1,6 @@
 package org.jaudiotagger.kt.tag.asf
 
+import org.jaudiotagger.kt.audio.asf.AsfMetadataDescriptor
 import org.jaudiotagger.kt.io.readInt32LE
 import org.jaudiotagger.kt.io.u
 import org.jaudiotagger.kt.tag.Artwork
@@ -7,25 +8,8 @@ import org.jaudiotagger.kt.tag.FieldKey
 import org.jaudiotagger.kt.tag.Tag
 
 /**
- * An entry of the ASF Extended Content Description (or Metadata) object.
- */
-sealed class AsfDescriptor(val name: String) {
-    class Text(name: String, var value: String) : AsfDescriptor(name) {
-        override fun toString(): String = "$name=$value"
-    }
-
-    class Binary(name: String, val data: ByteArray) : AsfDescriptor(name) {
-        override fun toString(): String = "$name=<${data.size} bytes>"
-    }
-}
-
-/**
- * ASF (WMA) metadata: the five legacy Content Description fields plus the
- * name/value descriptors of the Extended Content Description object.
- *
- * Artwork is carried in "WM/Picture" binary descriptors:
- * type byte, image size (uint32 LE), then NUL-terminated UTF-16LE mime and
- * description strings, then the image bytes.
+ * ASF (WMA) metadata: the five legacy Content Description fields plus descriptors
+ * from Extended Content, Metadata and Metadata Library objects.
  */
 class AsfTag : Tag {
 
@@ -36,9 +20,13 @@ class AsfTag : Tag {
     var description: String = ""
     var rating: String = ""
 
-    val descriptors = mutableListOf<AsfDescriptor>()
+    internal val internalDescriptors = mutableListOf<AsfMetadataDescriptor>()
 
-    private fun legacyGet(name: String): String? = when (name) {
+    internal fun addDescriptor(descriptor: AsfMetadataDescriptor) {
+        internalDescriptors += descriptor
+    }
+
+    private fun legacyGet(name: String): String? = when (name.uppercase()) {
         "TITLE" -> title
         "AUTHOR" -> author
         "COPYRIGHT" -> copyright
@@ -48,7 +36,7 @@ class AsfTag : Tag {
     }?.ifEmpty { null }
 
     private fun legacySet(name: String, value: String): Boolean {
-        when (name) {
+        when (name.uppercase()) {
             "TITLE" -> title = value
             "AUTHOR" -> author = value
             "COPYRIGHT" -> copyright = value
@@ -60,7 +48,7 @@ class AsfTag : Tag {
     }
 
     private fun isLegacy(name: String): Boolean =
-        name in setOf("TITLE", "AUTHOR", "COPYRIGHT", "DESCRIPTION", "RATING")
+        name.uppercase() in setOf("TITLE", "AUTHOR", "COPYRIGHT", "DESCRIPTION", "RATING")
 
     private fun nameFor(key: FieldKey): String =
         asfFieldNames[key]
@@ -68,30 +56,32 @@ class AsfTag : Tag {
 
     fun firstRaw(name: String): String? {
         legacyGet(name)?.let { return it }
-        return descriptors.filterIsInstance<AsfDescriptor.Text>()
-            .firstOrNull { it.name.equals(name, ignoreCase = true) }?.value?.ifEmpty { null }
+        return internalDescriptors.firstNotNullOfOrNull { descriptor ->
+            if (descriptor.name.equals(name, ignoreCase = true)) descriptor.asStringValue()?.ifEmpty { null } else null
+        }
     }
 
     fun allRaw(name: String): List<String> {
         if (isLegacy(name)) return listOfNotNull(legacyGet(name))
-        return descriptors.filterIsInstance<AsfDescriptor.Text>()
-            .filter { it.name.equals(name, ignoreCase = true) }.map { it.value }
+        return internalDescriptors.mapNotNull { descriptor ->
+            if (descriptor.name.equals(name, ignoreCase = true)) descriptor.asStringValue() else null
+        }
     }
 
     fun setRaw(name: String, value: String) {
         if (legacySet(name, value)) return
         removeRaw(name)
-        descriptors += AsfDescriptor.Text(name, value)
+        internalDescriptors += AsfMetadataDescriptor.text(name, value)
     }
 
     fun addRaw(name: String, value: String) {
         if (legacySet(name, value)) return
-        descriptors += AsfDescriptor.Text(name, value)
+        internalDescriptors += AsfMetadataDescriptor.text(name, value)
     }
 
     fun removeRaw(name: String) {
         if (legacySet(name, "")) return
-        descriptors.removeAll { it.name.equals(name, ignoreCase = true) }
+        internalDescriptors.removeAll { it.name.equals(name, ignoreCase = true) }
     }
 
     override fun first(key: FieldKey): String? = firstRaw(nameFor(key))
@@ -105,33 +95,33 @@ class AsfTag : Tag {
     override fun remove(key: FieldKey) = removeRaw(nameFor(key))
 
     override val fieldCount: Int
-        get() = descriptors.size +
+        get() = internalDescriptors.size +
             listOf(title, author, copyright, description, rating).count { it.isNotEmpty() }
 
     override val isEmpty: Boolean get() = fieldCount == 0
 
     override fun clear() {
         title = ""; author = ""; copyright = ""; description = ""; rating = ""
-        descriptors.clear()
+        internalDescriptors.clear()
     }
 
-    // ---- artwork (WM/Picture) ----
-
     override val artworks: List<Artwork>
-        get() = descriptors.filterIsInstance<AsfDescriptor.Binary>()
-            .filter { it.name == PICTURE_DESCRIPTOR }
-            .mapNotNull { decodePicture(it.data) }
+        get() = internalDescriptors
+            .filter { it.name == PICTURE_DESCRIPTOR && it.valueType == AsfMetadataDescriptor.TYPE_BINARY }
+            .mapNotNull { decodePicture(it.content) }
 
     override fun addArtwork(artwork: Artwork) {
-        descriptors += AsfDescriptor.Binary(PICTURE_DESCRIPTOR, encodePicture(artwork))
+        internalDescriptors += AsfMetadataDescriptor.binary(PICTURE_DESCRIPTOR, encodePicture(artwork))
     }
 
     override fun clearArtworks() {
-        descriptors.removeAll { it is AsfDescriptor.Binary && it.name == PICTURE_DESCRIPTOR }
+        internalDescriptors.removeAll {
+            it.name == PICTURE_DESCRIPTOR && it.valueType == AsfMetadataDescriptor.TYPE_BINARY
+        }
     }
 
     override fun toString(): String =
-        "AsfTag(title=$title, author=$author, descriptors=$descriptors)"
+        "AsfTag(title=$title, author=$author, descriptors=$internalDescriptors)"
 
     companion object {
         const val PICTURE_DESCRIPTOR = "WM/Picture"

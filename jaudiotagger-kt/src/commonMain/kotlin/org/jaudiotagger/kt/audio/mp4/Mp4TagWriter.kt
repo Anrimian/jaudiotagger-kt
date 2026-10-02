@@ -144,6 +144,13 @@ internal object Mp4TagWriter {
                     body.write(buildItem(item.atomId, buildDataBox(TYPE_IMPLICIT, payload)))
                 }
 
+                is Mp4Item.Genre -> {
+                    val payload = ByteArray(2)
+                    payload[0] = (item.genreId ushr 8).toByte()
+                    payload[1] = item.genreId.toByte()
+                    body.write(buildItem("gnre", buildDataBox(TYPE_IMPLICIT, payload)))
+                }
+
                 is Mp4Item.Cover ->
                     covers += buildDataBox(if (item.isPng) TYPE_PNG else TYPE_JPEG, item.data)
 

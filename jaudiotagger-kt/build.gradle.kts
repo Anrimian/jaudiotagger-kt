@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 
 plugins {
-    kotlin("multiplatform") version "2.3.21"
-    id("com.android.library") version "8.11.2"
+    kotlin("multiplatform")
+    id("com.android.library")
     `maven-publish`
 }
 
@@ -35,6 +35,9 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
         }
+        jvmTest.dependencies {
+            implementation("net.jthink:jaudiotagger:3.0.1")
+        }
     }
 }
 
@@ -60,4 +63,10 @@ tasks.withType<Test>().configureEach {
 
 tasks.withType<KotlinNativeTest>().configureEach {
     environment("TESTDATA_DIR", testDataDir)
+}
+
+// Kotlin 2.4 registers prepareKotlinIdeaImport on modules; some IDE versions still
+// request prepareKotlinBuildScriptModel on subprojects (it lives on the root only).
+tasks.register("prepareKotlinBuildScriptModel") {
+    dependsOn(tasks.named("prepareKotlinIdeaImport"))
 }

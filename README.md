@@ -3,7 +3,7 @@
 [![JitPack](https://jitpack.io/v/Anrimian/jaudiotagger-kt.svg)](https://jitpack.io/#Anrimian/jaudiotagger-kt)
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL_v2.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 ![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20JVM%20%7C%20iOS%20%7C%20macOS-orange)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.3-purple)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.4-purple)
 
 A **Kotlin Multiplatform rewrite of [jaudiotagger](https://bitbucket.org/ijabz/jaudiotagger)**,
 the venerable Java audio tagging library — reading and writing metadata for
@@ -154,8 +154,6 @@ file.tag.setArtwork(Artwork(data = jpegBytes, mimeType = "image/jpeg"))
 
 - ID3v2 compressed frames are preserved as opaque bytes, not decoded
   (no zlib in common Kotlin).
-- WMA: binary descriptors larger than 64 KB are dropped on write (they would
-  require the ASF Metadata Library object, which is read but not yet written).
 - DFF and RealAudio are read-only (the original library did not write them
   either).
 

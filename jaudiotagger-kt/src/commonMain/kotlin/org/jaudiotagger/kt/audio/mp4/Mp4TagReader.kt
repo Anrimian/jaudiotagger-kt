@@ -5,7 +5,6 @@ import org.jaudiotagger.kt.io.readFully
 import org.jaudiotagger.kt.io.decodeLatin1
 import org.jaudiotagger.kt.io.readInt32BE
 import org.jaudiotagger.kt.io.readUInt16BE
-import org.jaudiotagger.kt.tag.id3.GenreTypes
 import org.jaudiotagger.kt.tag.mp4.Mp4Item
 import org.jaudiotagger.kt.tag.mp4.Mp4Tag
 
@@ -70,10 +69,8 @@ internal object Mp4TagReader {
                 }
 
                 item.id == "gnre" -> {
-                    // pre-defined genre: ID3v1 genre id + 1
                     if (payload.size >= 2) {
-                        val name = GenreTypes.nameOf(payload.readUInt16BE(0) - 1)
-                        if (name != null) tag.items += Mp4Item.Text("©gen", name)
+                        tag.items += Mp4Item.Genre(payload.readUInt16BE(0))
                     }
                 }
 

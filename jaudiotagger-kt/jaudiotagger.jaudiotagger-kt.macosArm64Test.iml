@@ -33,7 +33,6 @@
           <flagArguments>
             <flagArg name="debug" arg="true" />
             <flagArg name="enableAssertions" arg="true" />
-            <flagArg name="noendorsedlibs" arg="true" />
             <flagArg name="multiPlatform" arg="true" />
           </flagArguments>
           <stringArguments>
@@ -42,8 +41,8 @@
             <stringArg name="produce" arg="library" />
             <stringArg name="shortModuleName" arg="jaudiotagger-kt_test" />
             <stringArg name="target" arg="macos_arm64" />
-            <stringArg name="apiVersion" arg="2.3" />
-            <stringArg name="languageVersion" arg="2.3" />
+            <stringArg name="apiVersion" arg="2.4" />
+            <stringArg name="languageVersion" arg="2.4" />
           </stringArguments>
           <arrayArguments>
             <arrayArg name="fragmentRefines">

@@ -205,6 +205,12 @@ internal object Id3v2TagReader {
                 Id3v2Frame.PairedText(id, pairs)
             }
 
+            isNumberTotalFrameId(id) -> {
+                val encoding = Id3TextEncoding.fromId(u(data[0]))
+                val values = splitNulSeparated(data, 1, encoding)
+                Id3v2Frame.NumberTotal(id, PartOfSetValue(values.firstOrNull() ?: ""))
+            }
+
             id.startsWith("T") -> {
                 val encoding = Id3TextEncoding.fromId(u(data[0]))
                 val values = splitNulSeparated(data, 1, encoding).toMutableList()

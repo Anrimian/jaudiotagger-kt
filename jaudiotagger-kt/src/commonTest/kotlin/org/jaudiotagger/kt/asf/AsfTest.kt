@@ -74,4 +74,11 @@ class AsfTest {
 
         SystemFileSystem.delete(path)
     }
+
+    @Test
+    fun readKeepsDuplicateDescriptorNamesInOrder() {
+        val tag = assertIs<AsfTag>(AudioTagger.read(testDataPath("test1.wma")).tag)
+        // IsVBR exists in both Metadata and Extended Content; ECD value wins for first().
+        assertEquals(2, tag.allRaw("IsVBR").size)
+    }
 }

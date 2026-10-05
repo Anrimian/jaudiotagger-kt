@@ -79,6 +79,6 @@ internal object ShiftData {
             io.write(rest, 0, read)
         }
 
-        io.truncate(io.position)
+        io.truncate(startPos - shrinkBy + amountToBeWritten)
     }
 }

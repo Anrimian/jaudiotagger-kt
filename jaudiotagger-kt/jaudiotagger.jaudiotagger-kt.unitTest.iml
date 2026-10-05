@@ -69,7 +69,7 @@
     <content url="file://$MODULE_DIR$/src/androidUnitTestDebug" />
     <content url="file://$MODULE_DIR$/src/test" />
     <content url="file://$MODULE_DIR$/src/testDebug" />
-    <orderEntry type="jdk" jdkName="Android API 35, extension level 13 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 37.0, extension level 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.commonTest" scope="TEST" />
     <orderEntry type="module" module-name="jaudiotagger.jaudiotagger-kt.main" scope="TEST" />

@@ -1,5 +1,6 @@
 package org.jaudiotagger.kt.io
 
+import android.system.ErrnoException
 import android.system.Os
 import java.io.FileDescriptor
 import java.io.RandomAccessFile
@@ -101,35 +102,53 @@ class FileDescriptorIo(private val fd: FileDescriptor) : FileIo {
     override var position: Long = 0
 
     override val size: Long
-        get() = Os.fstat(fd).st_size
+        get() = errnoAsIo { Os.fstat(fd).st_size }
 
     override fun read(dest: ByteArray, offset: Int, length: Int): Int {
         if (length == 0) return 0
-        val read = Os.pread(fd, dest, offset, length, position)
-        if (read == 0) return -1
-        position += read
-        return read
+        var total = 0
+        while (total < length) {
+            val read = errnoAsIo { Os.pread(fd, dest, offset + total, length - total, position) }
+            if (read == 0) break
+            total += read
+            position += read
+        }
+        return if (total == 0) -1 else total
     }
 
     override fun write(src: ByteArray, offset: Int, length: Int) {
         var written = 0
         while (written < length) {
-            val n = Os.pwrite(fd, src, offset + written, length - written, position)
+            val n = errnoAsIo { Os.pwrite(fd, src, offset + written, length - written, position) }
             if (n <= 0) throw kotlinx.io.IOException("pwrite returned $n")
             written += n
             position += n
         }
     }
 
+    // FileChannel.truncate semantics: never extends the file, clamps the position
     override fun truncate(newSize: Long) {
-        Os.ftruncate(fd, newSize)
+        if (newSize < size) {
+            errnoAsIo { Os.ftruncate(fd, newSize) }
+        }
+        if (position > newSize) {
+            position = newSize
+        }
     }
 
     override fun flush() {
-        Os.fsync(fd)
+        errnoAsIo { Os.fsync(fd) }
     }
 
     override fun close() {
         // deliberately not closing: the descriptor belongs to the caller
+    }
+}
+
+private inline fun <T> errnoAsIo(block: () -> T): T {
+    try {
+        return block()
+    } catch (e: ErrnoException) {
+        throw e.rethrowAsIOException()
     }
 }

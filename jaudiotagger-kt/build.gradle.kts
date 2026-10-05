@@ -38,15 +38,52 @@ kotlin {
         jvmTest.dependencies {
             implementation("net.jthink:jaudiotagger:3.0.1")
         }
+        val androidInstrumentedTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("androidx.test:runner:1.7.0")
+                implementation("androidx.test.ext:junit:1.2.1")
+            }
+        }
     }
+}
+
+val androidTestAssetFiles = listOf(
+    "issue52.mp3",
+    "test23.mp3",
+    "testV1Cbr128ID3v1.mp3",
+    "testV1Cbr128.mp3",
+    "test.flac",
+    "test.ogg",
+    "test.m4a",
+    "test.wav",
+    "test119.aif",
+    "test1.wma",
+    "test122.dsf",
+    "test0001.ape",
+    "test0001.wv",
+    "coverart.png",
+)
+
+val syncAndroidTestAssets = tasks.register<Sync>("syncAndroidTestAssets") {
+    from(rootProject.projectDir.resolve("testdata")) {
+        include(androidTestAssetFiles)
+    }
+    into(layout.buildDirectory.dir("generated/androidTestAssets/testdata"))
 }
 
 android {
     namespace = "org.jaudiotagger.kt"
-    compileSdk = 35
+    compileSdk = 37
     defaultConfig {
         // android.system.Os.pread/pwrite/ftruncate need API 21
         minSdk = 21
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        getByName("androidTest") {
+            assets.srcDir(layout.buildDirectory.dir("generated/androidTestAssets"))
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -69,4 +106,8 @@ tasks.withType<KotlinNativeTest>().configureEach {
 // request prepareKotlinBuildScriptModel on subprojects (it lives on the root only).
 tasks.register("prepareKotlinBuildScriptModel") {
     dependsOn(tasks.named("prepareKotlinIdeaImport"))
+}
+
+tasks.matching { it.name == "mergeDebugAndroidTestAssets" }.configureEach {
+    dependsOn(syncAndroidTestAssets)
 }

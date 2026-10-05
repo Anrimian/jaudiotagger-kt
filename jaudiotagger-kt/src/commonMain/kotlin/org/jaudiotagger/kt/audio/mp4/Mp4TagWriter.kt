@@ -28,6 +28,7 @@ internal object Mp4TagWriter {
     private const val TYPE_INTEGER = 21
     private const val TYPE_JPEG = 13
     private const val TYPE_PNG = 14
+    private const val FREE_PADDING = 4000
 
     // ---- atom tree ----
 
@@ -88,6 +89,14 @@ internal object Mp4TagWriter {
 
     private fun latin1(text: String): ByteArray =
         ByteArray(text.length) { (text[it].code and 0xFF).toByte() }
+
+    private fun freeAtomHeader(size: Long): ByteArray = int32BE(size.toInt()) + latin1("free")
+
+    private fun freeAtom(size: Int): ByteArray {
+        val atom = ByteArray(size)
+        freeAtomHeader(size.toLong()).copyInto(atom)
+        return atom
+    }
 
     // ---- ilst serialization ----
 
@@ -231,35 +240,41 @@ internal object Mp4TagWriter {
         val newMoovSize = 8 + children.sumOf { serializedSize(it) }
         val delta = newMoovSize - (oldMoovEnd - moovStart).toInt()
 
-        var patchOffsets = false
+        var shift = 0
         if (delta != 0) {
-            // try to absorb the change into an adjacent top-level free atom
-            val next = if (oldMoovEnd + 8 <= io.size) {
+            val freeSize = if (oldMoovEnd + 8 <= io.size) {
                 io.position = oldMoovEnd
                 val header = io.readFully(8)
                 val size = header.readInt32BE(0).toUInt().toLong()
                 val id = header.decodeLatin1(4, 8)
-                if (id == "free" && size >= 8 && oldMoovEnd + size <= io.size) size else -1L
-            } else -1L
+                if (id == "free" && size >= 8 && oldMoovEnd + size <= io.size) size else 0L
+            } else 0L
 
-            if (next > 0 && next - delta >= 8) {
-                // shrink/grow the free atom in place: bytes after it stay put
-                io.position = oldMoovEnd + delta
-                io.write(int32BE((next - delta).toInt()))
-                io.write(latin1("free"))
-            } else {
-                io.position = oldMoovEnd
-                if (delta > 0) {
-                    ShiftData.shiftDataByOffsetToMakeSpace(io, delta)
-                } else {
-                    ShiftData.shiftDataByOffsetToShrinkSpace(io, -delta)
+            when {
+                freeSize > 0 && freeSize - delta >= 8 -> {
+                    // resize the free atom in place: bytes after it stay put
+                    io.position = oldMoovEnd + delta
+                    io.write(freeAtomHeader(freeSize - delta))
                 }
-                patchOffsets = true
+
+                delta <= -8 -> {
+                    io.position = oldMoovEnd + delta
+                    io.write(freeAtomHeader((-delta).toLong()))
+                }
+
+                else -> {
+                    // leave padding behind the new moov so the next edit does not shift again
+                    shift = delta - freeSize.toInt() + FREE_PADDING
+                    io.position = oldMoovEnd + freeSize
+                    ShiftData.shiftDataByOffsetToMakeSpace(io, shift)
+                    io.position = oldMoovEnd + delta
+                    io.write(freeAtom(FREE_PADDING))
+                }
             }
         }
 
-        if (patchOffsets) {
-            patchChunkOffsets(moovNode, threshold = oldMoovEnd, delta = delta.toLong())
+        if (shift != 0) {
+            patchChunkOffsets(moovNode, threshold = oldMoovEnd, delta = shift.toLong())
         }
 
         val out = Buffer()

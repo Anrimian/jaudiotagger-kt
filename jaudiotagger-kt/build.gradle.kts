@@ -74,7 +74,7 @@ val syncAndroidTestAssets = tasks.register<Sync>("syncAndroidTestAssets") {
 
 android {
     namespace = "org.jaudiotagger.kt"
-    compileSdk = 37
+    compileSdk = 35
     defaultConfig {
         // android.system.Os.pread/pwrite/ftruncate need API 21
         minSdk = 21

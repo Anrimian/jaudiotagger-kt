@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Fix ID3v2 zero-size frame parsing and improve MP3 duration calculations&#10;&#10;- Skip zero-size ID3v2 frames in `Id3v2TagReader` instead of terminating tag parsing.&#10;- Update `MpegFrameHeader` to use 576 samples per frame for MPEG-2/2.5 Layer III.&#10;- Improve frame count estimation in `Mp3InfoReader` when Xing/VBRI frame count is zero or missing by inspecting subsequent audio frames.&#10;- Add unit tests for empty ID3v2 frames and MP3 duration calculations, and update `PORTING.md`.">
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" afterDir="false" />
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Fix file truncation in ShiftData and improve Android FileDescriptorIo and MP4 tag writing&#10;&#10;- Correct truncation size calculation in `ShiftData.shiftDataByOffsetToShrinkSpace` when shrinking file space.&#10;- Update `FileDescriptorIo` to handle complete reads in a loop, map `ErrnoException` to `IOException`, and align `truncate` semantics with `FileChannel`.&#10;- Optimize MP4 tag writing in `Mp4TagWriter` by utilizing adjacent `free` atoms or leaving padding after `moov` to prevent repeated file shifting on edits.&#10;- Add Android instrumented parity/unit tests for `FileDescriptorIo`, as well as unit tests for `ShiftData` and MP4 writing.&#10;- Update Android `compileSdk` to 37 and enable AndroidX test runner and test asset sync.">
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/androidMain/kotlin/org/jaudiotagger/kt/io/FileIo.android.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/androidMain/kotlin/org/jaudiotagger/kt/io/FileIo.android.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp4/Mp4TagWriter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp4/Mp4TagWriter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/io/ShiftData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/io/ShiftData.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/mp4/Mp4WriteTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/mp4/Mp4WriteTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -957,7 +951,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="287" />
+    <option name="localTasksCounter" value="288" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1172,7 +1166,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="#355:When write to Wav LIST fields need to write as IS0-8859-1 not UTF-8" />
     <MESSAGE value="#655:Issue writing to Wav file because INFO chunk has invalid field and this prevents reading of subsequent data chunk" />
     <MESSAGE value="#656:Add support for CREDITS,URL_BANDCAMP_ARTIST_SITE and URL_BANDCAMP_RELEASE_SITE" />
     <MESSAGE value="#658:For Wav Files allow to read Riff Files using a different encoding to the official ISO-8859-1 encoding" />
@@ -1197,7 +1190,8 @@
     <MESSAGE value="Upgraded Kotlin to 2.4.20 and improved ASF, MP4, and ID3v2 tag handling&#10;&#10;- Upgraded Kotlin version to 2.4.20 and Gradle wrapper to 8.14.5.&#10;- Implemented full ASF metadata container distribution supporting Content Description, Extended Content, Metadata, and Metadata Library objects.&#10;- Added `PartOfSet` frame handling for ID3v2 TRCK/TPOS and MP4 `trkn`/`disk` atoms to preserve track/disc numbers and totals.&#10;- Separated standard `gnre` uint16 genres and custom `©gen` text genres in MP4 tags.&#10;- Updated Vorbis `ALBUM_ARTIST` and ID3v2 comment/lyrics frame handling.&#10;- Added Java parity unit tests and test dependency against `jaudiotagger:3.0.1`." />
     <MESSAGE value="Fix ID3v2 zero-size frame parsing and improve MP3 duration calculations&#10;&#10;- Skip zero-size ID3v2 frames in `Id3v2TagReader` instead of terminating tag parsing.&#10;- Update `MpegFrameHeader` to use 576 samples per frame for MPEG-2/2.5 Layer III.&#10;- Improve frame count estimation in `Mp3InfoReader` when Xing/VBRI frame count is zero or missing by inspecting subsequent audio frames.&#10;- Add unit tests for empty ID3v2 frames and MP3 duration calculations, and update `PORTING.md`." />
     <MESSAGE value="kt scanner" />
-    <option name="LAST_COMMIT_MESSAGE" value="kt scanner" />
+    <MESSAGE value="Fix file truncation in ShiftData and improve Android FileDescriptorIo and MP4 tag writing&#10;&#10;- Correct truncation size calculation in `ShiftData.shiftDataByOffsetToShrinkSpace` when shrinking file space.&#10;- Update `FileDescriptorIo` to handle complete reads in a loop, map `ErrnoException` to `IOException`, and align `truncate` semantics with `FileChannel`.&#10;- Optimize MP4 tag writing in `Mp4TagWriter` by utilizing adjacent `free` atoms or leaving padding after `moov` to prevent repeated file shifting on edits.&#10;- Add Android instrumented parity/unit tests for `FileDescriptorIo`, as well as unit tests for `ShiftData` and MP4 writing.&#10;- Update Android `compileSdk` to 37 and enable AndroidX test runner and test asset sync." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix file truncation in ShiftData and improve Android FileDescriptorIo and MP4 tag writing&#10;&#10;- Correct truncation size calculation in `ShiftData.shiftDataByOffsetToShrinkSpace` when shrinking file space.&#10;- Update `FileDescriptorIo` to handle complete reads in a loop, map `ErrnoException` to `IOException`, and align `truncate` semantics with `FileChannel`.&#10;- Optimize MP4 tag writing in `Mp4TagWriter` by utilizing adjacent `free` atoms or leaving padding after `moov` to prevent repeated file shifting on edits.&#10;- Add Android instrumented parity/unit tests for `FileDescriptorIo`, as well as unit tests for `ShiftData` and MP4 writing.&#10;- Update Android `compileSdk` to 37 and enable AndroidX test runner and test asset sync." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

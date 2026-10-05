@@ -44,6 +44,16 @@ class JavaParityTest {
         AcceptedDeviation("test127.wav", "COMMENT", "Java keeps RIFF pad byte in INFO"),
         AcceptedDeviation("test128.wav", "COMMENT", "Java keeps RIFF pad byte in INFO"),
         AcceptedDeviation("test152.aiff", "ARTIST", "Java tolerates misaligned ID3 chunk"),
+        AcceptedDeviation(
+            "test74.mp3",
+            "duration",
+            "Java MPEG-2 L3 stereo uses 1152 samples/frame; kt uses 576 per ISO/IEC 13818-3",
+        ),
+        AcceptedDeviation(
+            "testV2L3Stereo.mp3",
+            "duration",
+            "Java MPEG-2 L3 stereo uses 1152 samples/frame; kt uses 576 per ISO/IEC 13818-3",
+        ),
     )
 
     private fun acceptedReason(file: String, field: String): String? {

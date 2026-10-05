@@ -88,7 +88,11 @@ internal object Id3v2TagReader {
                 }
             }
             pos += frameHeaderLength
-            if (declaredSize <= 0 || declaredSize > body.size - pos) break
+            when {
+                declaredSize == 0 -> continue // EmptyFrameException in Java: skip, header consumed
+                declaredSize < 0 -> break // InvalidFrameException
+                declaredSize > body.size - pos -> break // InvalidFrameException: extends past tag
+            }
 
             var frameData = body.copyOfRange(pos, pos + declaredSize)
             pos += declaredSize

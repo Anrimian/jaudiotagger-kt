@@ -83,19 +83,22 @@ internal object Mp3InfoReader {
         val frameLength = header.frameLength
         if (frameLength <= 0) throw CannotReadException("Invalid frame length")
 
-        val numberOfFramesEstimate = (fileSize - headerPosition) / frameLength
         val numberOfFrames = when {
-            xingFrame != null && xingFrame.frameCount > 0 -> xingFrame.frameCount.toLong()
-            vbriFrame != null && vbriFrame.frameCount > 0 -> vbriFrame.frameCount.toLong()
-            else -> numberOfFramesEstimate
+            xingFrame != null && xingFrame.isFrameCountPresent && xingFrame.frameCount > 0 ->
+                xingFrame.frameCount.toLong()
+            vbriFrame != null && vbriFrame.frameCount > 0 ->
+                vbriFrame.frameCount.toLong()
+            xingFrame != null || vbriFrame != null ->
+                estimateFrameCountAfterVbrHeader(io, headerPosition, header, fileSize)
+            else ->
+                (fileSize - headerPosition) / mpeg2Layer3SlotLengthForCount(header)
         }
 
         var timePerFrame = header.noOfSamples / header.samplingRate.toDouble()
-        // mirrors the frame-length halving quirk for MPEG-2(.5) Layer II/III mono
+        // MPEG-2/2.5 Layer III frames carry 576 samples regardless of channel mode (ISO/IEC 13818-3).
+        // Layer II mono still needs Java's halving to match frame-length compensation.
         if (header.version == MpegFrameHeader.VERSION_2 || header.version == MpegFrameHeader.VERSION_2_5) {
-            if ((header.layer == MpegFrameHeader.LAYER_II || header.layer == MpegFrameHeader.LAYER_III) &&
-                header.numberOfChannels == 1
-            ) {
+            if (header.layer == MpegFrameHeader.LAYER_II && header.numberOfChannels == 1) {
                 timePerFrame /= 2
             }
         }
@@ -135,6 +138,20 @@ internal object Mp3InfoReader {
         )
     }
 
+    /**
+     * CBR byte estimate for MPEG-2/2.5 Layer III always uses the 72 × bitrate / sampleRate slot
+     * size (ISO/IEC 13818-3), even for stereo/joint-stereo headers whose on-disk slot is 144 × …
+     */
+    private fun mpeg2Layer3SlotLengthForCount(header: MpegFrameHeader): Int {
+        if (header.version == MpegFrameHeader.VERSION_2 || header.version == MpegFrameHeader.VERSION_2_5) {
+            if (header.layer == MpegFrameHeader.LAYER_III) {
+                val paddingLength = if (header.isPadding) 1 else 0
+                return 72 * (header.bitRate * 1000) / header.samplingRate + paddingLength
+            }
+        }
+        return header.frameLength
+    }
+
     private fun readWindow(io: FileIo, position: Long): ByteArray {
         val length = minOf(FILE_BUFFER_SIZE.toLong(), io.size - position).coerceAtLeast(0)
         if (length == 0L) return ByteArray(0)
@@ -147,6 +164,107 @@ internal object Mp3InfoReader {
             read += n
         }
         return if (read == buffer.size) buffer else buffer.copyOf(read)
+    }
+
+    /**
+     * When Xing/VBRI advertises a frame count of 0 (or omits it), estimate from the first
+     * MPEG frame after the VBR header frame — not from the VBR frame's own bitrate slot.
+     *
+     * VBR files often have a short run of transitional frames right after the Xing slot whose
+     * declared bitrate differs from the stable stream that follows (e.g. 192 kbit/s then 128 kbit/s).
+     * The Xing wrapper itself may use the same bitrate as the main audio, so we pick the first
+     * frame whose immediate successor matches its own header rather than comparing against the
+     * wrapper bitrate.
+     */
+    private fun estimateFrameCountAfterVbrHeader(
+        io: FileIo,
+        vbrFrameStart: Long,
+        vbrFrame: MpegFrameHeader,
+        fileSize: Long,
+    ): Long {
+        val audioFrame = findFirstStableAudioFrameAfterVbrHeader(io, vbrFrameStart, vbrFrame, fileSize)
+            ?: return (fileSize - vbrFrameStart) / vbrFrame.frameLength
+        val audioFrameStart = audioFrame.first
+        val audioHeader = audioFrame.second
+        return (fileSize - audioFrameStart) / audioHeader.frameLength
+    }
+
+    private fun findFirstStableAudioFrameAfterVbrHeader(
+        io: FileIo,
+        vbrFrameStart: Long,
+        vbrFrame: MpegFrameHeader,
+        fileSize: Long,
+    ): Pair<Long, MpegFrameHeader>? {
+        var windowStart = vbrFrameStart
+        var window = readWindow(io, windowStart)
+        var index = vbrFrame.frameLength
+        val maxScan = maxOf(vbrFrame.frameLength * 32, 4096)
+        while (index <= maxScan) {
+            while (index + MpegFrameHeader.HEADER_SIZE > window.size) {
+                windowStart += index
+                if (windowStart >= fileSize) return null
+                window = readWindow(io, windowStart)
+                index = 0
+            }
+            if (MpegFrameHeader.isMpegFrame(window, index)) {
+                try {
+                    val candidate = MpegFrameHeader.parse(window, index)
+                    if (candidate.frameLength > 0 &&
+                        hasMatchingSuccessor(io, window, windowStart, index, candidate)
+                    ) {
+                        return (windowStart + index) to candidate
+                    }
+                } catch (_: AudioException) {
+                    // keep scanning
+                }
+            }
+            index++
+        }
+        return null
+    }
+
+    /** True when the frame at [index] + [header.frameLength] parses and matches [header]. */
+    private fun hasMatchingSuccessor(
+        io: FileIo,
+        window: ByteArray,
+        windowStart: Long,
+        index: Int,
+        header: MpegFrameHeader,
+    ): Boolean {
+        val nextHeader = peekFrameHeaderAfter(io, window, windowStart, index, header.frameLength)
+            ?: return false
+        return nextHeader.bitRate == header.bitRate &&
+            nextHeader.version == header.version &&
+            nextHeader.layer == header.layer &&
+            nextHeader.samplingRate == header.samplingRate
+    }
+
+    private fun peekFrameHeaderAfter(
+        io: FileIo,
+        window: ByteArray,
+        windowStart: Long,
+        index: Int,
+        offsetFromIndex: Int,
+    ): MpegFrameHeader? {
+        val frameLength = offsetFromIndex
+        if (frameLength <= 0) return null
+
+        var buffer = window
+        var offset = index
+        if (buffer.size - offset <= MIN_BUFFER_REMAINING_REQUIRED + frameLength) {
+            buffer = readWindow(io, windowStart + index)
+            offset = 0
+            if (buffer.size <= MIN_BUFFER_REMAINING_REQUIRED + frameLength) return null
+        }
+
+        val next = offset + frameLength
+        if (next + MpegFrameHeader.HEADER_SIZE > buffer.size) return null
+        if (!MpegFrameHeader.isMpegFrame(buffer, next)) return null
+        return try {
+            MpegFrameHeader.parse(buffer, next)
+        } catch (_: AudioException) {
+            null
+        }
     }
 
     /** Checks that a parseable frame follows the candidate frame. */

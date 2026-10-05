@@ -40,8 +40,10 @@ internal class MpegFrameHeader private constructor(private val bytes: ByteArray)
 
     val numberOfChannels: Int get() = if (channelMode == MODE_MONO) 1 else 2
 
-    /** Samples per frame: 384 for Layer I, 1152 for Layers II/III. */
-    val noOfSamples: Int get() = if (layer == LAYER_I) 384 else 1152
+    /** Samples per frame; ported from [org.jaudiotagger.audio.mp3.MPEGFrameHeader.getNoOfSamples]. */
+    val noOfSamples: Int
+        get() = samplesPerFrameMap[version]?.get(layer)
+            ?: throw InvalidTagDataException("Mp3 unknown version/layer: $version/$layer")
 
     /**
      * Frame length in bytes, including the quirky MPEG-2 Layer III mono halving
@@ -145,6 +147,13 @@ internal class MpegFrameHeader private constructor(private val bytes: ByteArray)
             VERSION_1 to mapOf(0 to 44100, 1 to 48000, 2 to 32000),
             VERSION_2 to mapOf(0 to 22050, 1 to 24000, 2 to 16000),
             VERSION_2_5 to mapOf(0 to 11025, 1 to 12000, 2 to 8000),
+        )
+
+        /** MPEG-2/2.5 Layer III uses 576 samples per frame (half of MPEG-1 Layer III). */
+        private val samplesPerFrameMap: Map<Int, Map<Int, Int>> = mapOf(
+            VERSION_1 to mapOf(LAYER_I to 384, LAYER_II to 1152, LAYER_III to 1152),
+            VERSION_2 to mapOf(LAYER_I to 384, LAYER_II to 1152, LAYER_III to 576),
+            VERSION_2_5 to mapOf(LAYER_I to 384, LAYER_II to 1152, LAYER_III to 576),
         )
 
         /** Quick sync check: 11 set bits and a valid sampling-rate field. */

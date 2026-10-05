@@ -4,34 +4,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Chunked FileChannel IO operations and updated Android openFileIo implementation&#10;&#10;- Chunked `FileChannelIo` read and write calls in 64KB increments on JVM and Android to cap NIO direct memory allocations per thread.&#10;- Updated `openFileIo` on Android to create `FileChannel` via `RandomAccessFile` for better compatibility.&#10;- Added unit tests covering read, write, position, and EOF behavior in `FileChannelIoTest`.&#10;- Updated IDE project module configuration files for multiplatform target support.">
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/asf/AsfContainerType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/asf/AsfMetadataDescriptor.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/asf/AsfTagConverter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/asf/AsfFieldContainers.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/PartOfSet.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/mp3/Id3NumberTotalTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/mp3/Id3v2CommentTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/mp4/Mp4GenreTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/parity/JavaParityTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Upgraded Kotlin to 2.4.20 and improved ASF, MP4, and ID3v2 tag handling&#10;&#10;- Upgraded Kotlin version to 2.4.20 and Gradle wrapper to 8.14.5.&#10;- Implemented full ASF metadata container distribution supporting Content Description, Extended Content, Metadata, and Metadata Library objects.&#10;- Added `PartOfSet` frame handling for ID3v2 TRCK/TPOS and MP4 `trkn`/`disk` atoms to preserve track/disc numbers and totals.&#10;- Separated standard `gnre` uint16 genres and custom `©gen` text genres in MP4 tags.&#10;- Updated Vorbis `ALBUM_ARTIST` and ID3v2 comment/lyrics frame handling.&#10;- Added Java parity unit tests and test dependency against `jaudiotagger:3.0.1`.">
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/asf/AsfFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/asf/AsfFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp4/Mp4TagReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp4/Mp4TagReader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp4/Mp4TagWriter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp4/Mp4TagWriter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/asf/AsfTag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/asf/AsfTag.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/GenreTypes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/GenreTypes.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2Frame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2Frame.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2Tag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2Tag.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/Mp3InfoReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/Mp3InfoReader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/MpegFrameHeader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/MpegFrameHeader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/VbrFrames.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/VbrFrames.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2TagReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2TagReader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2TagWriter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/id3/Id3v2TagWriter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/mp4/Mp4Tag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/mp4/Mp4Tag.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/asf/AsfTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/asf/AsfTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/parity/JavaParityTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/parity/JavaParityTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,6 +253,7 @@
     "JUnit.srctest in jaudiotagger.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
@@ -975,7 +955,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="285" />
+    <option name="localTasksCounter" value="286" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1190,7 +1170,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove reference to bintray" />
     <MESSAGE value="Tidied up README" />
     <MESSAGE value="Remove invalid link to Cobertura reports" />
     <MESSAGE value="#355:When write to Wav LIST fields need to write as IS0-8859-1 not UTF-8" />
@@ -1215,7 +1194,8 @@
     <MESSAGE value="+ rewrite to kt" />
     <MESSAGE value="README: verified JitPack coordinates" />
     <MESSAGE value="Chunked FileChannel IO operations and updated Android openFileIo implementation&#10;&#10;- Chunked `FileChannelIo` read and write calls in 64KB increments on JVM and Android to cap NIO direct memory allocations per thread.&#10;- Updated `openFileIo` on Android to create `FileChannel` via `RandomAccessFile` for better compatibility.&#10;- Added unit tests covering read, write, position, and EOF behavior in `FileChannelIoTest`.&#10;- Updated IDE project module configuration files for multiplatform target support." />
-    <option name="LAST_COMMIT_MESSAGE" value="Chunked FileChannel IO operations and updated Android openFileIo implementation&#10;&#10;- Chunked `FileChannelIo` read and write calls in 64KB increments on JVM and Android to cap NIO direct memory allocations per thread.&#10;- Updated `openFileIo` on Android to create `FileChannel` via `RandomAccessFile` for better compatibility.&#10;- Added unit tests covering read, write, position, and EOF behavior in `FileChannelIoTest`.&#10;- Updated IDE project module configuration files for multiplatform target support." />
+    <MESSAGE value="Upgraded Kotlin to 2.4.20 and improved ASF, MP4, and ID3v2 tag handling&#10;&#10;- Upgraded Kotlin version to 2.4.20 and Gradle wrapper to 8.14.5.&#10;- Implemented full ASF metadata container distribution supporting Content Description, Extended Content, Metadata, and Metadata Library objects.&#10;- Added `PartOfSet` frame handling for ID3v2 TRCK/TPOS and MP4 `trkn`/`disk` atoms to preserve track/disc numbers and totals.&#10;- Separated standard `gnre` uint16 genres and custom `©gen` text genres in MP4 tags.&#10;- Updated Vorbis `ALBUM_ARTIST` and ID3v2 comment/lyrics frame handling.&#10;- Added Java parity unit tests and test dependency against `jaudiotagger:3.0.1`." />
+    <option name="LAST_COMMIT_MESSAGE" value="Upgraded Kotlin to 2.4.20 and improved ASF, MP4, and ID3v2 tag handling&#10;&#10;- Upgraded Kotlin version to 2.4.20 and Gradle wrapper to 8.14.5.&#10;- Implemented full ASF metadata container distribution supporting Content Description, Extended Content, Metadata, and Metadata Library objects.&#10;- Added `PartOfSet` frame handling for ID3v2 TRCK/TPOS and MP4 `trkn`/`disk` atoms to preserve track/disc numbers and totals.&#10;- Separated standard `gnre` uint16 genres and custom `©gen` text genres in MP4 tags.&#10;- Updated Vorbis `ALBUM_ARTIST` and ID3v2 comment/lyrics frame handling.&#10;- Added Java parity unit tests and test dependency against `jaudiotagger:3.0.1`." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -64,6 +64,14 @@ large real-world collection, integrate into the player app, add a
 
 ## Fixed porting bugs
 
+- **ID3v2 zero-size frames (round 5):** `Id3v2TagReader` stopped the frame loop on
+  `declaredSize <= 0`, so a leading or mid-tag empty frame (e.g. v2.3 `WOAF`, v2.4
+  `TYER`) hid all following metadata. Now matches Java's `EmptyFrameException`
+  handling: consume the frame header and continue.
+- **MPEG-2/2.5 Layer III duration (round 5/6):** `MpegFrameHeader.noOfSamples` used
+  1152 for every Layer III frame; MPEG-2/2.5 Layer III carries 576 samples per
+  frame per ISO/IEC 13818-3. Fixed via a version/layer sample map; MPEG-2/2.5 Layer II
+  mono still halves time-per-frame as in Java.
 - **ASF/WMA container write (round 3):** replaced the round-2 dedupe/strip workaround
   with Java's container model. Read keeps every descriptor in `ContainerType` order;
   write runs `distributeMetadata` so each descriptor lands in the first container
@@ -84,6 +92,15 @@ large real-world collection, integrate into the player app, add a
 
 ## Known intentional deviations from the Java library
 
+- **MPEG-2/2.5 Layer III stereo duration (round 6):** Java's `samplesPerFrameMap` gives
+  1152 for MPEG-2/2.5 Layer III and only halves for mono, so stereo/joint-stereo files
+  report roughly twice the real length. kt uses 576 samples per frame for every channel
+  mode, matching `afinfo`/`ffprobe` ground truth.
+- **Xing/VBRI frame count zero (round 5):** when a Xing/Info or VBRI header advertises
+  a frame count of 0, Java's `MP3AudioHeader.setNumberOfFrames` keeps 0 and the
+  duration collapses. kt scans past the VBR wrapper slot for the first MPEG frame
+  whose successor matches its own header (skipping transitional bitrates), then
+  estimates `(audio end − that frame's start) / that frame's length`.
 - **Vorbis `ALBUM_ARTIST` write/remove:** on `set(ALBUM_ARTIST, …)` kt writes
   `ALBUMARTIST` and deletes JRiver's `ALBUM ARTIST`; on `remove` both are
   deleted. Java's default `WRITE_ALBUMARTIST` would leave a stale JRiver field.

@@ -10,6 +10,7 @@ import org.jaudiotagger.kt.io.readInt32BE
 internal class XingFrame private constructor(buffer: ByteArray) {
 
     val isVbr: Boolean = buffer.decodeToString(0, 4) == "Xing"
+    val isFrameCountPresent: Boolean
     var frameCount: Int = -1
         private set
     var audioSize: Int = -1
@@ -19,8 +20,9 @@ internal class XingFrame private constructor(buffer: ByteArray) {
 
     init {
         val flags = buffer.readInt32BE(4)
+        isFrameCountPresent = (flags and 0x1) != 0
         var pos = 8
-        if ((flags and 0x1) != 0) {
+        if (isFrameCountPresent) {
             frameCount = buffer.readInt32BE(pos)
             pos += 4
         }

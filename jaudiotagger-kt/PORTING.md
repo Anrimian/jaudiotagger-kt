@@ -75,6 +75,11 @@ large real-world collection, integrate into the player app, add a
   1152 for every Layer III frame; MPEG-2/2.5 Layer III carries 576 samples per
   frame per ISO/IEC 13818-3. Fixed via a version/layer sample map; MPEG-2/2.5 Layer II
   mono still halves time-per-frame as in Java.
+- **MPEG-2/2.5 Layer III frame length (round 8):** `MpegFrameHeader.frameLength`
+  used `144 ×` for non-mono MPEG-2/2.5 Layer III (ported from Java), breaking sync
+  confirmation and halving Xing-count-0 duration estimates for stereo files. Fixed to
+  `72 ×` for every channel mode; the round-6 CBR-only `mpeg2Layer3SlotLengthForCount`
+  workaround was removed.
 - **ASF/WMA container write (round 3):** replaced the round-2 dedupe/strip workaround
   with Java's container model. Read keeps every descriptor in `ContainerType` order;
   write runs `distributeMetadata` so each descriptor lands in the first container
@@ -98,9 +103,13 @@ large real-world collection, integrate into the player app, add a
 - **MP4 write layout (round 7):** the kt MP4 writer works in place and leaves
   `free` padding after `moov` so later edits avoid shifting the whole file.
   File layout and size after a write differ from Java; tag values are identical.
-- **MPEG-2/2.5 Layer III stereo duration (round 6):** Java's `samplesPerFrameMap` gives
-  1152 for MPEG-2/2.5 Layer III and only halves for mono, so stereo/joint-stereo files
-  report roughly twice the real length. kt uses 576 samples per frame for every channel
+- **MPEG-2/2.5 Layer III frame length (round 8):** Java's
+  `MPEGFrameHeader.getFrameLength` uses `144 × bitrate / sampleRate` for non-mono
+  MPEG-2/2.5 Layer III, so its sync checks and Xing-count-0 estimates are off for those
+  files. kt uses `72 ×` per ISO/IEC 13818-3 for every channel mode. Durations and the
+  frame chain are verified against ffprobe/afinfo and a walk to EOF.
+- **MPEG-2/2.5 Layer III samples per frame (round 5/6):** Java's `noOfSamples` gives
+  1152 for MPEG-2/2.5 Layer III stereo; kt uses 576 per ISO/IEC 13818-3 for every channel
   mode, matching `afinfo`/`ffprobe` ground truth.
 - **Xing/VBRI frame count zero (round 5):** when a Xing/Info or VBRI header advertises
   a frame count of 0, Java's `MP3AudioHeader.setNumberOfFrames` keeps 0 and the

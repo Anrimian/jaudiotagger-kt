@@ -91,7 +91,7 @@ internal object Mp3InfoReader {
             xingFrame != null || vbriFrame != null ->
                 estimateFrameCountAfterVbrHeader(io, headerPosition, header, fileSize)
             else ->
-                (fileSize - headerPosition) / mpeg2Layer3SlotLengthForCount(header)
+                (fileSize - headerPosition) / frameLength
         }
 
         var timePerFrame = header.noOfSamples / header.samplingRate.toDouble()
@@ -136,20 +136,6 @@ internal object Mp3InfoReader {
             encoder = encoder,
             channelMode = channelModeNames.getValue(header.channelMode),
         )
-    }
-
-    /**
-     * CBR byte estimate for MPEG-2/2.5 Layer III always uses the 72 × bitrate / sampleRate slot
-     * size (ISO/IEC 13818-3), even for stereo/joint-stereo headers whose on-disk slot is 144 × …
-     */
-    private fun mpeg2Layer3SlotLengthForCount(header: MpegFrameHeader): Int {
-        if (header.version == MpegFrameHeader.VERSION_2 || header.version == MpegFrameHeader.VERSION_2_5) {
-            if (header.layer == MpegFrameHeader.LAYER_III) {
-                val paddingLength = if (header.isPadding) 1 else 0
-                return 72 * (header.bitRate * 1000) / header.samplingRate + paddingLength
-            }
-        }
-        return header.frameLength
     }
 
     private fun readWindow(io: FileIo, position: Long): ByteArray {

@@ -46,8 +46,8 @@ internal class MpegFrameHeader private constructor(private val bytes: ByteArray)
             ?: throw InvalidTagDataException("Mp3 unknown version/layer: $version/$layer")
 
     /**
-     * Frame length in bytes, including the quirky MPEG-2 Layer III mono halving
-     * of the original implementation.
+     * Slot length in bytes for this frame header (ISO/IEC 13818-3).
+     * MPEG-2/2.5 Layer III always uses 72 × bitrate / sampleRate + padding.
      */
     val frameLength: Int
         get() {
@@ -56,12 +56,7 @@ internal class MpegFrameHeader private constructor(private val bytes: ByteArray)
                 VERSION_2, VERSION_2_5 -> when (layer) {
                     LAYER_I -> (12 * (bitRate * 1000) / samplingRate + paddingLength) * 4
                     LAYER_II -> 144 * (bitRate * 1000) / samplingRate + paddingLength
-                    LAYER_III ->
-                        if (channelMode == MODE_MONO) {
-                            72 * (bitRate * 1000) / samplingRate + paddingLength
-                        } else {
-                            144 * (bitRate * 1000) / samplingRate + paddingLength
-                        }
+                    LAYER_III -> 72 * (bitRate * 1000) / samplingRate + paddingLength
 
                     else -> throw InvalidTagDataException("Mp3 Unknown Layer:$layer")
                 }

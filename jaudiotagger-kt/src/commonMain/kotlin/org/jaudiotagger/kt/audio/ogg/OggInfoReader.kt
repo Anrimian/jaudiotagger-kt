@@ -93,7 +93,7 @@ internal object OggInfoReader {
      * Scans backwards from the end of the file for the last "OggS" capture pattern
      * and returns that page's absolute granule position.
      */
-    private fun findLastPageGranule(io: FileIo): Long {
+    fun findLastPageGranule(io: FileIo): Long {
         val fileSize = io.size
         val chunkSize = 64 * 1024
         var chunkEnd = fileSize
@@ -129,7 +129,7 @@ internal object OggInfoReader {
     }
 
     // matches jaudiotagger: kilobytes are truncated before multiplying by 8
-    private fun computeBitrate(lengthSeconds: Int, size: Long): Int {
+    fun computeBitrate(lengthSeconds: Int, size: Long): Int {
         // guard against sub-second audio rounding to zero
         val length = if (lengthSeconds == 0) 1 else lengthSeconds
         return ((size / 1000) * 8 / length).toInt()

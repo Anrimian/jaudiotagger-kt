@@ -8,10 +8,10 @@ import org.jaudiotagger.kt.tag.FieldKey
 import org.jaudiotagger.kt.tag.Tag
 
 /**
- * A single `NAME=value` comment. Names are upper-cased as the Vorbis spec requires.
+ * A single `NAME=value` comment. Names are case-insensitive; the original spelling is
+ * kept so rewriting an untouched tag does not change the packet bytes.
  */
-class VorbisCommentField(id: String, val value: String) {
-    val id: String = id.uppercase()
+class VorbisCommentField(val id: String, val value: String) {
 
     override fun toString(): String = "$id=$value"
 
@@ -52,13 +52,11 @@ class VorbisCommentTag(
     // ---- string-keyed access (also usable for custom/unmapped field names) ----
 
     fun firstRaw(id: String): String? {
-        val upper = id.uppercase()
-        return fields.firstOrNull { it.id == upper }?.value
+        return fields.firstOrNull { field -> field.id.equals(id, ignoreCase = true) }?.value
     }
 
     fun allRaw(id: String): List<String> {
-        val upper = id.uppercase()
-        return fields.filter { it.id == upper }.map { it.value }
+        return fields.filter { field -> field.id.equals(id, ignoreCase = true) }.map { field -> field.value }
     }
 
     fun addRaw(id: String, value: String) {
@@ -66,19 +64,17 @@ class VorbisCommentTag(
     }
 
     fun setRaw(id: String, value: String) {
-        val upper = id.uppercase()
-        val insertAt = fields.indexOfFirst { it.id == upper }
-        fields.removeAll { it.id == upper }
+        val insertAt = fields.indexOfFirst { field -> field.id.equals(id, ignoreCase = true) }
+        fields.removeAll { field -> field.id.equals(id, ignoreCase = true) }
         if (insertAt >= 0) {
-            fields.add(insertAt, VorbisCommentField(upper, value))
+            fields.add(insertAt, VorbisCommentField(id, value))
         } else {
-            fields += VorbisCommentField(upper, value)
+            fields += VorbisCommentField(id, value)
         }
     }
 
     fun removeRaw(id: String) {
-        val upper = id.uppercase()
-        fields.removeAll { it.id == upper }
+        fields.removeAll { field -> field.id.equals(id, ignoreCase = true) }
     }
 
     internal fun addParsedField(field: VorbisCommentField) {

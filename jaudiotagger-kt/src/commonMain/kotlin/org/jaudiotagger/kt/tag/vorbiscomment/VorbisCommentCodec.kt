@@ -58,6 +58,29 @@ object VorbisCommentCodec {
         return tag
     }
 
+    /**
+     * Offset one past the last user comment in [rawData], or null when a comment length is
+     * corrupt. Ogg Opus allows padding or binary data after this offset.
+     */
+    internal fun commentListEnd(rawData: ByteArray): Int? {
+        var pos = 0
+        val vendorLength = rawData.readInt32LE(pos)
+        pos += 4 + vendorLength
+
+        val userComments = rawData.readInt32LE(pos)
+        pos += 4
+
+        for (i in 0 until userComments) {
+            val commentLength = rawData.readInt32LE(pos)
+            pos += 4
+            if (commentLength > MAX_COMMENT_LENGTH || commentLength > rawData.size - pos) {
+                return null
+            }
+            pos += commentLength
+        }
+        return pos
+    }
+
     /** Serializes [tag]; the framing bit (Ogg only) is appended by the Ogg writer. */
     fun encode(tag: VorbisCommentTag): ByteArray {
         val buffer = Buffer()

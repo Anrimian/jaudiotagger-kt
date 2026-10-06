@@ -7,7 +7,7 @@
 
 A **Kotlin Multiplatform rewrite of [jaudiotagger](https://bitbucket.org/ijabz/jaudiotagger)**,
 the venerable Java audio tagging library — reading and writing metadata for
-12 audio formats with no reflection and no temp-file copies.
+13 audio formats with no reflection and no temp-file copies.
 
 > **Full disclosure:** this library was written by **Claude Fable 5**
 > (Anthropic's `claude-fable-5` model), porting the original Java sources of
@@ -36,7 +36,8 @@ knowledge baked in, but it shows its age on modern Android:
 |---|---|---|---|---|---|
 | MP3 | `.mp3` | MPEG header, Xing/VBRI/LAME | ✅ | ✅ | ID3v2.2/2.3/2.4 + ID3v1(.1) |
 | FLAC | `.flac` | ✅ | ✅ | ✅ | Vorbis Comment + PICTURE blocks |
-| Ogg Vorbis | `.ogg` | ✅ | ✅ | ✅ | Vorbis Comment (base64 artwork) |
+| Ogg Vorbis | `.ogg .oga` | ✅ | ✅ | ✅ | Vorbis Comment (base64 artwork) |
+| Ogg Opus | `.opus (.ogg/.oga by content)` | ✅ | ✅ | ✅ | Vorbis Comment (base64 artwork) |
 | MP4 / AAC / ALAC | `.m4a .mp4 .m4b .m4p` | ✅ | ✅ | ✅ | iTunes `ilst` (incl. reverse-DNS) |
 | WAV | `.wav` | ✅ | ✅ | ✅ | ID3v2 chunk + LIST-INFO (synced) |
 | AIFF | `.aif .aiff .aifc` | ✅ | ✅ | ✅ | ID3v2 chunk |

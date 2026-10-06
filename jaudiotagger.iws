@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Downgrade Android compileSdk to 35">
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/Mp3InfoReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/Mp3InfoReader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/MpegFrameHeader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/mp3/MpegFrameHeader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/parity/JavaParityTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/parity/JavaParityTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/AudioTagger.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/AudioTagger.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggInfoReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggInfoReader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggVorbisTagWriter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggVorbisTagWriter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentCodec.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentCodec.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/SamplesSmokeTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/SamplesSmokeTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -953,7 +957,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="289" />
+    <option name="localTasksCounter" value="290" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1168,7 +1172,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="#656:Add support for CREDITS,URL_BANDCAMP_ARTIST_SITE and URL_BANDCAMP_RELEASE_SITE" />
     <MESSAGE value="#658:For Wav Files allow to read Riff Files using a different encoding to the official ISO-8859-1 encoding" />
     <MESSAGE value="#659:For files that have ID3 tag allow for frames with text encoding set to zero (ISO-8859-1) allow to read as different encoding instead" />
     <MESSAGE value="Only use override charset for fields listed in TagOptionSingleton.getInstance().getOverrideCharset()" />
@@ -1193,7 +1196,8 @@
     <MESSAGE value="kt scanner" />
     <MESSAGE value="Fix file truncation in ShiftData and improve Android FileDescriptorIo and MP4 tag writing&#10;&#10;- Correct truncation size calculation in `ShiftData.shiftDataByOffsetToShrinkSpace` when shrinking file space.&#10;- Update `FileDescriptorIo` to handle complete reads in a loop, map `ErrnoException` to `IOException`, and align `truncate` semantics with `FileChannel`.&#10;- Optimize MP4 tag writing in `Mp4TagWriter` by utilizing adjacent `free` atoms or leaving padding after `moov` to prevent repeated file shifting on edits.&#10;- Add Android instrumented parity/unit tests for `FileDescriptorIo`, as well as unit tests for `ShiftData` and MP4 writing.&#10;- Update Android `compileSdk` to 37 and enable AndroidX test runner and test asset sync." />
     <MESSAGE value="Downgrade Android compileSdk to 35" />
-    <option name="LAST_COMMIT_MESSAGE" value="Downgrade Android compileSdk to 35" />
+    <MESSAGE value="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

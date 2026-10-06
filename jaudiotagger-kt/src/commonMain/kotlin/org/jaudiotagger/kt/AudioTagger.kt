@@ -14,9 +14,7 @@ import org.jaudiotagger.kt.audio.mp3.Mp3InfoReader
 import org.jaudiotagger.kt.audio.mp4.Mp4InfoReader
 import org.jaudiotagger.kt.audio.mp4.Mp4TagReader
 import org.jaudiotagger.kt.audio.mp4.Mp4TagWriter
-import org.jaudiotagger.kt.audio.ogg.OggInfoReader
-import org.jaudiotagger.kt.audio.ogg.OggVorbisTagReader
-import org.jaudiotagger.kt.audio.ogg.OggVorbisTagWriter
+import org.jaudiotagger.kt.audio.ogg.OggFile
 import org.jaudiotagger.kt.audio.real.RealFileReader
 import org.jaudiotagger.kt.audio.wav.WavInfoReader
 import org.jaudiotagger.kt.audio.wav.WavTagIo
@@ -43,7 +41,9 @@ import org.jaudiotagger.kt.tag.wav.WavTag
  */
 enum class AudioFormat(vararg val extensions: String) {
     FLAC("flac"),
-    OGG("ogg"),
+
+    /** Ogg container with a Vorbis or Opus stream; the codec is detected from the first packet. */
+    OGG("ogg", "oga", "opus"),
     APE("ape"),
     WAVPACK("wv"),
 
@@ -114,8 +114,8 @@ object AudioTagger {
 
         AudioFormat.OGG -> AudioFile(
             format = format,
-            properties = OggInfoReader.read(io),
-            tag = OggVorbisTagReader.read(io),
+            properties = OggFile.readProperties(io),
+            tag = OggFile.readTag(io),
         )
 
         AudioFormat.APE -> AudioFile(
@@ -187,7 +187,7 @@ object AudioTagger {
 
     fun readProperties(io: FileIo, format: AudioFormat): AudioProperties = when (format) {
         AudioFormat.FLAC -> FlacInfoReader.read(io)
-        AudioFormat.OGG -> OggInfoReader.read(io)
+        AudioFormat.OGG -> OggFile.readProperties(io)
         AudioFormat.APE -> MonkeyInfoReader.read(io)
         AudioFormat.WAVPACK -> WavPackInfoReader.read(io)
         AudioFormat.REALAUDIO -> RealFileReader.readProperties(io)
@@ -215,7 +215,7 @@ object AudioTagger {
                     ?: throw CannotWriteException("FLAC file requires a FlacTag, got ${tag::class.simpleName}"),
             )
 
-            AudioFormat.OGG -> OggVorbisTagWriter.write(
+            AudioFormat.OGG -> OggFile.writeTag(
                 io,
                 tag as? VorbisCommentTag
                     ?: throw CannotWriteException("OGG file requires a VorbisCommentTag, got ${tag::class.simpleName}"),
@@ -282,7 +282,7 @@ object AudioTagger {
     fun deleteTag(io: FileIo, format: AudioFormat) {
         when (format) {
             AudioFormat.FLAC -> FlacTagWriter.delete(io)
-            AudioFormat.OGG -> OggVorbisTagWriter.delete(io)
+            AudioFormat.OGG -> OggFile.deleteTag(io)
             AudioFormat.APE, AudioFormat.WAVPACK -> ApeTagIo.deleteTag(io)
             AudioFormat.REALAUDIO -> throw CannotWriteException("RealAudio is read-only")
             AudioFormat.MP3 -> {

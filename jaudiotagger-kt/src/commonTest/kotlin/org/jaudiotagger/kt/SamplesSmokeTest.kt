@@ -17,6 +17,7 @@ class SamplesSmokeTest {
         "test.ogg", "test3.ogg", "test5.ogg",
         "test76.ogg", "test77.ogg", "testlargeimage.ogg", "testsmallimage.ogg",
         "test-opus.opus", "test-opus-padding.opus", "test-opus-binary-tail.opus", "test-opus-in-ogg.ogg",
+        "test-opus-track-total.opus",
     )
 
     // corrupt on purpose; the original library throws CannotReadException on them

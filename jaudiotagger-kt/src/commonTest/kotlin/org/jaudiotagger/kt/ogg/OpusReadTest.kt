@@ -41,6 +41,16 @@ class OpusReadTest {
     }
 
     @Test
+    fun readsCombinedTrackAndDiscNumbers() {
+        val file = AudioTagger.read(testDataPath("test-opus-track-total.opus"))
+        val tag = assertIs<VorbisCommentTag>(file.tag)
+        assertEquals("3", tag.first(FieldKey.TRACK))
+        assertEquals("12", tag.first(FieldKey.TRACK_TOTAL))
+        assertEquals("1", tag.first(FieldKey.DISC_NO))
+        assertEquals("2", tag.first(FieldKey.DISC_TOTAL))
+    }
+
+    @Test
     fun oggVorbisStillReadsAsVorbis() {
         val file = AudioTagger.read(testDataPath("test.ogg"))
         assertEquals("Ogg Vorbis v1", file.properties.encodingType)

@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Added support for reading and writing Ogg Opus audio metadata&#10;&#10;- Added `OggFile` dispatcher to detect and route Ogg streams to Vorbis or Opus readers and writers&#10;- Implemented `OpusInfoReader`, `OggOpusTagReader`, and `OggOpusTagWriter` for RFC 7845 Ogg Opus support&#10;- Extracted shared page creation, shifting, and sequence renumbering logic into `OggPageWriter`&#10;- Updated `VorbisCommentTag` to preserve field key casing while keeping lookups case-insensitive&#10;- Added test fixtures, unit tests, and cross-check tests for Ogg Opus parsing and writing">
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/AudioTagger.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/AudioTagger.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggInfoReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggInfoReader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggVorbisTagWriter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/audio/ogg/OggVorbisTagWriter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentCodec.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentCodec.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/SamplesSmokeTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/SamplesSmokeTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/flac/FlacWriteTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/flac/FlacWriteTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusReadTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusReadTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusWriteTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusWriteTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/ogg/OpusFfmpegCrossCheckTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/ogg/OpusFfmpegCrossCheckTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/tools/gen_opus_fixtures.py" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/tools/gen_opus_fixtures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -957,7 +957,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="290" />
+    <option name="localTasksCounter" value="291" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1172,7 +1172,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="#658:For Wav Files allow to read Riff Files using a different encoding to the official ISO-8859-1 encoding" />
     <MESSAGE value="#659:For files that have ID3 tag allow for frames with text encoding set to zero (ISO-8859-1) allow to read as different encoding instead" />
     <MESSAGE value="Only use override charset for fields listed in TagOptionSingleton.getInstance().getOverrideCharset()" />
     <MESSAGE value="Modify ID3 tags so now take note of the overrideCharset field list, and only does override if field is in list.&#10;Also, overrideCharset has no effect on some text fields. If the text field is a description field to further subdivide a frame into versions for different data (most notably FrameBodyTXXX and FrameBodyCOMM description fields) we use the standard encoding when reading the metadata because software would usually only write   wrong charset into the value field not the description field." />
@@ -1197,7 +1196,8 @@
     <MESSAGE value="Fix file truncation in ShiftData and improve Android FileDescriptorIo and MP4 tag writing&#10;&#10;- Correct truncation size calculation in `ShiftData.shiftDataByOffsetToShrinkSpace` when shrinking file space.&#10;- Update `FileDescriptorIo` to handle complete reads in a loop, map `ErrnoException` to `IOException`, and align `truncate` semantics with `FileChannel`.&#10;- Optimize MP4 tag writing in `Mp4TagWriter` by utilizing adjacent `free` atoms or leaving padding after `moov` to prevent repeated file shifting on edits.&#10;- Add Android instrumented parity/unit tests for `FileDescriptorIo`, as well as unit tests for `ShiftData` and MP4 writing.&#10;- Update Android `compileSdk` to 37 and enable AndroidX test runner and test asset sync." />
     <MESSAGE value="Downgrade Android compileSdk to 35" />
     <MESSAGE value="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`" />
+    <MESSAGE value="Added support for reading and writing Ogg Opus audio metadata&#10;&#10;- Added `OggFile` dispatcher to detect and route Ogg streams to Vorbis or Opus readers and writers&#10;- Implemented `OpusInfoReader`, `OggOpusTagReader`, and `OggOpusTagWriter` for RFC 7845 Ogg Opus support&#10;- Extracted shared page creation, shifting, and sequence renumbering logic into `OggPageWriter`&#10;- Updated `VorbisCommentTag` to preserve field key casing while keeping lookups case-insensitive&#10;- Added test fixtures, unit tests, and cross-check tests for Ogg Opus parsing and writing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added support for reading and writing Ogg Opus audio metadata&#10;&#10;- Added `OggFile` dispatcher to detect and route Ogg streams to Vorbis or Opus readers and writers&#10;- Implemented `OpusInfoReader`, `OggOpusTagReader`, and `OggOpusTagWriter` for RFC 7845 Ogg Opus support&#10;- Extracted shared page creation, shifting, and sequence renumbering logic into `OggPageWriter`&#10;- Updated `VorbisCommentTag` to preserve field key casing while keeping lookups case-insensitive&#10;- Added test fixtures, unit tests, and cross-check tests for Ogg Opus parsing and writing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

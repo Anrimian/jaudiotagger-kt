@@ -128,6 +128,12 @@ large real-world collection, integrate into the player app, add a
 - Vorbis comment names keep the spelling from the file (lookups stay
   case-insensitive). Java uppercases them, which would rewrite every
   ffmpeg Opus tag on a no-op write.
+- Ogg (Vorbis and Opus) writing is in-place instead of temp-file based
+  (MediaStore requirement).
+- **Vorbis combined TRACKNUMBER/DISCNUMBER (round 10):** a value matching
+  `N/M` is split into number and total for `TRACK`/`TRACK_TOTAL` and
+  `DISC_NO`/`DISC_TOTAL`; `set`/`remove` keep the total. Java returns the
+  raw `3/12` string.
 - **Ogg Opus (round 9):** the Kaned1as fork was the format reference but was not
   ported. That writer loads the whole file into memory, rewrites through a temp
   file, and drops data after the comment list.

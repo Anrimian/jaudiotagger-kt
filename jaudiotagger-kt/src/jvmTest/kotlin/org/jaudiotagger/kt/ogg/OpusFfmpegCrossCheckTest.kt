@@ -48,6 +48,31 @@ class OpusFfmpegCrossCheckTest {
         }
     }
 
+    @Test
+    fun combinedTrackEditIsAcceptedByFfmpeg() {
+        assumeFfprobeAvailable()
+        val path = copyToTemp("test-opus-track-total.opus", "opus-ffmpeg-track")
+        try {
+            val tag = AudioTagger.read(path).tag as VorbisCommentTag
+            tag.set(FieldKey.TRACK, "5")
+            AudioTagger.write(path, tag)
+            assertFfmpegAccepts(path, "Opus Title", expectCover = false)
+            val file = File(path.toString())
+            val probedTrack = run(
+                "ffprobe", "-v", "error",
+                "-select_streams", "a",
+                "-show_entries", "stream_tags=track",
+                "-of", "default=nw=1:nk=1",
+                file.absolutePath,
+                captureStdout = true,
+            )
+            assertEquals(0, probedTrack.exitCode)
+            assertEquals("5/12", probedTrack.stdout.decodeToString().trim())
+        } finally {
+            SystemFileSystem.delete(path)
+        }
+    }
+
     private fun assumeFfprobeAvailable() {
         Assume.assumeTrue(
             try {

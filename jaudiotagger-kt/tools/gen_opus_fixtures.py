@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Generate the Ogg Opus test fixtures in repo-root testdata/.
 
-Creates:
+Creates (write-if-absent; delete a file to regenerate it):
   test-opus.opus              3 s stereo sine, tags, OpusHead input rate patched to 44100
   test-opus-padding.opus      same stream with libopusenc-sized zero padding on OpusTags
   test-opus-binary-tail.opus  same stream with RFC 7845 binary data after the comments
   test-opus-in-ogg.ogg        byte copy of test-opus.opus
   test-opus-shared-page.opus  OpusTags merged onto the first audio page (RFC-violating)
+  test-opus-track-total.opus  stream copy of test-opus.opus with TRACKNUMBER=3/12 DISCNUMBER=1/2
 
 Run once by hand; the tests treat the files as ground truth. Requires ffmpeg on PATH.
 The Ogg CRC is CRC-32 with polynomial 0x04C11DB7, init 0, no reflection, no final xor,
@@ -300,6 +301,57 @@ def last_granule(data: bytes) -> int:
     return parse_pages(data)[-1].granule
 
 
+def write_if_absent(path: Path, producer) -> bytes:
+    if path.exists():
+        return path.read_bytes()
+    data = producer()
+    path.write_bytes(data)
+    return data
+
+
+def generate_track_total(src: Path, dest: Path) -> None:
+    run(
+        [
+            "ffmpeg",
+            "-y",
+            "-i",
+            str(src),
+            "-c",
+            "copy",
+            "-map_metadata",
+            "-1",
+            "-metadata",
+            "title=Opus Title",
+            "-metadata",
+            "track=3/12",
+            "-metadata",
+            "disc=1/2",
+            str(dest),
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+    )
+
+
+def opus_tags_body(data: bytes) -> bytes:
+    for page in parse_pages(data):
+        if bytes(page.body).startswith(b"OpusTags"):
+            return bytes(page.body)
+    raise ValueError("OpusTags packet not found")
+
+
+def assert_combined_track_disc(data: bytes) -> None:
+    comments = opus_tags_body(data)
+    if b"TRACKNUMBER=3/12" not in comments:
+        raise AssertionError("OpusTags is missing TRACKNUMBER=3/12")
+    if b"DISCNUMBER=1/2" not in comments:
+        raise AssertionError("OpusTags is missing DISCNUMBER=1/2")
+    if b"TRACKTOTAL" in comments:
+        raise AssertionError("OpusTags must not contain TRACKTOTAL")
+    if b"DISCTOTAL" in comments:
+        raise AssertionError("OpusTags must not contain DISCTOTAL")
+
+
 def main() -> int:
     if shutil.which("ffmpeg") is None:
         print("ffmpeg not found on PATH", file=sys.stderr)
@@ -307,23 +359,33 @@ def main() -> int:
 
     TESTDATA.mkdir(parents=True, exist_ok=True)
     base_path = TESTDATA / "test-opus.opus"
-    generate_base(base_path)
-    base = patch_input_sample_rate(base_path.read_bytes(), 44100)
-    base_path.write_bytes(base)
+    if base_path.exists():
+        base = base_path.read_bytes()
+    else:
+        generate_base(base_path)
+        base = patch_input_sample_rate(base_path.read_bytes(), 44100)
+        base_path.write_bytes(base)
 
     padding_path = TESTDATA / "test-opus-padding.opus"
-    padding_path.write_bytes(pad_comment(base))
+    write_if_absent(padding_path, lambda: pad_comment(base))
 
     binary_path = TESTDATA / "test-opus-binary-tail.opus"
-    binary_path.write_bytes(append_binary_tail(base))
+    write_if_absent(binary_path, lambda: append_binary_tail(base))
 
     ogg_path = TESTDATA / "test-opus-in-ogg.ogg"
-    ogg_path.write_bytes(base)
+    write_if_absent(ogg_path, lambda: base)
 
     shared_path = TESTDATA / "test-opus-shared-page.opus"
-    shared_path.write_bytes(merge_comment_with_audio(base))
+    write_if_absent(shared_path, lambda: merge_comment_with_audio(base))
 
-    fixtures = [base_path, padding_path, binary_path, ogg_path, shared_path]
+    track_total_path = TESTDATA / "test-opus-track-total.opus"
+    if not track_total_path.exists():
+        generate_track_total(base_path, track_total_path)
+        assert_combined_track_disc(track_total_path.read_bytes())
+    else:
+        assert_combined_track_disc(track_total_path.read_bytes())
+
+    fixtures = [base_path, padding_path, binary_path, ogg_path, shared_path, track_total_path]
     print("fixture\tsamples/ch\tpre-skip\tlast granule")
     for path in fixtures:
         validate_with_ffmpeg(path)

@@ -88,28 +88,34 @@ class VorbisCommentTag(
             ?: throw IllegalArgumentException("FieldKey $key is not supported by VorbisComment")
 
     override fun first(key: FieldKey): String? {
-        if (key == FieldKey.ENCODER) return vendor.ifEmpty { null }
-        if (key == FieldKey.ALBUM_ARTIST) return albumArtistValues().firstOrNull()
-        return firstRaw(vorbisKey(key).fieldName)
+        return all(key).firstOrNull()
     }
 
     override fun all(key: FieldKey): List<String> {
-        if (key == FieldKey.ENCODER) return if (vendor.isEmpty()) emptyList() else listOf(vendor)
-        if (key == FieldKey.ALBUM_ARTIST) return albumArtistValues()
-        return allRaw(vorbisKey(key).fieldName)
+        return when (key) {
+            FieldKey.ENCODER -> if (vendor.isEmpty()) emptyList() else listOf(vendor)
+            FieldKey.ALBUM_ARTIST -> albumArtistValues()
+            FieldKey.TRACK -> numberValues(TRACK_FIELDS)
+            FieldKey.DISC_NO -> numberValues(DISC_FIELDS)
+            FieldKey.TRACK_TOTAL -> totalValues(TRACK_FIELDS)
+            FieldKey.DISC_TOTAL -> totalValues(DISC_FIELDS)
+            else -> allRaw(vorbisKey(key).fieldName)
+        }
     }
 
     override fun set(key: FieldKey, value: String) {
-        if (key == FieldKey.ENCODER) {
-            vendor = value
-            return
+        when (key) {
+            FieldKey.ENCODER -> vendor = value
+            FieldKey.ALBUM_ARTIST -> {
+                setRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName, value)
+                removeRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
+            }
+            FieldKey.TRACK -> setNumber(TRACK_FIELDS, value)
+            FieldKey.DISC_NO -> setNumber(DISC_FIELDS, value)
+            FieldKey.TRACK_TOTAL -> setTotal(TRACK_FIELDS, value)
+            FieldKey.DISC_TOTAL -> setTotal(DISC_FIELDS, value)
+            else -> setRaw(vorbisKey(key).fieldName, value)
         }
-        if (key == FieldKey.ALBUM_ARTIST) {
-            setRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName, value)
-            removeRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
-            return
-        }
-        setRaw(vorbisKey(key).fieldName, value)
     }
 
     override fun add(key: FieldKey, value: String) {
@@ -125,16 +131,18 @@ class VorbisCommentTag(
     }
 
     override fun remove(key: FieldKey) {
-        if (key == FieldKey.ENCODER) {
-            vendor = DEFAULT_VENDOR
-            return
+        when (key) {
+            FieldKey.ENCODER -> vendor = DEFAULT_VENDOR
+            FieldKey.ALBUM_ARTIST -> {
+                removeRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName)
+                removeRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
+            }
+            FieldKey.TRACK -> removeNumber(TRACK_FIELDS)
+            FieldKey.DISC_NO -> removeNumber(DISC_FIELDS)
+            FieldKey.TRACK_TOTAL -> removeTotal(TRACK_FIELDS)
+            FieldKey.DISC_TOTAL -> removeTotal(DISC_FIELDS)
+            else -> removeRaw(vorbisKey(key).fieldName)
         }
-        if (key == FieldKey.ALBUM_ARTIST) {
-            removeRaw(VorbisCommentFieldKey.ALBUMARTIST.fieldName)
-            removeRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
-            return
-        }
-        removeRaw(vorbisKey(key).fieldName)
     }
 
     /** Java default: read ALBUMARTIST, then JRiver's `ALBUM ARTIST`. */
@@ -143,6 +151,74 @@ class VorbisCommentTag(
         if (standard.isNotEmpty()) return standard
         return allRaw(VorbisCommentFieldKey.ALBUMARTIST_JRIVER.fieldName)
     }
+
+    // ffmpeg writes "TRACKNUMBER=3/12"; the number and total fields read it like ID3 TRCK.
+    private fun numberValues(fields: NumberTotalFields): List<String> {
+        return allRaw(fields.number).map { value -> parseNumberTotal(value)?.number ?: value }
+    }
+
+    private fun totalValues(fields: NumberTotalFields): List<String> {
+        val totals = allRaw(fields.total)
+        if (totals.isNotEmpty()) {
+            return totals
+        }
+        val combined = combinedNumber(fields) ?: return emptyList()
+        return listOf(combined.total)
+    }
+
+    private fun setNumber(fields: NumberTotalFields, value: String) {
+        val combined = combinedNumber(fields)
+        if (combined != null && isPlainNumber(value)) {
+            setRaw(fields.number, "$value/${combined.total}")
+        } else {
+            setRaw(fields.number, value)
+        }
+    }
+
+    private fun setTotal(fields: NumberTotalFields, value: String) {
+        val combined = combinedNumber(fields)
+        if (combined != null) {
+            setRaw(fields.number, "${combined.number}/$value")
+        } else {
+            setRaw(fields.total, value)
+        }
+    }
+
+    private fun removeNumber(fields: NumberTotalFields) {
+        val combined = combinedNumber(fields)
+        removeRaw(fields.number)
+        if (combined != null) {
+            addRaw(fields.total, combined.total)
+        }
+    }
+
+    private fun removeTotal(fields: NumberTotalFields) {
+        removeRaw(fields.total)
+        val combined = combinedNumber(fields) ?: return
+        setRaw(fields.number, combined.number)
+    }
+
+    /** The first number field in `N/M` form, when no separate total field overrides it. */
+    private fun combinedNumber(fields: NumberTotalFields): NumberTotal? {
+        if (firstRaw(fields.total) != null) {
+            return null
+        }
+        val number = firstRaw(fields.number) ?: return null
+        return parseNumberTotal(number)
+    }
+
+    private fun parseNumberTotal(value: String): NumberTotal? {
+        val match = NUMBER_WITH_TOTAL.matchEntire(value) ?: return null
+        return NumberTotal(match.groupValues[1], match.groupValues[2])
+    }
+
+    private fun isPlainNumber(value: String): Boolean {
+        return value.isNotEmpty() && value.all { char -> char in '0'..'9' }
+    }
+
+    private class NumberTotalFields(val number: String, val total: String)
+
+    private class NumberTotal(val number: String, val total: String)
 
     override val fieldCount: Int get() = fields.size
 
@@ -199,5 +275,15 @@ class VorbisCommentTag(
 
     companion object {
         const val DEFAULT_VENDOR = "jaudiotagger"
+
+        private val TRACK_FIELDS = NumberTotalFields(
+            VorbisCommentFieldKey.TRACKNUMBER.fieldName,
+            VorbisCommentFieldKey.TRACKTOTAL.fieldName,
+        )
+        private val DISC_FIELDS = NumberTotalFields(
+            VorbisCommentFieldKey.DISCNUMBER.fieldName,
+            VorbisCommentFieldKey.DISCTOTAL.fieldName,
+        )
+        private val NUMBER_WITH_TOTAL = Regex("""\s*([0-9]+)\s*/\s*([0-9]+)\s*""")
     }
 }

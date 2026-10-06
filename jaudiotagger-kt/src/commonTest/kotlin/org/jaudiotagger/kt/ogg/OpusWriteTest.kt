@@ -202,6 +202,23 @@ class OpusWriteTest {
     }
 
     @Test
+    fun setTrackKeepsCombinedTotal() {
+        val path = copyToTemp("test-opus-track-total.opus", "opus-track-total")
+        val originalSamples = AudioTagger.read(path).properties.totalSamples
+        val tag = AudioTagger.read(path).tag as VorbisCommentTag
+        tag.set(FieldKey.TRACK, "5")
+        AudioTagger.write(path, tag)
+        validateOggPageStructure(path)
+        val reread = AudioTagger.read(path)
+        val rereadTag = reread.tag as VorbisCommentTag
+        assertEquals("5", rereadTag.first(FieldKey.TRACK))
+        assertEquals("12", rereadTag.first(FieldKey.TRACK_TOTAL))
+        assertEquals("5/12", rereadTag.firstRaw("TRACKNUMBER"))
+        assertEquals(originalSamples, reread.properties.totalSamples)
+        SystemFileSystem.delete(path)
+    }
+
+    @Test
     fun commentSharingLastPageWithAudioRefusesToWrite() {
         val path = copyToTemp("test-opus-shared-page.opus", "opus-shared")
         val original = readBytes(path)

@@ -98,4 +98,24 @@ class FlacWriteTest {
 
         SystemFileSystem.delete(path)
     }
+
+    @Test
+    fun combinedTrackNumberRoundTrip() {
+        val path = copyToTemp("test.flac", "flac-track-total")
+        val tag = AudioTagger.read(path).tag as FlacTag
+        tag.vorbisComment.setRaw("TRACKNUMBER", "3/12")
+        AudioTagger.write(path, tag)
+
+        val withTotal = AudioTagger.read(path)
+        assertEquals("3", withTotal.tag.first(FieldKey.TRACK))
+        assertEquals("12", withTotal.tag.first(FieldKey.TRACK_TOTAL))
+
+        withTotal.tag.remove(FieldKey.TRACK)
+        AudioTagger.write(path, withTotal.tag)
+        val afterRemove = AudioTagger.read(path)
+        assertEquals(null, afterRemove.tag.first(FieldKey.TRACK))
+        assertEquals("12", afterRemove.tag.first(FieldKey.TRACK_TOTAL))
+
+        SystemFileSystem.delete(path)
+    }
 }

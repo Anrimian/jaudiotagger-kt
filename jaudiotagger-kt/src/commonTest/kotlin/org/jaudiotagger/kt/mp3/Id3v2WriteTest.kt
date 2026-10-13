@@ -140,4 +140,21 @@ class Id3v2WriteTest {
         val tag = AudioTagger.createTag(org.jaudiotagger.kt.AudioFormat.MP3)
         assertEquals(Id3v2Version.V23, (tag as Id3v2Tag).version)
     }
+
+    @Test
+    fun v24GenreSurvivesSetAndAddRoundTrip() {
+        val path = copyToTemp("test23.mp3", "id3v24-genre-multi")
+        val tag = assertIs<Id3v2Tag>(AudioTagger.read(path).tag)
+        assertEquals(Id3v2Version.V24, tag.version)
+
+        tag.set(FieldKey.GENRE, "Rock")
+        tag.add(FieldKey.GENRE, "Pop")
+        AudioTagger.write(path, tag)
+
+        val reread = assertIs<Id3v2Tag>(AudioTagger.read(path).tag)
+        assertEquals(Id3v2Version.V24, reread.version)
+        assertEquals(listOf("Rock", "Pop"), reread.all(FieldKey.GENRE))
+
+        SystemFileSystem.delete(path)
+    }
 }

@@ -4,8 +4,9 @@ package org.jaudiotagger.kt.tag
  * Format-independent view of an audio file's metadata.
  *
  * Text fields are addressed by [FieldKey]; each implementation maps keys to its
- * native field names. Multi-value fields (e.g. several genres) are supported by
- * [all] and [add].
+ * native field names. Multi-value fields (e.g. several genres) are read with [all]
+ * and written with [add]; [supportsMultipleValues] tells whether the format keeps
+ * them as separate values.
  */
 interface Tag {
 
@@ -23,6 +24,13 @@ interface Tag {
 
     /** Removes all values of [key]. */
     fun remove(key: FieldKey)
+
+    /**
+     * Whether [key] can hold several values that other readers of this format will see: the format
+     * defines a multi-value representation for the field and [add] writes it. False for keys the
+     * format does not map.
+     */
+    fun supportsMultipleValues(key: FieldKey): Boolean = false
 
     fun has(key: FieldKey): Boolean = first(key) != null
 

@@ -199,6 +199,14 @@ class Id3v2Tag(val version: Id3v2Version) : Tag {
         }
     }
 
+    override fun supportsMultipleValues(key: FieldKey): Boolean {
+        if (version != Id3v2Version.V24 || isNumberFieldKey(key) || isTotalFieldKey(key)) {
+            return false
+        }
+        val frameKey = version.frameKeys[key] ?: return false
+        return frameKey.subId == null && frameKey.frameId.startsWith("T")
+    }
+
     private fun deleteNumberTotalFrame(
         key: FieldKey,
         otherKey: FieldKey,

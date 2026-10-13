@@ -81,4 +81,18 @@ class AsfTest {
         // IsVBR exists in both Metadata and Extended Content; ECD value wins for first().
         assertEquals(2, tag.allRaw("IsVBR").size)
     }
+
+    @Test
+    fun genreSurvivesSetAndAddRoundTrip() {
+        val path = copyToTemp("test1.wma", "asf-genre-multi")
+        val tag = AudioTagger.read(path).tag as AsfTag
+        tag.set(FieldKey.GENRE, "Rock")
+        tag.add(FieldKey.GENRE, "Pop")
+        AudioTagger.write(path, tag)
+
+        val reread = assertIs<AsfTag>(AudioTagger.read(path).tag)
+        assertEquals(listOf("Rock", "Pop"), reread.all(FieldKey.GENRE))
+
+        SystemFileSystem.delete(path)
+    }
 }

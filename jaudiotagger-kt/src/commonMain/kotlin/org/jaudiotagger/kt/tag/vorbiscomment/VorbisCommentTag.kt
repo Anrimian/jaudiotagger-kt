@@ -109,6 +109,10 @@ class VorbisCommentTag(
         }
     }
 
+    override fun supportsMultipleValues(key: FieldKey): Boolean {
+        return key in fieldKeyToVorbisKey && key !in SINGLE_VALUE_KEYS
+    }
+
     override fun clear() {
         fields.clear()
     }
@@ -275,6 +279,15 @@ class VorbisCommentTag(
 
     companion object {
         const val DEFAULT_VENDOR = "jaudiotagger"
+
+        private val SINGLE_VALUE_KEYS = setOf(
+            FieldKey.ENCODER,
+            FieldKey.COVER_ART,
+            FieldKey.TRACK,
+            FieldKey.DISC_NO,
+            FieldKey.TRACK_TOTAL,
+            FieldKey.DISC_TOTAL,
+        )
 
         private val TRACK_FIELDS = NumberTotalFields(
             VorbisCommentFieldKey.TRACKNUMBER.fieldName,

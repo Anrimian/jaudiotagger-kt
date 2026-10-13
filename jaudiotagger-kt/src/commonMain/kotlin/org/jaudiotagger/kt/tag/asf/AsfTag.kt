@@ -94,6 +94,11 @@ class AsfTag : Tag {
 
     override fun remove(key: FieldKey) = removeRaw(nameFor(key))
 
+    override fun supportsMultipleValues(key: FieldKey): Boolean {
+        val name = asfFieldNames[key] ?: return false
+        return AsfFieldContainers.isMultiValued(name)
+    }
+
     override val fieldCount: Int
         get() = internalDescriptors.size +
             listOf(title, author, copyright, description, rating).count { it.isNotEmpty() }

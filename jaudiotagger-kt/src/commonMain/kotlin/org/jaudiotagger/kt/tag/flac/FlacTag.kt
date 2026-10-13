@@ -25,6 +25,9 @@ class FlacTag(
 
     override fun remove(key: FieldKey) = vorbisComment.remove(key)
 
+    override fun supportsMultipleValues(key: FieldKey): Boolean =
+        vorbisComment.supportsMultipleValues(key)
+
     override val fieldCount: Int get() = vorbisComment.fieldCount + pictures.size
 
     override val isEmpty: Boolean get() = vorbisComment.isEmpty && pictures.isEmpty()

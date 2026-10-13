@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Added support for reading and writing Ogg Opus audio metadata&#10;&#10;- Added `OggFile` dispatcher to detect and route Ogg streams to Vorbis or Opus readers and writers&#10;- Implemented `OpusInfoReader`, `OggOpusTagReader`, and `OggOpusTagWriter` for RFC 7845 Ogg Opus support&#10;- Extracted shared page creation, shifting, and sequence renumbering logic into `OggPageWriter`&#10;- Updated `VorbisCommentTag` to preserve field key casing while keeping lookups case-insensitive&#10;- Added test fixtures, unit tests, and cross-check tests for Ogg Opus parsing and writing">
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/PORTING.md" afterDir="false" />
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="VorbisCommentTag: handle combined TRACKNUMBER and DISCNUMBER values in N/M format&#10;&#10;- Parse `N/M` string values into separate track/disc number and total queries&#10;- Preserve totals when setting or removing track or disc numbers on combined fields&#10;- Add `test-opus-track-total.opus` fixture and unit tests for FLAC and Ogg Opus tag handling">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonMain/kotlin/org/jaudiotagger/kt/tag/vorbiscomment/VorbisCommentTag.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/SamplesSmokeTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/SamplesSmokeTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/flac/FlacWriteTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/flac/FlacWriteTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusReadTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusReadTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusWriteTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/commonTest/kotlin/org/jaudiotagger/kt/ogg/OpusWriteTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/ogg/OpusFfmpegCrossCheckTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/src/jvmTest/kotlin/org/jaudiotagger/kt/ogg/OpusFfmpegCrossCheckTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaudiotagger-kt/tools/gen_opus_fixtures.py" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger-kt/tools/gen_opus_fixtures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,117 +167,117 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ID3v24TagTest.executor": "Run",
-    "JUnit.AiffAudioFileTest.executor": "Run",
-    "JUnit.AiffAudioTagTest.executor": "Run",
-    "JUnit.AiffFileHeaderTest.executor": "Run",
-    "JUnit.AiffInfoReaderTest.executor": "Run",
-    "JUnit.AlbumComposerTest.executor": "Run",
-    "JUnit.AlbumComposerTest.testAif.executor": "Run",
-    "JUnit.AlbumComposerTest.testFlac.executor": "Run",
-    "JUnit.AlbumComposerTest.testFlacFile.executor": "Run",
-    "JUnit.AlbumComposerTest.testMp4File.executor": "Run",
-    "JUnit.AlbumComposerTest.testVorbisCommentFile.executor": "Run",
-    "JUnit.AlbumComposerTest.testWav.executor": "Run",
-    "JUnit.ApeReadTagTest.executor": "Run",
-    "JUnit.ApeReadTagTest.testReadFile.executor": "Run",
-    "JUnit.AsfCodeCheckTest.executor": "Run",
-    "JUnit.AsfHeaderUtils.executor": "Run",
-    "JUnit.AsfKeyMappingTest.executor": "Run",
-    "JUnit.AsfTagCoverFieldTest.executor": "Run",
-    "JUnit.AsfTagTest.executor": "Run",
-    "JUnit.AudioFileWriteAsTest.executor": "Run",
-    "JUnit.AudioFileWriterTest.executor": "Run",
-    "JUnit.ChunkContainerTest.executor": "Run",
-    "JUnit.ChunkTest.executor": "Run",
-    "JUnit.CompressedTest.executor": "Run",
-    "JUnit.ConcurrentWritesTest (1).executor": "Run",
-    "JUnit.ConcurrentWritesTest (2).executor": "Run",
-    "JUnit.ConcurrentWritesTest (3).executor": "Run",
-    "JUnit.ConcurrentWritesTest (4).executor": "Run",
-    "JUnit.ConcurrentWritesTest.executor": "Run",
-    "JUnit.ContainerTypeTest.executor": "Run",
-    "JUnit.ContentBrandingData.executor": "Run",
-    "JUnit.FileClosingTest.testClosingFileAfterFailedReadOnly.executor": "Run",
-    "JUnit.FrameCOMMTest.executor": "Run",
-    "JUnit.FrameCOMMTest.testReadFileContainingInvalidSizeCOMMFrame.executor": "Run",
-    "JUnit.FrameTIT1Test.testAppleGrouping.executor": "Run",
-    "JUnit.FrameTXXXTest.executor": "Run",
-    "JUnit.ID3v24TagTest.testWriteAppleMusicGrouping.executor": "Run",
-    "JUnit.ID3v24TagTest.testWriteMultipleGenresToID3v24TagUsingV24CreateField.executor": "Run",
-    "JUnit.Issue123Test.executor": "Run",
-    "JUnit.Issue173Test.testMp4GenresUsingGenericInterface.executor": "Run",
-    "JUnit.Issue173Test.testMp4GenresUsingMp4Interface.executor": "Run",
-    "JUnit.Issue418Test.testGetCustomGenreField.executor": "Run",
-    "JUnit.Issue655Test.executor": "Run",
-    "JUnit.Issue655Test.testWriteFile.executor": "Run",
-    "JUnit.Issue657Test.executor": "Run",
-    "JUnit.Issue657Test.testFixBadEncoding.executor": "Run",
-    "JUnit.Issue657Test.testFixBadWavId3v23Encoding.executor": "Run",
-    "JUnit.Issue657Test.testFixBadWavListInfoEncoding.executor": "Run",
-    "JUnit.Issue657Test.testFixBadWavRiffEncoding.executor": "Run",
-    "JUnit.Issue657Test.testReadFile.executor": "Run",
-    "JUnit.Issue657Test.testReadFile2.executor": "Run",
-    "JUnit.Issue657Test.testWriteFile.executor": "Run",
-    "JUnit.Issue659Test.executor": "Run",
-    "JUnit.Issue659Test.testFixBadWavId3v23Encoding.executor": "Run",
-    "JUnit.Issue663Test.testIso8.executor": "Run",
-    "JUnit.Issue665Test.testReadFileDiskAtomStoringTextInsteadOfNumber.executor": "Run",
-    "JUnit.Issue667Test.testApe.executor": "Run",
-    "JUnit.Issue667Test.testApeFile.executor": "Run",
-    "JUnit.Issue700Test.testIso8.executor": "Run",
-    "JUnit.M4aWriteTagTest.executor": "Run",
-    "JUnit.M4aWriteTagTest.testReadWriteMultipleGenres.executor": "Run",
-    "JUnit.M4aWriteTagTest.testReadWriteMultipleGenres2.executor": "Run",
-    "JUnit.M4aWriteTagTest.testWriteGenres3.executor": "Run",
-    "JUnit.M4aWriteTagTest.testWriteGenres4.executor": "Run",
-    "JUnit.MonkeyReadTest.executor": "Run",
-    "JUnit.MonkeyReadTest.testReadFile.executor": "Run",
-    "JUnit.Mp4HeaderTest.testReadFile3.executor": "Run",
-    "JUnit.ReadFileTest.executor": "Run",
-    "JUnit.ReadFileTest.testReadFile.executor": "Run",
-    "JUnit.VorbisWriteTagTest.executor": "Run",
-    "JUnit.VorbisWriteTagTest.testDeleteTag.executor": "Run",
-    "JUnit.VorbisWriteTagTest.testDeleteTag2.executor": "Run",
-    "JUnit.WavSimpleTest.executor": "Run",
-    "JUnit.WavpackReadTest.executor": "Run",
-    "JUnit.WavpackReadTest.testReadFile.executor": "Run",
-    "JUnit.WmaSimpleTest.executor": "Run",
-    "JUnit.WriteFileTest.executor": "Run",
-    "JUnit.WriteFileTest.testWriteFile.executor": "Run",
-    "JUnit.jaudiotagger in jaudiotagger.executor": "Run",
-    "JUnit.srctest in jaudiotagger.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/code/jthink/jthinksearch",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ID3v24TagTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AiffAudioFileTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AiffAudioTagTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AiffFileHeaderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AiffInfoReaderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.testAif.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.testFlac.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.testFlacFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.testMp4File.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.testVorbisCommentFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlbumComposerTest.testWav.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApeReadTagTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApeReadTagTest.testReadFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AsfCodeCheckTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AsfHeaderUtils.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AsfKeyMappingTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AsfTagCoverFieldTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AsfTagTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AudioFileWriteAsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AudioFileWriterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ChunkContainerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ChunkTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CompressedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConcurrentWritesTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConcurrentWritesTest (2).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConcurrentWritesTest (3).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConcurrentWritesTest (4).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConcurrentWritesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ContainerTypeTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ContentBrandingData.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FileClosingTest.testClosingFileAfterFailedReadOnly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FrameCOMMTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FrameCOMMTest.testReadFileContainingInvalidSizeCOMMFrame.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FrameTIT1Test.testAppleGrouping.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FrameTXXXTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ID3v24TagTest.testWriteAppleMusicGrouping.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ID3v24TagTest.testWriteMultipleGenresToID3v24TagUsingV24CreateField.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue123Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue173Test.testMp4GenresUsingGenericInterface.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue173Test.testMp4GenresUsingMp4Interface.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue418Test.testGetCustomGenreField.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue655Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue655Test.testWriteFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testFixBadEncoding.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testFixBadWavId3v23Encoding.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testFixBadWavListInfoEncoding.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testFixBadWavRiffEncoding.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testReadFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testReadFile2.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue657Test.testWriteFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue659Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue659Test.testFixBadWavId3v23Encoding.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue663Test.testIso8.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue665Test.testReadFileDiskAtomStoringTextInsteadOfNumber.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue667Test.testApe.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue667Test.testApeFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Issue700Test.testIso8.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.M4aWriteTagTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.M4aWriteTagTest.testReadWriteMultipleGenres.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.M4aWriteTagTest.testReadWriteMultipleGenres2.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.M4aWriteTagTest.testWriteGenres3.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.M4aWriteTagTest.testWriteGenres4.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MonkeyReadTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MonkeyReadTest.testReadFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Mp4HeaderTest.testReadFile3.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ReadFileTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ReadFileTest.testReadFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VorbisWriteTagTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VorbisWriteTagTest.testDeleteTag.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VorbisWriteTagTest.testDeleteTag2.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WavSimpleTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WavpackReadTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WavpackReadTest.testReadFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WmaSimpleTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WriteFileTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WriteFileTest.testWriteFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.jaudiotagger in jaudiotagger.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.srctest in jaudiotagger.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/code/jthink/jthinksearch&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Code\jthink\opensrc\jaudiotagger\testdata" />
@@ -957,7 +953,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674128825138</updated>
     </task>
-    <option name="localTasksCounter" value="291" />
+    <option name="localTasksCounter" value="292" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1172,7 +1168,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="#659:For files that have ID3 tag allow for frames with text encoding set to zero (ISO-8859-1) allow to read as different encoding instead" />
     <MESSAGE value="Only use override charset for fields listed in TagOptionSingleton.getInstance().getOverrideCharset()" />
     <MESSAGE value="Modify ID3 tags so now take note of the overrideCharset field list, and only does override if field is in list.&#10;Also, overrideCharset has no effect on some text fields. If the text field is a description field to further subdivide a frame into versions for different data (most notably FrameBodyTXXX and FrameBodyCOMM description fields) we use the standard encoding when reading the metadata because software would usually only write   wrong charset into the value field not the description field." />
     <MESSAGE value="#622:Add ENGINEER subtypes AUDIO_ENGINEER, BALANCE_ENGINEER, AUDIO_ENGINEER, SOUND_ENGINEER and also MASTERING plus sort fields" />
@@ -1197,7 +1192,8 @@
     <MESSAGE value="Downgrade Android compileSdk to 35" />
     <MESSAGE value="Fix MPEG-2/2.5 Layer III frame length calculation for non-mono channels&#10;&#10;- Update `MpegFrameHeader.frameLength` to use 72 multiplier for all channel modes per ISO/IEC 13818-3&#10;- Remove `mpeg2Layer3SlotLengthForCount` workaround in `Mp3InfoReader`&#10;- Update `PORTING.md` and remove duration deviation test exception for `test74.mp3`" />
     <MESSAGE value="Added support for reading and writing Ogg Opus audio metadata&#10;&#10;- Added `OggFile` dispatcher to detect and route Ogg streams to Vorbis or Opus readers and writers&#10;- Implemented `OpusInfoReader`, `OggOpusTagReader`, and `OggOpusTagWriter` for RFC 7845 Ogg Opus support&#10;- Extracted shared page creation, shifting, and sequence renumbering logic into `OggPageWriter`&#10;- Updated `VorbisCommentTag` to preserve field key casing while keeping lookups case-insensitive&#10;- Added test fixtures, unit tests, and cross-check tests for Ogg Opus parsing and writing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added support for reading and writing Ogg Opus audio metadata&#10;&#10;- Added `OggFile` dispatcher to detect and route Ogg streams to Vorbis or Opus readers and writers&#10;- Implemented `OpusInfoReader`, `OggOpusTagReader`, and `OggOpusTagWriter` for RFC 7845 Ogg Opus support&#10;- Extracted shared page creation, shifting, and sequence renumbering logic into `OggPageWriter`&#10;- Updated `VorbisCommentTag` to preserve field key casing while keeping lookups case-insensitive&#10;- Added test fixtures, unit tests, and cross-check tests for Ogg Opus parsing and writing" />
+    <MESSAGE value="VorbisCommentTag: handle combined TRACKNUMBER and DISCNUMBER values in N/M format&#10;&#10;- Parse `N/M` string values into separate track/disc number and total queries&#10;- Preserve totals when setting or removing track or disc numbers on combined fields&#10;- Add `test-opus-track-total.opus` fixture and unit tests for FLAC and Ogg Opus tag handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="VorbisCommentTag: handle combined TRACKNUMBER and DISCNUMBER values in N/M format&#10;&#10;- Parse `N/M` string values into separate track/disc number and total queries&#10;- Preserve totals when setting or removing track or disc numbers on combined fields&#10;- Add `test-opus-track-total.opus` fixture and unit tests for FLAC and Ogg Opus tag handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

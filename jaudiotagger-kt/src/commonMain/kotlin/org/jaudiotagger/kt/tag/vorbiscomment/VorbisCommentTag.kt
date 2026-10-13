@@ -49,43 +49,7 @@ class VorbisCommentTag(
 
     val allFields: List<VorbisCommentField> get() = fields
 
-    // ---- string-keyed access (also usable for custom/unmapped field names) ----
-
-    fun firstRaw(id: String): String? {
-        return fields.firstOrNull { field -> field.id.equals(id, ignoreCase = true) }?.value
-    }
-
-    fun allRaw(id: String): List<String> {
-        return fields.filter { field -> field.id.equals(id, ignoreCase = true) }.map { field -> field.value }
-    }
-
-    fun addRaw(id: String, value: String) {
-        fields += VorbisCommentField(id, value)
-    }
-
-    fun setRaw(id: String, value: String) {
-        val insertAt = fields.indexOfFirst { field -> field.id.equals(id, ignoreCase = true) }
-        fields.removeAll { field -> field.id.equals(id, ignoreCase = true) }
-        if (insertAt >= 0) {
-            fields.add(insertAt, VorbisCommentField(id, value))
-        } else {
-            fields += VorbisCommentField(id, value)
-        }
-    }
-
-    fun removeRaw(id: String) {
-        fields.removeAll { field -> field.id.equals(id, ignoreCase = true) }
-    }
-
-    internal fun addParsedField(field: VorbisCommentField) {
-        fields += field
-    }
-
     // ---- FieldKey access ----
-
-    private fun vorbisKey(key: FieldKey): VorbisCommentFieldKey =
-        fieldKeyToVorbisKey[key]
-            ?: throw IllegalArgumentException("FieldKey $key is not supported by VorbisComment")
 
     override fun first(key: FieldKey): String? {
         return all(key).firstOrNull()
@@ -144,6 +108,95 @@ class VorbisCommentTag(
             else -> removeRaw(vorbisKey(key).fieldName)
         }
     }
+
+    override fun clear() {
+        fields.clear()
+    }
+
+    // Artwork is carried as base64-encoded FLAC picture blocks in
+    // METADATA_BLOCK_PICTURE comments (plus the legacy COVERART field), which is
+    // how Ogg embeds pictures. FLAC files use separate PICTURE metadata blocks
+    // instead — FlacTag overrides the artwork API accordingly.
+    @OptIn(ExperimentalEncodingApi::class)
+    override val artworks: List<Artwork>
+        get() {
+            val result = mutableListOf<Artwork>()
+            for (encoded in allRaw(VorbisCommentFieldKey.METADATA_BLOCK_PICTURE.fieldName)) {
+                try {
+                    result += FlacPictureCodec.decode(Base64.decode(encoded))
+                } catch (_: Exception) {
+                    // unparsable picture comment: ignore, the rest of the tag is fine
+                }
+            }
+            // legacy pre-METADATA_BLOCK_PICTURE style
+            val legacyData = firstRaw(VorbisCommentFieldKey.COVERART.fieldName)
+            if (legacyData != null) {
+                try {
+                    result += Artwork(
+                        data = Base64.decode(legacyData),
+                        mimeType = firstRaw(VorbisCommentFieldKey.COVERARTMIME.fieldName) ?: "",
+                    )
+                } catch (_: Exception) {
+                }
+            }
+            return result
+        }
+
+    @OptIn(ExperimentalEncodingApi::class)
+    override fun addArtwork(artwork: Artwork) {
+        addRaw(
+            VorbisCommentFieldKey.METADATA_BLOCK_PICTURE.fieldName,
+            Base64.encode(FlacPictureCodec.encode(artwork)),
+        )
+    }
+
+    override fun clearArtworks() {
+        removeRaw(VorbisCommentFieldKey.METADATA_BLOCK_PICTURE.fieldName)
+        removeRaw(VorbisCommentFieldKey.COVERART.fieldName)
+        removeRaw(VorbisCommentFieldKey.COVERARTMIME.fieldName)
+    }
+
+    override val fieldCount: Int get() = fields.size
+
+    override val isEmpty: Boolean get() = fields.isEmpty()
+
+    // ---- string-keyed access (also usable for custom/unmapped field names) ----
+
+    fun firstRaw(id: String): String? {
+        return fields.firstOrNull { field -> field.id.equals(id, ignoreCase = true) }?.value
+    }
+
+    fun allRaw(id: String): List<String> {
+        return fields.filter { field -> field.id.equals(id, ignoreCase = true) }.map { field -> field.value }
+    }
+
+    fun addRaw(id: String, value: String) {
+        fields += VorbisCommentField(id, value)
+    }
+
+    fun setRaw(id: String, value: String) {
+        val insertAt = fields.indexOfFirst { field -> field.id.equals(id, ignoreCase = true) }
+        fields.removeAll { field -> field.id.equals(id, ignoreCase = true) }
+        if (insertAt >= 0) {
+            fields.add(insertAt, VorbisCommentField(id, value))
+        } else {
+            fields += VorbisCommentField(id, value)
+        }
+    }
+
+    fun removeRaw(id: String) {
+        fields.removeAll { field -> field.id.equals(id, ignoreCase = true) }
+    }
+
+    internal fun addParsedField(field: VorbisCommentField) {
+        fields += field
+    }
+
+    override fun toString(): String = "VorbisCommentTag(vendor=$vendor, fields=$fields)"
+
+    private fun vorbisKey(key: FieldKey): VorbisCommentFieldKey =
+        fieldKeyToVorbisKey[key]
+            ?: throw IllegalArgumentException("FieldKey $key is not supported by VorbisComment")
 
     /** Java default: read ALBUMARTIST, then JRiver's `ALBUM ARTIST`. */
     private fun albumArtistValues(): List<String> {
@@ -219,59 +272,6 @@ class VorbisCommentTag(
     private class NumberTotalFields(val number: String, val total: String)
 
     private class NumberTotal(val number: String, val total: String)
-
-    override val fieldCount: Int get() = fields.size
-
-    override val isEmpty: Boolean get() = fields.isEmpty()
-
-    override fun clear() {
-        fields.clear()
-    }
-
-    // Artwork is carried as base64-encoded FLAC picture blocks in
-    // METADATA_BLOCK_PICTURE comments (plus the legacy COVERART field), which is
-    // how Ogg embeds pictures. FLAC files use separate PICTURE metadata blocks
-    // instead — FlacTag overrides the artwork API accordingly.
-    @OptIn(ExperimentalEncodingApi::class)
-    override val artworks: List<Artwork>
-        get() {
-            val result = mutableListOf<Artwork>()
-            for (encoded in allRaw(VorbisCommentFieldKey.METADATA_BLOCK_PICTURE.fieldName)) {
-                try {
-                    result += FlacPictureCodec.decode(Base64.decode(encoded))
-                } catch (_: Exception) {
-                    // unparsable picture comment: ignore, the rest of the tag is fine
-                }
-            }
-            // legacy pre-METADATA_BLOCK_PICTURE style
-            val legacyData = firstRaw(VorbisCommentFieldKey.COVERART.fieldName)
-            if (legacyData != null) {
-                try {
-                    result += Artwork(
-                        data = Base64.decode(legacyData),
-                        mimeType = firstRaw(VorbisCommentFieldKey.COVERARTMIME.fieldName) ?: "",
-                    )
-                } catch (_: Exception) {
-                }
-            }
-            return result
-        }
-
-    @OptIn(ExperimentalEncodingApi::class)
-    override fun addArtwork(artwork: Artwork) {
-        addRaw(
-            VorbisCommentFieldKey.METADATA_BLOCK_PICTURE.fieldName,
-            Base64.encode(FlacPictureCodec.encode(artwork)),
-        )
-    }
-
-    override fun clearArtworks() {
-        removeRaw(VorbisCommentFieldKey.METADATA_BLOCK_PICTURE.fieldName)
-        removeRaw(VorbisCommentFieldKey.COVERART.fieldName)
-        removeRaw(VorbisCommentFieldKey.COVERARTMIME.fieldName)
-    }
-
-    override fun toString(): String = "VorbisCommentTag(vendor=$vendor, fields=$fields)"
 
     companion object {
         const val DEFAULT_VENDOR = "jaudiotagger"

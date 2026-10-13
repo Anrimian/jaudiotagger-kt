@@ -143,3 +143,4 @@ jaudiotagger-kt/local.properties
 build/
 local.properties
 .kotlin/
+.hotswan/
